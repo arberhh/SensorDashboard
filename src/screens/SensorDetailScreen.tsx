@@ -3,6 +3,7 @@ import { StyleSheet, Text } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import type { NativeStackScreenProps } from "@react-navigation/native-stack";
 import type { RootStackParamList } from "../navigation/types";
+import theme from "../theme";
 
 type Props = NativeStackScreenProps<RootStackParamList, "SensorDetail">;
 
@@ -19,12 +20,12 @@ const SensorDetailScreen: React.FC<Props> = ({ route }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#151544",
-    padding: 16,
+    backgroundColor: theme.colors.background,
+    padding: theme.spacing.m,
   },
   text: {
-    color: "#fff",
-    fontSize: 16,
+    color: theme.colors.text,
+    fontSize: theme.fontSizes.l,
   },
 });
 
