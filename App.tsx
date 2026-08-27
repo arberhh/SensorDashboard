@@ -24,7 +24,7 @@ function App() {
           <Stack.Screen
             name="Home"
             component={HomeScreen}
-            options={{ title: 'Sensors' }}
+            options={{ title: 'Sensor Dashboard' }}
           />
           <Stack.Screen
             name="SensorDetail"
