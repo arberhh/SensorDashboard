@@ -1,14 +1,15 @@
 ---
 name: label-pr
-description: Use whenever creating a pull request for this repo (SensorDashboard). Every PR must carry exactly one of the repo's type labels (feat/fix/refactor/docs/chore/test) so the change type is clear at a glance.
+description: Use whenever creating a pull request for this repo (SensorDashboard). Every PR must carry one of the repo's type labels (feat/fix/refactor/docs/chore/test), applied by you — a second label auto-added by Linear's GitHub sync is expected and fine, but don't apply more than one yourself.
 ---
 
 # Label every PR by type
 
 This repo uses six labels to classify what kind of change a PR is.
-Every PR must have exactly one of them applied before it's considered
+Every PR must have one of them applied by you before it's considered
 ready — an unlabeled PR is an incomplete PR, not a formatting nit to
-skip.
+skip. Up to two labels total is fine if the second arrived via
+Linear's auto-sync (see below); you should still only ever apply one.
 
 | Label | Use when the PR is... |
 |---|---|
@@ -37,10 +38,22 @@ skip.
    gh pr edit <PR#> --add-label <label>
    ```
 
-3. **One label, not several.** These are mutually exclusive
-   classifications of change type — don't stack `feat` and `refactor`
-   on the same PR. If a PR genuinely doesn't fit one type, that's a
-   sign it should probably be split, not multi-labeled.
+3. **Apply exactly one type label yourself — don't intentionally
+   stack more.** These are mutually exclusive classifications; if a
+   PR genuinely doesn't fit one type, that's a sign it should
+   probably be split, not multi-labeled by you.
+
+   In practice, PRs linked to a Linear issue (branch name matching
+   the issue's `gitBranchName`) can end up with a second label —
+   Linear's own GitHub sync has been observed auto-adding `feat` to
+   the PR independent of anything this skill does (seen on PR #1 and
+   PR #2). That's outside this skill's control and not worth fighting
+   after the fact. **Two labels total is acceptable** when the second
+   one arrived this way; the rule is about what *you* deliberately
+   apply, not about scrubbing labels Linear adds on its own. If a PR
+   ever has three or more, or two labels neither of which trace back
+   to Linear's auto-add, that's a real signal something's wrong —
+   fix it rather than ignore it.
 
 4. **If a label from this set doesn't exist in the repo yet**
    (`gh label list`), create it before applying — don't silently
