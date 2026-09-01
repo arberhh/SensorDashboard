@@ -18,6 +18,11 @@ export const colors = {
   cardBackground: 'rgba(255, 255, 255, 0.05)',
   chipBackground: 'rgba(255, 255, 255, 0.08)',
   chipPressed: 'rgba(255, 255, 255, 0.18)',
+
+  // Sensor-type accent colors — warm for temperature, cool for humidity,
+  // so the two are distinguishable at a glance rather than by unit alone.
+  temperature: '#ff9152',
+  humidity: '#4fc3f7',
 };
 
 export const fontSizes = {

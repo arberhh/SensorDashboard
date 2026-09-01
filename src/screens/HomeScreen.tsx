@@ -15,27 +15,24 @@ type SortField = 'trend' | 'name';
 type SortDirection = 'asc' | 'desc';
 type ActiveSort = { field: SortField; direction: SortDirection } | null;
 
-// Row text line-height — still needed for the itemLabel style itself.
-// The old getItemLayout height math (padding/margin/line-count constants)
-// is gone: FlashList has no getItemLayout, windowSize, or
-// initialNumToRender props — it auto-manages sizing/windowing via cell
-// recycling instead, so those FlatList-specific tuning props don't carry
-// over and would be a compile error if left in.
-const ROW_LABEL_LINE_HEIGHT = 16;
-
 function RenderRow({ item: sensor }: { item: Sensor }) {
+  const readingColor =
+    sensor.type === 'temperature'
+      ? theme.colors.temperature
+      : theme.colors.humidity;
+
   return (
     <View style={styles.itemContainer}>
-      <Text style={styles.itemLabel} numberOfLines={1}>
-        <Text style={styles.itemValue}>{sensor.name}</Text>
-        {'  ·  '}
-        <Text style={styles.itemValue}>
+      <Text style={styles.itemName} numberOfLines={1}>
+        {sensor.name}
+      </Text>
+      <View style={styles.itemMetaRow}>
+        <Text style={[styles.itemReading, { color: readingColor }]}>
           {sensor.currentReading}
           {sensor.unit}
         </Text>
-        {'  ·  DP '}
-        <Text style={styles.itemValue}>{sensor.deviationPercent}</Text>
-      </Text>
+        <Text style={styles.itemDp}>DP {sensor.deviationPercent}</Text>
+      </View>
     </View>
   );
 }
@@ -274,18 +271,30 @@ const styles = StyleSheet.create({
     fontWeight: '600',
   },
   itemContainer: {
-    padding: 15,
+    paddingHorizontal: theme.spacing.m,
+    paddingVertical: theme.spacing.sm,
     backgroundColor: theme.colors.cardBackground,
-    margin: 10,
-    borderRadius: 5,
+    margin: theme.spacing.sm,
+    borderRadius: 8,
   },
-  itemLabel: {
+  itemName: {
     color: theme.colors.text,
-    fontSize: theme.fontSizes.sm,
-    lineHeight: ROW_LABEL_LINE_HEIGHT,
+    fontSize: theme.fontSizes.m,
+    fontWeight: '700',
+    marginBottom: theme.spacing.xs,
   },
-  itemValue: {
-    fontWeight: 'bold',
+  itemMetaRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: theme.spacing.sm,
+  },
+  itemReading: {
+    fontSize: theme.fontSizes.sm,
+    fontWeight: '700',
+  },
+  itemDp: {
+    fontSize: theme.fontSizes.sm,
+    color: theme.colors.textMuted,
   },
 });
 
