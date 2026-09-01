@@ -1,17 +1,56 @@
 import React, { useEffect, useState } from 'react';
 
-import { View, Text, StyleSheet, FlatList, Pressable } from 'react-native';
+import { View, Text, StyleSheet, Pressable } from 'react-native';
+import { FlashList } from '@shopify/flash-list';
 
 import initialSensors from '../data/sensor_readings.json';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import theme from '../theme';
 
-type TSensor = (typeof initialSensors)[number][];
+type Sensor = (typeof initialSensors)[number];
+type TSensor = Sensor[];
 
 type TypeFilter = 'all' | 'temperature' | 'humidity';
 type SortField = 'trend' | 'name';
 type SortDirection = 'asc' | 'desc';
 type ActiveSort = { field: SortField; direction: SortDirection } | null;
+
+// Row text line-height — still needed for the itemLabel style itself.
+// The old getItemLayout height math (padding/margin/line-count constants)
+// is gone: FlashList has no getItemLayout, windowSize, or
+// initialNumToRender props — it auto-manages sizing/windowing via cell
+// recycling instead, so those FlatList-specific tuning props don't carry
+// over and would be a compile error if left in.
+const ROW_LABEL_LINE_HEIGHT = 16;
+
+function RenderRow({ item: sensor }: { item: Sensor }) {
+  return (
+    <View style={styles.itemContainer}>
+      <Text style={styles.itemLabel} numberOfLines={1}>
+        <Text style={styles.itemValue}>{sensor.name}</Text>
+        {'  ·  '}
+        <Text style={styles.itemValue}>
+          {sensor.currentReading}
+          {sensor.unit}
+        </Text>
+        {'  ·  DP '}
+        <Text style={styles.itemValue}>{sensor.deviationPercent}</Text>
+      </Text>
+    </View>
+  );
+}
+
+// No memo here: FlashList's own ViewHolder already gates on `item`
+// reference equality (both via its own React.memo comparator and via a
+// useMemo wrapping the renderItem call itself), so renderItem is only
+// ever invoked when `item` has actually changed. Memoizing this row on
+// top of that would just re-check something FlashList already
+// guarantees — real, necessary protection under FlatList, redundant
+// under FlashList. Still module scope so this stays a stable function
+// reference across every HomeScreen render.
+function renderSensorRow({ item }: { item: Sensor }) {
+  return <RenderRow item={item} />;
+}
 
 const HomeScreen: React.FC = () => {
   const [sensors, setSensors] = useState<TSensor>(initialSensors);
@@ -40,6 +79,17 @@ const HomeScreen: React.FC = () => {
     return () => clearInterval(intervalId);
   }, []);
 
+  // Deferred so switching the type filter doesn't fight an in-flight
+  // scroll/momentum animation for frame budget — requestIdleCallback runs
+  // the actual list-swap once the JS thread is idle. This is scoped to
+  // the filter specifically, a discrete user action where a brief delay
+  // is invisible; the live-reading interval above is deliberately NOT
+  // deferred the same way, since delaying that would make "current
+  // reading" go stale while someone's actively watching it.
+  function setTypeFilterDeferred(next: TypeFilter): void {
+    requestIdleCallback(() => setTypeFilter(next));
+  }
+
   function applySort(field: SortField, direction: SortDirection): void {
     const sorted = [...sensors].sort((a, b) => {
       if (field === 'trend') {
@@ -67,7 +117,7 @@ const HomeScreen: React.FC = () => {
           <Text style={styles.sortGroupLabel}>TYPE</Text>
           <View style={styles.sortChipRow}>
             <Pressable
-              onPress={() => setTypeFilter('all')}
+              onPress={() => setTypeFilterDeferred('all')}
               hitSlop={6}
               style={({ pressed }) => [
                 styles.sortChip,
@@ -78,7 +128,7 @@ const HomeScreen: React.FC = () => {
               <Text style={styles.sortChipText}>All</Text>
             </Pressable>
             <Pressable
-              onPress={() => setTypeFilter('temperature')}
+              onPress={() => setTypeFilterDeferred('temperature')}
               hitSlop={6}
               style={({ pressed }) => [
                 styles.sortChip,
@@ -89,7 +139,7 @@ const HomeScreen: React.FC = () => {
               <Text style={styles.sortChipText}>Temperature</Text>
             </Pressable>
             <Pressable
-              onPress={() => setTypeFilter('humidity')}
+              onPress={() => setTypeFilterDeferred('humidity')}
               hitSlop={6}
               style={({ pressed }) => [
                 styles.sortChip,
@@ -166,28 +216,10 @@ const HomeScreen: React.FC = () => {
           </View>
         </View>
       </View>
-      <FlatList
-        keyExtractor={sensor => `${sensor.id}`}
+      <FlashList
+        keyExtractor={(sensor: Sensor) => `${sensor.id}`}
         data={filteredSensors}
-        renderItem={({ item: sensor }) => (
-          <View style={styles.itemContainer}>
-            <Text style={styles.itemLabel}>
-              {'Sensor Name: '}
-              <Text style={styles.itemValue}>{sensor.name}</Text>
-            </Text>
-            <Text style={styles.itemLabel}>
-              {'Current Reading: '}
-              <Text style={styles.itemValue}>
-                {sensor.currentReading}
-                {sensor.unit}
-              </Text>
-            </Text>
-            <Text style={styles.itemLabel}>
-              {'DP: '}
-              <Text style={styles.itemValue}>{sensor.deviationPercent}</Text>
-            </Text>
-          </View>
-        )}
+        renderItem={renderSensorRow}
       />
     </SafeAreaView>
   );
@@ -249,7 +281,8 @@ const styles = StyleSheet.create({
   },
   itemLabel: {
     color: theme.colors.text,
-    fontSize: theme.fontSizes.m,
+    fontSize: theme.fontSizes.sm,
+    lineHeight: ROW_LABEL_LINE_HEIGHT,
   },
   itemValue: {
     fontWeight: 'bold',
