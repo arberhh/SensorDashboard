@@ -273,9 +273,14 @@ const styles = StyleSheet.create({
   itemContainer: {
     paddingHorizontal: theme.spacing.m,
     paddingVertical: theme.spacing.sm,
-    backgroundColor: theme.colors.cardBackground,
+    backgroundColor: theme.colors.surface,
     margin: theme.spacing.sm,
     borderRadius: 8,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 4,
   },
   itemName: {
     color: theme.colors.text,
