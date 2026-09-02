@@ -23,6 +23,12 @@ export const colors = {
   // so the two are distinguishable at a glance rather than by unit alone.
   temperature: '#ff9152',
   humidity: '#4fc3f7',
+
+  // Card drop-shadow color. Stays pure black regardless of theme, since a
+  // shadow's job is to sit behind the surface color, not tint it — but it
+  // still goes through the theme rather than being a literal in a style
+  // block, same as every other color in this app.
+  shadow: '#000000',
 };
 
 export const fontSizes = {
