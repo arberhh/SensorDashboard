@@ -96,6 +96,11 @@ const HomeScreen: React.FC = () => {
   }
 
   function applySort(field: SortField, direction: SortDirection): void {
+    if (activeSort?.field === field && activeSort?.direction === direction) {
+      setSensors(sensors);
+      setActiveSort(null);
+      return;
+    }
     const sorted = [...sensors].sort((a, b) => {
       if (field === 'trend') {
         return direction === 'asc'
