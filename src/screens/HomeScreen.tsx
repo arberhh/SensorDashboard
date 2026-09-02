@@ -15,24 +15,47 @@ type SortField = 'trend' | 'name';
 type SortDirection = 'asc' | 'desc';
 type ActiveSort = { field: SortField; direction: SortDirection } | null;
 
+// Sensor names are drawn from a closed list of 20 in genSensorData.js
+// (e.g. "Warehouse A - Zone 1", "Cold Storage Room 2") — not arbitrary
+// freeform text, so keyword-matching against that fixed set is reliable
+// rather than fragile. Order doesn't matter here since the categories
+// are distinct, non-overlapping substrings.
+function getLocationIcon(name: string): string {
+  if (name.includes('Warehouse')) return '🏭';
+  if (name.includes('Cold Storage')) return '🧊';
+  if (name.includes('Greenhouse')) return '🌿';
+  if (name.includes('Server Room')) return '🖥️';
+  if (name.includes('Office')) return '🏢';
+  if (name.includes('Production Line')) return '⚙️';
+  if (name.includes('Loading Bay')) return '🚛';
+  if (name.includes('Rooftop')) return '🏙️';
+  if (name.includes('Basement')) return '🗄️';
+  if (name.includes('Packaging')) return '📦';
+  if (name.includes('Cleanroom')) return '🧪';
+  return '📍';
+}
+
 function RenderRow({ item: sensor }: { item: Sensor }) {
   const readingColor =
     sensor.type === 'temperature'
       ? theme.colors.temperature
       : theme.colors.humidity;
-  const icon = sensor.type === 'temperature' ? '🌡️' : '💧';
+  const readingIcon = sensor.type === 'temperature' ? '🌡️' : '💧';
+  const locationIcon = getLocationIcon(sensor.name);
 
   return (
     <View style={styles.itemContainer}>
       <View style={styles.itemHeaderRow}>
-        <Text style={styles.itemIcon}>{icon}</Text>
+        <Text style={styles.itemIcon}>{locationIcon}</Text>
         <Text style={styles.itemName} numberOfLines={1}>
           {sensor.name}
         </Text>
       </View>
       <View style={styles.itemStatsRow}>
         <View style={styles.itemStat}>
-          <Text style={styles.itemStatLabel}>READING</Text>
+          <Text style={styles.itemStatLabel}>
+            {readingIcon} READING
+          </Text>
           <Text style={[styles.itemStatValue, { color: readingColor }]}>
             {sensor.currentReading}
             {sensor.unit}
