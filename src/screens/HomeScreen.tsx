@@ -48,11 +48,21 @@ const HomeScreen: React.FC = () => {
   // is invisible; the live-reading interval above is deliberately NOT
   // deferred the same way, since delaying that would make "current
   // reading" go stale while someone's actively watching it.
+  // Pressing the already-active filter toggles it back off (to "all")
+  // instead of being a no-op; pressing "all" while already on "all" is
+  // still a no-op, since there's nothing to toggle off.
   function setTypeFilterDeferred(next: TypeFilter): void {
-    requestIdleCallback(() => setTypeFilter(next));
+    requestIdleCallback(() => {
+      setTypeFilter(current => (current === next ? 'all' : next));
+    });
   }
 
   function applySort(field: SortField, direction: SortDirection): void {
+    if (activeSort?.field === field && activeSort?.direction === direction) {
+      setSensors(sensors);
+      setActiveSort(null);
+      return;
+    }
     const sorted = [...sensors].sort((a, b) => {
       if (field === 'trend') {
         return direction === 'asc'
