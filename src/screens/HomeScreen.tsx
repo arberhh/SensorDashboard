@@ -20,18 +20,28 @@ function RenderRow({ item: sensor }: { item: Sensor }) {
     sensor.type === 'temperature'
       ? theme.colors.temperature
       : theme.colors.humidity;
+  const icon = sensor.type === 'temperature' ? '🌡️' : '💧';
 
   return (
     <View style={styles.itemContainer}>
-      <Text style={styles.itemName} numberOfLines={1}>
-        {sensor.name}
-      </Text>
-      <View style={styles.itemMetaRow}>
-        <Text style={[styles.itemReading, { color: readingColor }]}>
-          {sensor.currentReading}
-          {sensor.unit}
+      <View style={styles.itemHeaderRow}>
+        <Text style={styles.itemIcon}>{icon}</Text>
+        <Text style={styles.itemName} numberOfLines={1}>
+          {sensor.name}
         </Text>
-        <Text style={styles.itemDp}>DP {sensor.deviationPercent}</Text>
+      </View>
+      <View style={styles.itemStatsRow}>
+        <View style={styles.itemStat}>
+          <Text style={styles.itemStatLabel}>READING</Text>
+          <Text style={[styles.itemStatValue, { color: readingColor }]}>
+            {sensor.currentReading}
+            {sensor.unit}
+          </Text>
+        </View>
+        <View style={styles.itemStat}>
+          <Text style={styles.itemStatLabel}>DEVIATION</Text>
+          <Text style={styles.itemStatValue}>{sensor.deviationPercent}</Text>
+        </View>
       </View>
     </View>
   );
@@ -271,35 +281,49 @@ const styles = StyleSheet.create({
     fontWeight: '600',
   },
   itemContainer: {
-    paddingHorizontal: theme.spacing.m,
-    paddingVertical: theme.spacing.m,
+    paddingHorizontal: theme.spacing.l,
+    paddingVertical: theme.spacing.l,
     backgroundColor: theme.colors.surface,
     margin: theme.spacing.sm,
-    borderRadius: 14,
+    borderRadius: 16,
     shadowColor: theme.colors.shadow,
-    shadowOffset: { width: 0, height: 3 },
-    shadowOpacity: 0.3,
-    shadowRadius: 6,
-    elevation: 6,
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.35,
+    shadowRadius: 8,
+    elevation: 8,
   },
-  itemName: {
-    color: theme.colors.text,
-    fontSize: theme.fontSizes.m,
-    fontWeight: '700',
-    marginBottom: theme.spacing.xs,
-  },
-  itemMetaRow: {
+  itemHeaderRow: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: theme.spacing.sm,
+    marginBottom: theme.spacing.m,
   },
-  itemReading: {
-    fontSize: theme.fontSizes.sm,
+  itemIcon: {
+    fontSize: theme.fontSizes.xl,
+  },
+  itemName: {
+    flex: 1,
+    color: theme.colors.text,
+    fontSize: theme.fontSizes.l,
     fontWeight: '700',
   },
-  itemDp: {
+  itemStatsRow: {
+    flexDirection: 'row',
+    gap: theme.spacing.xl,
+  },
+  itemStat: {
+    gap: theme.spacing.xs,
+  },
+  itemStatLabel: {
     fontSize: theme.fontSizes.sm,
     color: theme.colors.textMuted,
+    fontWeight: '700',
+    letterSpacing: 0.6,
+  },
+  itemStatValue: {
+    fontSize: theme.fontSizes.m,
+    color: theme.colors.text,
+    fontWeight: '700',
   },
 });
 
