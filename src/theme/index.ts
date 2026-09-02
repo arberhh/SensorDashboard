@@ -18,6 +18,17 @@ export const colors = {
   cardBackground: 'rgba(255, 255, 255, 0.05)',
   chipBackground: 'rgba(255, 255, 255, 0.08)',
   chipPressed: 'rgba(255, 255, 255, 0.18)',
+
+  // Sensor-type accent colors — warm for temperature, cool for humidity,
+  // so the two are distinguishable at a glance rather than by unit alone.
+  temperature: '#ff9152',
+  humidity: '#4fc3f7',
+
+  // Card drop-shadow color. Stays pure black regardless of theme, since a
+  // shadow's job is to sit behind the surface color, not tint it — but it
+  // still goes through the theme rather than being a literal in a style
+  // block, same as every other color in this app.
+  shadow: '#000000',
 };
 
 export const fontSizes = {
