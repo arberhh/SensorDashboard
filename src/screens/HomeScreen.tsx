@@ -8,11 +8,15 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import theme from "../theme";
 import type { Sensor, TSensor } from "../types/sensor";
 import { renderSensorRow } from "../components/SensorRow";
-
-type TypeFilter = "all" | "temperature" | "humidity";
-type SortField = "trend" | "name";
-type SortDirection = "asc" | "desc";
-type ActiveSort = { field: SortField; direction: SortDirection } | null;
+import { generateReading } from "../utils/sensorReadings";
+import {
+  filterSensorsByType,
+  sortSensors,
+  type ActiveSort,
+  type SortDirection,
+  type SortField,
+  type TypeFilter,
+} from "../utils/sensorList";
 
 const HomeScreen: React.FC = () => {
   const [sensors, setSensors] = useState<TSensor>(initialSensors);
@@ -22,15 +26,10 @@ const HomeScreen: React.FC = () => {
   useEffect(() => {
     const intervalId = setInterval(() => {
       setSensors((prevSensors) =>
-        prevSensors.map((sensor) => {
-          const { min, max } =
-            sensor.type === "temperature" ? { min: 15, max: 35 } : { min: 20, max: 90 };
-
-          return {
-            ...sensor,
-            currentReading: parseFloat((Math.random() * (max - min) + min).toFixed(2)),
-          };
-        }),
+        prevSensors.map((sensor) => ({
+          ...sensor,
+          currentReading: generateReading(sensor.type),
+        })),
       );
     }, 5000);
 
@@ -59,20 +58,11 @@ const HomeScreen: React.FC = () => {
       setActiveSort(null);
       return;
     }
-    const sorted = [...sensors].sort((a, b) => {
-      if (field === "trend") {
-        return direction === "asc"
-          ? a.deviationPercent - b.deviationPercent
-          : b.deviationPercent - a.deviationPercent;
-      }
-      return direction === "asc" ? a.name.localeCompare(b.name) : b.name.localeCompare(a.name);
-    });
-    setSensors(sorted);
+    setSensors(sortSensors(sensors, field, direction));
     setActiveSort({ field, direction });
   }
 
-  const filteredSensors =
-    typeFilter === "all" ? sensors : sensors.filter((sensor) => sensor.type === typeFilter);
+  const filteredSensors = filterSensorsByType(sensors, typeFilter);
 
   return (
     <SafeAreaView style={styles.container} edges={["bottom", "left", "right"]}>
@@ -81,6 +71,7 @@ const HomeScreen: React.FC = () => {
           <Text style={styles.sortGroupLabel}>TYPE</Text>
           <View style={styles.sortChipRow}>
             <Pressable
+              testID="type-filter-all"
               onPress={() => setTypeFilterDeferred("all")}
               hitSlop={6}
               style={({ pressed }) => [
@@ -92,6 +83,7 @@ const HomeScreen: React.FC = () => {
               <Text style={styles.sortChipText}>All</Text>
             </Pressable>
             <Pressable
+              testID="type-filter-temperature"
               onPress={() => setTypeFilterDeferred("temperature")}
               hitSlop={6}
               style={({ pressed }) => [
@@ -103,6 +95,7 @@ const HomeScreen: React.FC = () => {
               <Text style={styles.sortChipText}>Temperature</Text>
             </Pressable>
             <Pressable
+              testID="type-filter-humidity"
               onPress={() => setTypeFilterDeferred("humidity")}
               hitSlop={6}
               style={({ pressed }) => [
@@ -120,6 +113,7 @@ const HomeScreen: React.FC = () => {
           <Text style={styles.sortGroupLabel}>TREND</Text>
           <View style={styles.sortChipRow}>
             <Pressable
+              testID="sort-trend-asc"
               onPress={() => applySort("trend", "asc")}
               hitSlop={6}
               style={({ pressed }) => [
@@ -133,6 +127,7 @@ const HomeScreen: React.FC = () => {
               <Text style={styles.sortChipText}>Asc ↑</Text>
             </Pressable>
             <Pressable
+              testID="sort-trend-desc"
               onPress={() => applySort("trend", "desc")}
               hitSlop={6}
               style={({ pressed }) => [
@@ -152,6 +147,7 @@ const HomeScreen: React.FC = () => {
           <Text style={styles.sortGroupLabel}>NAME</Text>
           <View style={styles.sortChipRow}>
             <Pressable
+              testID="sort-name-asc"
               onPress={() => applySort("name", "asc")}
               hitSlop={6}
               style={({ pressed }) => [
@@ -165,6 +161,7 @@ const HomeScreen: React.FC = () => {
               <Text style={styles.sortChipText}>Asc ↑</Text>
             </Pressable>
             <Pressable
+              testID="sort-name-desc"
               onPress={() => applySort("name", "desc")}
               hitSlop={6}
               style={({ pressed }) => [
@@ -181,6 +178,7 @@ const HomeScreen: React.FC = () => {
         </View>
       </View>
       <FlashList
+        testID="sensor-list"
         keyExtractor={(sensor: Sensor) => `${sensor.id}`}
         data={filteredSensors}
         renderItem={renderSensorRow}
