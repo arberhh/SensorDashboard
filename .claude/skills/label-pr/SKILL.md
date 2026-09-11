@@ -11,14 +11,14 @@ ready — an unlabeled PR is an incomplete PR, not a formatting nit to
 skip. Up to two labels total is fine if the second arrived via
 Linear's auto-sync (see below); you should still only ever apply one.
 
-| Label | Use when the PR is... |
-|---|---|
-| `feat` | a new feature or capability |
-| `fix` | a bug fix |
+| Label      | Use when the PR is...                 |
+| ---------- | ------------------------------------- |
+| `feat`     | a new feature or capability           |
+| `fix`      | a bug fix                             |
 | `refactor` | a code change with no behavior change |
-| `docs` | documentation only |
-| `chore` | tooling, deps, config, maintenance |
-| `test` | adding or fixing tests |
+| `docs`     | documentation only                    |
+| `chore`    | tooling, deps, config, maintenance    |
+| `test`     | adding or fixing tests                |
 
 ## Process
 
@@ -30,10 +30,13 @@ Linear's auto-sync (see below); you should still only ever apply one.
    surface-level file names.
 
 2. **Apply the label at creation time**:
+
    ```
    gh pr create --title "..." --body "..." --label <label>
    ```
+
    If the PR already exists, add it after the fact:
+
    ```
    gh pr edit <PR#> --add-label <label>
    ```
@@ -49,7 +52,7 @@ Linear's auto-sync (see below); you should still only ever apply one.
    the PR independent of anything this skill does (seen on PR #1 and
    PR #2). That's outside this skill's control and not worth fighting
    after the fact. **Two labels total is acceptable** when the second
-   one arrived this way; the rule is about what *you* deliberately
+   one arrived this way; the rule is about what _you_ deliberately
    apply, not about scrubbing labels Linear adds on its own. If a PR
    ever has three or more, or two labels neither of which trace back
    to Linear's auto-add, that's a real signal something's wrong —
