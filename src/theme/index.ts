@@ -23,6 +23,11 @@ const colors = {
   // so the two are distinguishable at a glance rather than by unit alone.
   temperature: "#ff9152",
   humidity: "#4fc3f7",
+  // Low-alpha versions of the two above, for badge/tag backgrounds that
+  // should read as "temperature"/"humidity" without competing with the
+  // full-strength reading value.
+  temperatureTint: "rgba(255, 145, 82, 0.15)",
+  humidityTint: "rgba(79, 195, 247, 0.15)",
 
   // Card drop-shadow color. Stays pure black regardless of theme, since a
   // shadow's job is to sit behind the surface color, not tint it — but it
@@ -36,6 +41,7 @@ const fontSizes = {
   m: 14,
   l: 16,
   xl: 20,
+  display: 40, // hero numbers, e.g. the detail screen's current reading
 };
 
 // Base spacing unit is 16 — every other step is a multiple of it, so

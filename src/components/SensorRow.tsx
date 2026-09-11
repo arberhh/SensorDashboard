@@ -1,37 +1,24 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, Pressable } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 import theme from "../theme";
 import type { Sensor } from "../types/sensor";
-
-// Sensor names are drawn from a closed list of 20 in genSensorData.js
-// (e.g. "Warehouse A - Zone 1", "Cold Storage Room 2") — not arbitrary
-// freeform text, so keyword-matching against that fixed set is reliable
-// rather than fragile. Order doesn't matter here since the categories
-// are distinct, non-overlapping substrings.
-function getLocationIcon(name: string): string {
-  if (name.includes("Warehouse")) return "🏭";
-  if (name.includes("Cold Storage")) return "🧊";
-  if (name.includes("Greenhouse")) return "🌿";
-  if (name.includes("Server Room")) return "🖥️";
-  if (name.includes("Office")) return "🏢";
-  if (name.includes("Production Line")) return "⚙️";
-  if (name.includes("Loading Bay")) return "🚛";
-  if (name.includes("Rooftop")) return "🏙️";
-  if (name.includes("Basement")) return "🗄️";
-  if (name.includes("Packaging")) return "📦";
-  if (name.includes("Cleanroom")) return "🧪";
-  return "📍";
-}
+import { getLocationIcon } from "../utils/sensorDisplay";
 
 function RenderRow({ item: sensor }: { item: Sensor }) {
+  const navigation = useNavigation();
   const readingColor =
     sensor.type === "temperature" ? theme.colors.temperature : theme.colors.humidity;
   const readingIcon = sensor.type === "temperature" ? "🌡️" : "💧";
   const locationIcon = getLocationIcon(sensor.name);
 
+  function onSensorPress() {
+    navigation.navigate("SensorDetail", { sensorId: sensor.id });
+  }
+
   return (
-    <View style={styles.itemContainer}>
+    <Pressable onPress={onSensorPress} style={styles.itemContainer}>
       <View style={styles.itemHeaderRow}>
         <Text style={styles.itemIcon}>{locationIcon}</Text>
         <Text style={styles.itemName} numberOfLines={1}>
@@ -51,7 +38,7 @@ function RenderRow({ item: sensor }: { item: Sensor }) {
           <Text style={styles.itemStatValue}>{sensor.deviationPercent}</Text>
         </View>
       </View>
-    </View>
+    </Pressable>
   );
 }
 
