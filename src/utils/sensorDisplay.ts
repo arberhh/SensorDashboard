@@ -1,4 +1,4 @@
-import theme from "../theme";
+import theme from "@/theme";
 
 // Sensor names are drawn from a closed list of 20 in genSensorData.js
 // (e.g. "Warehouse A - Zone 1", "Cold Storage Room 2") — not arbitrary

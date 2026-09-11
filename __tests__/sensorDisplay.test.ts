@@ -2,7 +2,7 @@
  * @format
  */
 
-import { formatDeviation, getLocationIcon, getTypeStyle } from "../src/utils/sensorDisplay";
+import { formatDeviation, getLocationIcon, getTypeStyle } from "@/utils/sensorDisplay";
 
 describe("getLocationIcon", () => {
   test.each([

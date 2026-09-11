@@ -2,7 +2,7 @@
  * @format
  */
 
-import { generateReading } from "../src/utils/sensorReadings";
+import { generateReading } from "@/utils/sensorReadings";
 
 // Statistical, not exact — generateReading is a random-in-range formula,
 // so these assert the invariants that must hold for every call (correct

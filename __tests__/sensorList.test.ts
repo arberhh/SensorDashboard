@@ -2,8 +2,8 @@
  * @format
  */
 
-import { filterSensorsByType, filterSimilarSensors, sortSensors } from "../src/utils/sensorList";
-import type { Sensor } from "../src/types/sensor";
+import { filterSensorsByType, filterSimilarSensors, sortSensors } from "@/utils/sensorList";
+import type { Sensor } from "@/types/sensor";
 
 function makeSensor(overrides: Partial<Sensor>): Sensor {
   return {

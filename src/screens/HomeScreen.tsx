@@ -3,12 +3,12 @@ import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet, Pressable } from "react-native";
 import { FlashList } from "@shopify/flash-list";
 
-import initialSensors from "../data/sensor_readings.json";
+import initialSensors from "@/data/sensor_readings.json";
 import { SafeAreaView } from "react-native-safe-area-context";
-import theme from "../theme";
-import type { Sensor, TSensor } from "../types/sensor";
-import { renderSensorRow } from "../components/SensorRow";
-import { generateReading } from "../utils/sensorReadings";
+import theme from "@/theme";
+import type { Sensor, TSensor } from "@/types/sensor";
+import { renderSensorRow } from "@/components/SensorRow";
+import { generateReading } from "@/utils/sensorReadings";
 import {
   filterSensorsByType,
   sortSensors,
@@ -16,7 +16,7 @@ import {
   type SortDirection,
   type SortField,
   type TypeFilter,
-} from "../utils/sensorList";
+} from "@/utils/sensorList";
 
 const HomeScreen: React.FC = () => {
   const [sensors, setSensors] = useState<TSensor>(initialSensors);

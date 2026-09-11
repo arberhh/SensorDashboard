@@ -2,9 +2,9 @@ import React from "react";
 import { View, Text, StyleSheet, Pressable } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
-import theme from "../theme";
-import type { Sensor } from "../types/sensor";
-import { getLocationIcon } from "../utils/sensorDisplay";
+import theme from "@/theme";
+import type { Sensor } from "@/types/sensor";
+import { getLocationIcon } from "@/utils/sensorDisplay";
 
 function RenderRow({ item: sensor }: { item: Sensor }) {
   const navigation = useNavigation();

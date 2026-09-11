@@ -1,4 +1,4 @@
-import type { Sensor, TSensor } from "../types/sensor";
+import type { Sensor, TSensor } from "@/types/sensor";
 
 export type TypeFilter = "all" | "temperature" | "humidity";
 export type SortField = "trend" | "name";

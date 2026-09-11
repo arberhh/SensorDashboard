@@ -1,4 +1,4 @@
-import type { Sensor } from "../types/sensor";
+import type { Sensor } from "@/types/sensor";
 
 // Same per-type ranges as scripts/genSensorData.js. Duplicated rather than
 // imported from that script, which only runs at data-gen time (via `npm

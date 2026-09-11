@@ -4,18 +4,18 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { FlashList } from "@shopify/flash-list";
 import type { NativeStackScreenProps } from "@react-navigation/native-stack";
 
-import theme from "../theme";
-import initialSensors from "../data/sensor_readings.json";
-import type { Sensor } from "../types/sensor";
-import { formatDeviation, getLocationIcon, getTypeStyle } from "../utils/sensorDisplay";
+import theme from "@/theme";
+import initialSensors from "@/data/sensor_readings.json";
+import type { Sensor } from "@/types/sensor";
+import { formatDeviation, getLocationIcon, getTypeStyle } from "@/utils/sensorDisplay";
 import {
   filterSimilarSensors,
   sortSensors,
   type ActiveSort,
   type SortDirection,
   type SortField,
-} from "../utils/sensorList";
-import type { RootStackParamList } from "../navigation/RootStack";
+} from "@/utils/sensorList";
+import type { RootStackParamList } from "@/navigation/RootStack";
 
 type SensorDetailScreenProps = NativeStackScreenProps<RootStackParamList, "SensorDetail">;
 
