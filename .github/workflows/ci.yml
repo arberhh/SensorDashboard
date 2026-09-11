@@ -1,0 +1,65 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Setup Node
+        uses: actions/setup-node@v7
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      # Non-blocking: the remaining findings are all pinned to a
+      # react-native 0.87.0 -> 0.84.1 downgrade (a semver-major step
+      # backwards), which npm audit suggests because advisory metadata
+      # for this RN line hasn't caught up yet. Revisit when upstream
+      # publishes a real fix instead of a downgrade.
+      - name: Audit dependencies
+        run: npm audit --audit-level=high
+        continue-on-error: true
+
+      - name: Type check
+        run: npm run ts:check
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Test
+        run: npm run test -- --ci
+
+      - name: Dead code / unused exports / unused deps
+        run: npm run deadcode
+
+  # Native builds are slower and usually gated separately (nightly, or
+  # only on release branches) rather than on every PR — add jobs like
+  # the ones below only if the project wants build verification in CI,
+  # not as a default. They need macos-latest (iOS) and a JDK setup
+  # (Android) that the checks job above doesn't.
+  #
+  # android-build:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v7
+  #     - uses: actions/setup-java@v4
+  #       with: { distribution: temurin, java-version: "17" }
+  #     - run: cd android && ./gradlew assembleDebug
+  #
+  # ios-build:
+  #   runs-on: macos-latest
+  #   steps:
+  #     - uses: actions/checkout@v7
+  #     - run: cd ios && pod install
+  #     - run: xcodebuild -workspace ios/*.xcworkspace -scheme <Scheme> -configuration Debug -sdk iphonesimulator build

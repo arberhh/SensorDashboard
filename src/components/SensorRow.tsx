@@ -1,8 +1,8 @@
-import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import React from "react";
+import { View, Text, StyleSheet } from "react-native";
 
-import theme from '../theme';
-import type { Sensor } from '../types/sensor';
+import theme from "../theme";
+import type { Sensor } from "../types/sensor";
 
 // Sensor names are drawn from a closed list of 20 in genSensorData.js
 // (e.g. "Warehouse A - Zone 1", "Cold Storage Room 2") — not arbitrary
@@ -10,26 +10,24 @@ import type { Sensor } from '../types/sensor';
 // rather than fragile. Order doesn't matter here since the categories
 // are distinct, non-overlapping substrings.
 function getLocationIcon(name: string): string {
-  if (name.includes('Warehouse')) return '🏭';
-  if (name.includes('Cold Storage')) return '🧊';
-  if (name.includes('Greenhouse')) return '🌿';
-  if (name.includes('Server Room')) return '🖥️';
-  if (name.includes('Office')) return '🏢';
-  if (name.includes('Production Line')) return '⚙️';
-  if (name.includes('Loading Bay')) return '🚛';
-  if (name.includes('Rooftop')) return '🏙️';
-  if (name.includes('Basement')) return '🗄️';
-  if (name.includes('Packaging')) return '📦';
-  if (name.includes('Cleanroom')) return '🧪';
-  return '📍';
+  if (name.includes("Warehouse")) return "🏭";
+  if (name.includes("Cold Storage")) return "🧊";
+  if (name.includes("Greenhouse")) return "🌿";
+  if (name.includes("Server Room")) return "🖥️";
+  if (name.includes("Office")) return "🏢";
+  if (name.includes("Production Line")) return "⚙️";
+  if (name.includes("Loading Bay")) return "🚛";
+  if (name.includes("Rooftop")) return "🏙️";
+  if (name.includes("Basement")) return "🗄️";
+  if (name.includes("Packaging")) return "📦";
+  if (name.includes("Cleanroom")) return "🧪";
+  return "📍";
 }
 
 function RenderRow({ item: sensor }: { item: Sensor }) {
   const readingColor =
-    sensor.type === 'temperature'
-      ? theme.colors.temperature
-      : theme.colors.humidity;
-  const readingIcon = sensor.type === 'temperature' ? '🌡️' : '💧';
+    sensor.type === "temperature" ? theme.colors.temperature : theme.colors.humidity;
+  const readingIcon = sensor.type === "temperature" ? "🌡️" : "💧";
   const locationIcon = getLocationIcon(sensor.name);
 
   return (
@@ -71,20 +69,20 @@ export function renderSensorRow({ item }: { item: Sensor }) {
 
 const styles = StyleSheet.create({
   itemContainer: {
+    backgroundColor: theme.colors.surface,
+    borderRadius: 16,
+    elevation: 8,
+    margin: theme.spacing.sm,
     paddingHorizontal: theme.spacing.l,
     paddingVertical: theme.spacing.l,
-    backgroundColor: theme.colors.surface,
-    margin: theme.spacing.sm,
-    borderRadius: 16,
     shadowColor: theme.colors.shadow,
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.35,
     shadowRadius: 8,
-    elevation: 8,
   },
   itemHeaderRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    alignItems: "center",
+    flexDirection: "row",
     gap: theme.spacing.sm,
     marginBottom: theme.spacing.m,
   },
@@ -92,27 +90,27 @@ const styles = StyleSheet.create({
     fontSize: theme.fontSizes.xl,
   },
   itemName: {
-    flex: 1,
     color: theme.colors.text,
+    flex: 1,
     fontSize: theme.fontSizes.l,
-    fontWeight: '700',
-  },
-  itemStatsRow: {
-    flexDirection: 'row',
-    gap: theme.spacing.xl,
+    fontWeight: "700",
   },
   itemStat: {
     gap: theme.spacing.xs,
   },
   itemStatLabel: {
-    fontSize: theme.fontSizes.sm,
     color: theme.colors.textMuted,
-    fontWeight: '700',
+    fontSize: theme.fontSizes.sm,
+    fontWeight: "700",
     letterSpacing: 0.6,
   },
   itemStatValue: {
-    fontSize: theme.fontSizes.m,
     color: theme.colors.text,
-    fontWeight: '700',
+    fontSize: theme.fontSizes.m,
+    fontWeight: "700",
+  },
+  itemStatsRow: {
+    flexDirection: "row",
+    gap: theme.spacing.xl,
   },
 });

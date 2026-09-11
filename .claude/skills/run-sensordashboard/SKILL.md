@@ -55,9 +55,9 @@ Don't just confirm the build succeeded — confirm the screen actually
 rendered sensor data:
 
 1. Wait for the build to finish (`success Successfully launched the
-   app` in the CLI output), not a fixed sleep.
+app` in the CLI output), not a fixed sleep.
 2. Screenshot the simulator: `xcrun simctl io <udid> screenshot
-   /tmp/verify.png`, then look at it. Confirm sensor cards with
+/tmp/verify.png`, then look at it. Confirm sensor cards with
    "Sensor Name" / "Current Reading" / "DP" are rendering, not a
    blank navy screen or a red RN error overlay.
 3. `console.log` output does **not** appear in Xcode's build log —

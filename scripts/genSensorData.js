@@ -38,7 +38,7 @@ function generateSensors(numSensors = 500) {
     const name = sensorNames[Math.floor(Math.random() * sensorNames.length)];
     const sensorId = name
       .split(" ")
-      .map(word => word[0])
+      .map((word) => word[0])
       .join("")
       .toUpperCase()
       .slice(0, 5);
@@ -64,7 +64,7 @@ function generateSensors(numSensors = 500) {
 const sensors = generateSensors();
 const outFile = path.join(__dirname, "..", "src", "data", "sensor_readings.json");
 
-fs.writeFile(outFile, JSON.stringify(sensors, null, 4), err => {
+fs.writeFile(outFile, JSON.stringify(sensors, null, 4), (err) => {
   if (err) {
     console.error("Error writing file:", err);
   } else {

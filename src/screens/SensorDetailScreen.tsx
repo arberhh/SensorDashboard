@@ -19,8 +19,8 @@ const SensorDetailScreen: React.FC<Props> = ({ route }) => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     backgroundColor: theme.colors.background,
+    flex: 1,
     padding: theme.spacing.m,
   },
   text: {

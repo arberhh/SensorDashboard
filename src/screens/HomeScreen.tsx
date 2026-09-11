@@ -1,38 +1,34 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 
-import { View, Text, StyleSheet, Pressable } from 'react-native';
-import { FlashList } from '@shopify/flash-list';
+import { View, Text, StyleSheet, Pressable } from "react-native";
+import { FlashList } from "@shopify/flash-list";
 
-import initialSensors from '../data/sensor_readings.json';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import theme from '../theme';
-import type { Sensor, TSensor } from '../types/sensor';
-import { renderSensorRow } from '../components/SensorRow';
+import initialSensors from "../data/sensor_readings.json";
+import { SafeAreaView } from "react-native-safe-area-context";
+import theme from "../theme";
+import type { Sensor, TSensor } from "../types/sensor";
+import { renderSensorRow } from "../components/SensorRow";
 
-type TypeFilter = 'all' | 'temperature' | 'humidity';
-type SortField = 'trend' | 'name';
-type SortDirection = 'asc' | 'desc';
+type TypeFilter = "all" | "temperature" | "humidity";
+type SortField = "trend" | "name";
+type SortDirection = "asc" | "desc";
 type ActiveSort = { field: SortField; direction: SortDirection } | null;
 
 const HomeScreen: React.FC = () => {
   const [sensors, setSensors] = useState<TSensor>(initialSensors);
-  const [typeFilter, setTypeFilter] = useState<TypeFilter>('all');
+  const [typeFilter, setTypeFilter] = useState<TypeFilter>("all");
   const [activeSort, setActiveSort] = useState<ActiveSort>(null);
 
   useEffect(() => {
     const intervalId = setInterval(() => {
-      setSensors(prevSensors =>
-        prevSensors.map(sensor => {
+      setSensors((prevSensors) =>
+        prevSensors.map((sensor) => {
           const { min, max } =
-            sensor.type === 'temperature'
-              ? { min: 15, max: 35 }
-              : { min: 20, max: 90 };
+            sensor.type === "temperature" ? { min: 15, max: 35 } : { min: 20, max: 90 };
 
           return {
             ...sensor,
-            currentReading: parseFloat(
-              (Math.random() * (max - min) + min).toFixed(2),
-            ),
+            currentReading: parseFloat((Math.random() * (max - min) + min).toFixed(2)),
           };
         }),
       );
@@ -53,7 +49,7 @@ const HomeScreen: React.FC = () => {
   // still a no-op, since there's nothing to toggle off.
   function setTypeFilterDeferred(next: TypeFilter): void {
     requestIdleCallback(() => {
-      setTypeFilter(current => (current === next ? 'all' : next));
+      setTypeFilter((current) => (current === next ? "all" : next));
     });
   }
 
@@ -64,58 +60,54 @@ const HomeScreen: React.FC = () => {
       return;
     }
     const sorted = [...sensors].sort((a, b) => {
-      if (field === 'trend') {
-        return direction === 'asc'
+      if (field === "trend") {
+        return direction === "asc"
           ? a.deviationPercent - b.deviationPercent
           : b.deviationPercent - a.deviationPercent;
       }
-      return direction === 'asc'
-        ? a.name.localeCompare(b.name)
-        : b.name.localeCompare(a.name);
+      return direction === "asc" ? a.name.localeCompare(b.name) : b.name.localeCompare(a.name);
     });
     setSensors(sorted);
     setActiveSort({ field, direction });
   }
 
   const filteredSensors =
-    typeFilter === 'all'
-      ? sensors
-      : sensors.filter(sensor => sensor.type === typeFilter);
+    typeFilter === "all" ? sensors : sensors.filter((sensor) => sensor.type === typeFilter);
 
   return (
-    <SafeAreaView style={styles.container} edges={['bottom', 'left', 'right']}>
+    <SafeAreaView style={styles.container} edges={["bottom", "left", "right"]}>
       <View style={styles.sortBar}>
         <View style={styles.sortGroup}>
           <Text style={styles.sortGroupLabel}>TYPE</Text>
           <View style={styles.sortChipRow}>
             <Pressable
-              onPress={() => setTypeFilterDeferred('all')}
+              onPress={() => setTypeFilterDeferred("all")}
               hitSlop={6}
               style={({ pressed }) => [
                 styles.sortChip,
-                typeFilter === 'all' && styles.sortChipActive,
+                typeFilter === "all" && styles.sortChipActive,
                 pressed && styles.sortChipPressed,
               ]}
             >
               <Text style={styles.sortChipText}>All</Text>
             </Pressable>
             <Pressable
-              onPress={() => setTypeFilterDeferred('temperature')}
+              onPress={() => setTypeFilterDeferred("temperature")}
               hitSlop={6}
               style={({ pressed }) => [
                 styles.sortChip,
-                typeFilter === 'temperature' && styles.sortChipActive,
+                typeFilter === "temperature" && styles.sortChipActive,
                 pressed && styles.sortChipPressed,
               ]}
             >
               <Text style={styles.sortChipText}>Temperature</Text>
             </Pressable>
             <Pressable
-              onPress={() => setTypeFilterDeferred('humidity')}
+              onPress={() => setTypeFilterDeferred("humidity")}
               hitSlop={6}
               style={({ pressed }) => [
                 styles.sortChip,
-                typeFilter === 'humidity' && styles.sortChipActive,
+                typeFilter === "humidity" && styles.sortChipActive,
                 pressed && styles.sortChipPressed,
               ]}
             >
@@ -128,12 +120,12 @@ const HomeScreen: React.FC = () => {
           <Text style={styles.sortGroupLabel}>TREND</Text>
           <View style={styles.sortChipRow}>
             <Pressable
-              onPress={() => applySort('trend', 'asc')}
+              onPress={() => applySort("trend", "asc")}
               hitSlop={6}
               style={({ pressed }) => [
                 styles.sortChip,
-                activeSort?.field === 'trend' &&
-                  activeSort.direction === 'asc' &&
+                activeSort?.field === "trend" &&
+                  activeSort.direction === "asc" &&
                   styles.sortChipActive,
                 pressed && styles.sortChipPressed,
               ]}
@@ -141,12 +133,12 @@ const HomeScreen: React.FC = () => {
               <Text style={styles.sortChipText}>Asc ↑</Text>
             </Pressable>
             <Pressable
-              onPress={() => applySort('trend', 'desc')}
+              onPress={() => applySort("trend", "desc")}
               hitSlop={6}
               style={({ pressed }) => [
                 styles.sortChip,
-                activeSort?.field === 'trend' &&
-                  activeSort.direction === 'desc' &&
+                activeSort?.field === "trend" &&
+                  activeSort.direction === "desc" &&
                   styles.sortChipActive,
                 pressed && styles.sortChipPressed,
               ]}
@@ -160,12 +152,12 @@ const HomeScreen: React.FC = () => {
           <Text style={styles.sortGroupLabel}>NAME</Text>
           <View style={styles.sortChipRow}>
             <Pressable
-              onPress={() => applySort('name', 'asc')}
+              onPress={() => applySort("name", "asc")}
               hitSlop={6}
               style={({ pressed }) => [
                 styles.sortChip,
-                activeSort?.field === 'name' &&
-                  activeSort.direction === 'asc' &&
+                activeSort?.field === "name" &&
+                  activeSort.direction === "asc" &&
                   styles.sortChipActive,
                 pressed && styles.sortChipPressed,
               ]}
@@ -173,12 +165,12 @@ const HomeScreen: React.FC = () => {
               <Text style={styles.sortChipText}>Asc ↑</Text>
             </Pressable>
             <Pressable
-              onPress={() => applySort('name', 'desc')}
+              onPress={() => applySort("name", "desc")}
               hitSlop={6}
               style={({ pressed }) => [
                 styles.sortChip,
-                activeSort?.field === 'name' &&
-                  activeSort.direction === 'desc' &&
+                activeSort?.field === "name" &&
+                  activeSort.direction === "desc" &&
                   styles.sortChipActive,
                 pressed && styles.sortChipPressed,
               ]}
@@ -199,21 +191,42 @@ const HomeScreen: React.FC = () => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     backgroundColor: theme.colors.background,
+    flex: 1,
   },
   sortBar: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    gap: 16,
-    paddingHorizontal: 14,
-    paddingVertical: 12,
-    marginHorizontal: 10,
-    marginTop: 10,
     backgroundColor: theme.colors.cardBackground,
+    borderColor: theme.colors.border,
     borderRadius: 12,
     borderWidth: StyleSheet.hairlineWidth,
-    borderColor: theme.colors.border,
+    flexDirection: "row",
+    flexWrap: "wrap",
+    gap: 16,
+    marginHorizontal: 10,
+    marginTop: 10,
+    paddingHorizontal: 14,
+    paddingVertical: 12,
+  },
+  sortChip: {
+    backgroundColor: theme.colors.chipBackground,
+    borderRadius: 999,
+    paddingHorizontal: 12,
+    paddingVertical: 6,
+  },
+  sortChipActive: {
+    backgroundColor: theme.colors.accent,
+  },
+  sortChipPressed: {
+    backgroundColor: theme.colors.chipPressed,
+  },
+  sortChipRow: {
+    flexDirection: "row",
+    gap: 8,
+  },
+  sortChipText: {
+    color: theme.colors.text,
+    fontSize: theme.fontSizes.m,
+    fontWeight: "600",
   },
   sortGroup: {
     gap: 6,
@@ -221,29 +234,8 @@ const styles = StyleSheet.create({
   sortGroupLabel: {
     color: theme.colors.textMuted,
     fontSize: theme.fontSizes.sm,
-    fontWeight: '700',
+    fontWeight: "700",
     letterSpacing: 0.6,
-  },
-  sortChipRow: {
-    flexDirection: 'row',
-    gap: 8,
-  },
-  sortChip: {
-    paddingHorizontal: 12,
-    paddingVertical: 6,
-    borderRadius: 999,
-    backgroundColor: theme.colors.chipBackground,
-  },
-  sortChipPressed: {
-    backgroundColor: theme.colors.chipPressed,
-  },
-  sortChipActive: {
-    backgroundColor: theme.colors.accent,
-  },
-  sortChipText: {
-    color: theme.colors.text,
-    fontSize: theme.fontSizes.m,
-    fontWeight: '600',
   },
 });
 
