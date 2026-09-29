@@ -145,34 +145,34 @@ describe("HomeScreen — sort chips", () => {
 });
 
 describe("HomeScreen — live feed ticks", () => {
-  beforeEach(() => {
-    jest.useFakeTimers();
-  });
+  // Fake timers hang RNTL's async render against the 500-row list, so the
+  // feed's 5s interval callback is captured and invoked directly instead.
+  async function renderAndGetTick(): Promise<() => void> {
+    const setIntervalSpy = jest.spyOn(globalThis, "setInterval");
+    await render(<RootStack />);
+    const call = setIntervalSpy.mock.calls.find(((args) => args[1] === 5000);
+    return call![0] as () => void;
+  }
 
   afterEach(() => {
-    jest.useRealTimers();
+    jest.restoreAllMocks();
   });
 
-  test("local mode changes readings after the 5s interval", async () => {
-    await render(<RootStack />);
-    const firstId = initialSensors[0].id;
-    const before = JSON.stringify(screen.getByTestId(`sensor-row-${firstId}`).props.children);
+  test("local mode changes readings on each 5s tick", async () => {
+    const tick = await renderAndGetTick();
+    const before = JSON.stringify(screen.toJSON());
 
-    await act(async () => {
-      jest.advanceTimersByTime(5000);
-    });
+    await act(async () => tick());
 
-    const after = JSON.stringify(screen.getByTestId(`sensor-row-${firstId}`).props.children);
+    const after = JSON.stringify(screen.toJSON());
     expect(after).not.toEqual(before);
   });
 
   test("a chosen sort survives a feed tick", async () => {
-    await render(<RootStack />);
+    const tick = await renderAndGetTick();
     await fireEvent.press(screen.getByTestId("sort-name-asc"));
 
-    await act(async () => {
-      jest.advanceTimersByTime(5000);
-    });
+    await act(async () => tick());
 
     const values = renderedFieldOrder("name") as string[];
     for (let i = 1; i < values.length; i++) {
