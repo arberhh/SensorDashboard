@@ -150,7 +150,7 @@ describe("HomeScreen — live feed ticks", () => {
   async function renderAndGetTick(): Promise<() => void> {
     const setIntervalSpy = jest.spyOn(globalThis, "setInterval");
     await render(<RootStack />);
-    const call = setIntervalSpy.mock.calls.find(((args) => args[1] === 5000);
+    const call = setIntervalSpy.mock.calls.find((args) => args[1] === 5000);
     return call![0] as () => void;
   }
 
