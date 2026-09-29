@@ -2,9 +2,9 @@ import React from "react";
 import { View, Text, StyleSheet, Pressable } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
-import theme from "../theme";
-import type { Sensor } from "../types/sensor";
-import { getLocationIcon } from "../utils/sensorDisplay";
+import theme from "@/theme";
+import type { Sensor } from "@/types/sensor";
+import { getLocationIcon } from "@/utils/sensorDisplay";
 
 function RenderRow({ item: sensor }: { item: Sensor }) {
   const navigation = useNavigation();
@@ -18,7 +18,11 @@ function RenderRow({ item: sensor }: { item: Sensor }) {
   }
 
   return (
-    <Pressable onPress={onSensorPress} style={styles.itemContainer}>
+    <Pressable
+      testID={`sensor-row-${sensor.id}`}
+      onPress={onSensorPress}
+      style={styles.itemContainer}
+    >
       <View style={styles.itemHeaderRow}>
         <Text style={styles.itemIcon}>{locationIcon}</Text>
         <Text style={styles.itemName} numberOfLines={1}>

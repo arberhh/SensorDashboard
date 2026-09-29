@@ -4,17 +4,20 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { FlashList } from "@shopify/flash-list";
 import type { NativeStackScreenProps } from "@react-navigation/native-stack";
 
-import theme from "../theme";
-import initialSensors from "../data/sensor_readings.json";
-import type { Sensor } from "../types/sensor";
-import { formatDeviation, getLocationIcon, getTypeStyle } from "../utils/sensorDisplay";
-import type { RootStackParamList } from "../navigation/RootStack";
+import theme from "@/theme";
+import initialSensors from "@/data/sensor_readings.json";
+import type { Sensor } from "@/types/sensor";
+import { formatDeviation, getLocationIcon, getTypeStyle } from "@/utils/sensorDisplay";
+import {
+  filterSimilarSensors,
+  sortSensors,
+  type ActiveSort,
+  type SortDirection,
+  type SortField,
+} from "@/utils/sensorList";
+import type { RootStackParamList } from "@/navigation/RootStack";
 
 type SensorDetailScreenProps = NativeStackScreenProps<RootStackParamList, "SensorDetail">;
-
-type SortField = "trend" | "name";
-type SortDirection = "asc" | "desc";
-type ActiveSort = { field: SortField; direction: SortDirection } | null;
 
 // Non-pressable by design (ARB-10: "Does not navigate when a child item is
 // pressed") — unlike the Home screen's SensorRow, this is a plain View.
@@ -49,17 +52,8 @@ const SensorDetailScreen: React.FC<SensorDetailScreenProps> = ({ route }) => {
 
   const similarSensors = useMemo(() => {
     if (!sensor) return [];
-    const others = initialSensors.filter((s) => s.type === sensor.type && s.id !== sensor.id);
-    if (!activeSort) return others;
-    const { field, direction } = activeSort;
-    return [...others].sort((a, b) => {
-      if (field === "trend") {
-        return direction === "asc"
-          ? a.deviationPercent - b.deviationPercent
-          : b.deviationPercent - a.deviationPercent;
-      }
-      return direction === "asc" ? a.name.localeCompare(b.name) : b.name.localeCompare(a.name);
-    });
+    const others = filterSimilarSensors(initialSensors, sensor);
+    return activeSort ? sortSensors(others, activeSort.field, activeSort.direction) : others;
     // sensor is read once above from a stable, static import — re-reading
     // it here on every render would defeat the memo, so it's intentionally
     // omitted from deps in favor of the (also static) sensorId + activeSort.

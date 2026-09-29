@@ -1,4 +1,4 @@
-import RootStack from "./src/navigation/RootStack";
+import RootStack from "@/navigation/RootStack";
 
 function App() {
   return <RootStack />;

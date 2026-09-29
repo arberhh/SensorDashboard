@@ -6,9 +6,9 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { StatusBar } from "react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
-import theme from "../theme";
-import HomeScreen from "../screens/HomeScreen";
-import SensorDetailScreen from "../screens/SensorDetailScreen";
+import theme from "@/theme";
+import HomeScreen from "@/screens/HomeScreen";
+import SensorDetailScreen from "@/screens/SensorDetailScreen";
 
 export type RootStackParamList = {
   Home: undefined;

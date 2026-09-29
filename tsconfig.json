@@ -1,5 +1,19 @@
 {
   "extends": "@react-native/typescript-config",
+  "compilerOptions": {
+    // Mirrors babel.config.js's module-resolver aliases ("@" -> src/,
+    // "@tests" -> __tests__/) so tsc and editor IntelliSense resolve
+    // "@/..."/"@tests/..." imports the same way Babel rewrites them at
+    // compile time. This only affects type resolution — Metro/Jest never
+    // see tsconfig, only babel.config.js.
+    // No baseUrl: TS 5+ resolves `paths` relative to this file's own
+    // directory without it, and baseUrl itself is a hard error under
+    // this project's TypeScript 6 (TS5101 — removed in TS 7).
+    "paths": {
+      "@/*": ["./src/*"],
+      "@tests/*": ["./__tests__/*"]
+    }
+  },
   "include": ["**/*.ts", "**/*.tsx"],
   "exclude": ["**/node_modules", "**/Pods", "iot-dashboard-task/**"]
 }
