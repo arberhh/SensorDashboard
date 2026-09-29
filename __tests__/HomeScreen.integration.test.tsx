@@ -3,7 +3,7 @@
  */
 
 import React from "react";
-import { render, screen, fireEvent } from "@testing-library/react-native";
+import { act, render, screen, fireEvent } from "@testing-library/react-native";
 
 import RootStack from "@/navigation/RootStack";
 import initialSensors from "@/data/sensor_readings.json";
@@ -118,12 +118,10 @@ describe("HomeScreen — sort chips", () => {
     }
   });
 
-  test("pressing the already-active sort chip clears it without reverting list order", async () => {
+  test("pressing the already-active sort chip clears it and restores the original order", async () => {
     await fireEvent.press(screen.getByTestId("sort-trend-asc"));
-    const sortedIds = renderedSensorIds();
-
     await fireEvent.press(screen.getByTestId("sort-trend-asc"));
-    expect(renderedSensorIds()).toEqual(sortedIds);
+    expect(renderedSensorIds()).toEqual(initialSensors.map((s) => s.id));
   });
 
   test("switching from TREND to NAME replaces the active sort rather than combining", async () => {
@@ -139,6 +137,43 @@ describe("HomeScreen — sort chips", () => {
     await fireEvent.press(screen.getByTestId("sort-name-asc"));
     await fireEvent.press(screen.getByTestId("type-filter-temperature"));
     expect(renderedSensorIds()).toHaveLength(temperatureCount);
+    const values = renderedFieldOrder("name") as string[];
+    for (let i = 1; i < values.length; i++) {
+      expect(values[i].localeCompare(values[i - 1])).toBeGreaterThanOrEqual(0);
+    }
+  });
+});
+
+describe("HomeScreen — live feed ticks", () => {
+  // Fake timers hang RNTL's async render against the 500-row list, so the
+  // feed's 5s interval callback is captured and invoked directly instead.
+  async function renderAndGetTick(): Promise<() => void> {
+    const setIntervalSpy = jest.spyOn(globalThis, "setInterval");
+    await render(<RootStack />);
+    const call = setIntervalSpy.mock.calls.find((args) => args[1] === 5000);
+    return call![0] as () => void;
+  }
+
+  afterEach(() => {
+    jest.restoreAllMocks();
+  });
+
+  test("local mode changes readings on each 5s tick", async () => {
+    const tick = await renderAndGetTick();
+    const before = JSON.stringify(screen.toJSON());
+
+    await act(async () => tick());
+
+    const after = JSON.stringify(screen.toJSON());
+    expect(after).not.toEqual(before);
+  });
+
+  test("a chosen sort survives a feed tick", async () => {
+    const tick = await renderAndGetTick();
+    await fireEvent.press(screen.getByTestId("sort-name-asc"));
+
+    await act(async () => tick());
+
     const values = renderedFieldOrder("name") as string[];
     for (let i = 1; i < values.length; i++) {
       expect(values[i].localeCompare(values[i - 1])).toBeGreaterThanOrEqual(0);
