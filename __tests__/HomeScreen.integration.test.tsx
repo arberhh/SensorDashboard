@@ -3,7 +3,7 @@
  */
 
 import React from "react";
-import { render, screen, fireEvent } from "@testing-library/react-native";
+import { act, render, screen, fireEvent } from "@testing-library/react-native";
 
 import RootStack from "@/navigation/RootStack";
 import initialSensors from "@/data/sensor_readings.json";
@@ -118,12 +118,10 @@ describe("HomeScreen — sort chips", () => {
     }
   });
 
-  test("pressing the already-active sort chip clears it without reverting list order", async () => {
+  test("pressing the already-active sort chip clears it and restores the original order", async () => {
     await fireEvent.press(screen.getByTestId("sort-trend-asc"));
-    const sortedIds = renderedSensorIds();
-
     await fireEvent.press(screen.getByTestId("sort-trend-asc"));
-    expect(renderedSensorIds()).toEqual(sortedIds);
+    expect(renderedSensorIds()).toEqual(initialSensors.map((s) => s.id));
   });
 
   test("switching from TREND to NAME replaces the active sort rather than combining", async () => {
@@ -139,6 +137,43 @@ describe("HomeScreen — sort chips", () => {
     await fireEvent.press(screen.getByTestId("sort-name-asc"));
     await fireEvent.press(screen.getByTestId("type-filter-temperature"));
     expect(renderedSensorIds()).toHaveLength(temperatureCount);
+    const values = renderedFieldOrder("name") as string[];
+    for (let i = 1; i < values.length; i++) {
+      expect(values[i].localeCompare(values[i - 1])).toBeGreaterThanOrEqual(0);
+    }
+  });
+});
+
+describe("HomeScreen — live feed ticks", () => {
+  beforeEach(() => {
+    jest.useFakeTimers();
+  });
+
+  afterEach(() => {
+    jest.useRealTimers();
+  });
+
+  test("local mode changes readings after the 5s interval", async () => {
+    await render(<RootStack />);
+    const firstId = initialSensors[0].id;
+    const before = JSON.stringify(screen.getByTestId(`sensor-row-${firstId}`).props.children);
+
+    await act(async () => {
+      jest.advanceTimersByTime(5000);
+    });
+
+    const after = JSON.stringify(screen.getByTestId(`sensor-row-${firstId}`).props.children);
+    expect(after).not.toEqual(before);
+  });
+
+  test("a chosen sort survives a feed tick", async () => {
+    await render(<RootStack />);
+    await fireEvent.press(screen.getByTestId("sort-name-asc"));
+
+    await act(async () => {
+      jest.advanceTimersByTime(5000);
+    });
+
     const values = renderedFieldOrder("name") as string[];
     for (let i = 1; i < values.length; i++) {
       expect(values[i].localeCompare(values[i - 1])).toBeGreaterThanOrEqual(0);

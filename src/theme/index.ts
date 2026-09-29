@@ -29,6 +29,11 @@ const colors = {
   temperatureTint: "rgba(255, 145, 82, 0.15)",
   humidityTint: "rgba(79, 195, 247, 0.15)",
 
+  // Feed connection status dot (SensorFeedModeToggle).
+  statusConnected: "#4caf50",
+  statusConnecting: "#ffc107",
+  statusOffline: "#f44336",
+
   // Card drop-shadow color. Stays pure black regardless of theme, since a
   // shadow's job is to sit behind the surface color, not tint it — but it
   // still goes through the theme rather than being a literal in a style

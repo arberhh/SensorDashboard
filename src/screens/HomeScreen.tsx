@@ -1,14 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useMemo, useState } from "react";
 
 import { View, Text, StyleSheet, Pressable } from "react-native";
 import { FlashList } from "@shopify/flash-list";
 
-import initialSensors from "@/data/sensor_readings.json";
 import { SafeAreaView } from "react-native-safe-area-context";
 import theme from "@/theme";
-import type { Sensor, TSensor } from "@/types/sensor";
+import type { Sensor } from "@/types/sensor";
 import { renderSensorRow } from "@/components/SensorRow";
-import { generateReading } from "@/utils/sensorReadings";
+import { useSensorFeedContext } from "@/context/SensorFeedContext";
 import {
   filterSensorsByType,
   sortSensors,
@@ -19,28 +18,15 @@ import {
 } from "@/utils/sensorList";
 
 const HomeScreen: React.FC = () => {
-  const [sensors, setSensors] = useState<TSensor>(initialSensors);
+  const { sensors } = useSensorFeedContext();
   const [typeFilter, setTypeFilter] = useState<TypeFilter>("all");
   const [activeSort, setActiveSort] = useState<ActiveSort>(null);
-
-  useEffect(() => {
-    const intervalId = setInterval(() => {
-      setSensors((prevSensors) =>
-        prevSensors.map((sensor) => ({
-          ...sensor,
-          currentReading: generateReading(sensor.type),
-        })),
-      );
-    }, 5000);
-
-    return () => clearInterval(intervalId);
-  }, []);
 
   // Deferred so switching the type filter doesn't fight an in-flight
   // scroll/momentum animation for frame budget — requestIdleCallback runs
   // the actual list-swap once the JS thread is idle. This is scoped to
   // the filter specifically, a discrete user action where a brief delay
-  // is invisible; the live-reading interval above is deliberately NOT
+  // is invisible; the live-reading feed (useSensorFeed) is deliberately NOT
   // deferred the same way, since delaying that would make "current
   // reading" go stale while someone's actively watching it.
   // Pressing the already-active filter toggles it back off (to "all")
@@ -52,17 +38,19 @@ const HomeScreen: React.FC = () => {
     });
   }
 
+  // Pressing the already-active sort chip clears it.
   function applySort(field: SortField, direction: SortDirection): void {
-    if (activeSort?.field === field && activeSort?.direction === direction) {
-      setSensors(sensors);
-      setActiveSort(null);
-      return;
-    }
-    setSensors(sortSensors(sensors, field, direction));
-    setActiveSort({ field, direction });
+    setActiveSort((current) =>
+      current?.field === field && current.direction === direction ? null : { field, direction },
+    );
   }
 
-  const filteredSensors = filterSensorsByType(sensors, typeFilter);
+  // Derived rather than stored, so a new `sensors` array from the feed
+  // (every tick) doesn't discard the chosen sort.
+  const filteredSensors = useMemo(() => {
+    const filtered = filterSensorsByType(sensors, typeFilter);
+    return activeSort ? sortSensors(filtered, activeSort.field, activeSort.direction) : filtered;
+  }, [sensors, typeFilter, activeSort]);
 
   return (
     <SafeAreaView style={styles.container} edges={["bottom", "left", "right"]}>
