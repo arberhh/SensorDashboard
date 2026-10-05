@@ -5,7 +5,7 @@ import { FlashList } from "@shopify/flash-list";
 import type { NativeStackScreenProps } from "@react-navigation/native-stack";
 
 import theme from "@/theme";
-import initialSensors from "@/data/sensor_readings.json";
+import { useSensorFeedContext } from "@/context/SensorFeedContext";
 import type { Sensor } from "@/types/sensor";
 import { formatDeviation, getLocationIcon, getTypeStyle } from "@/utils/sensorDisplay";
 import {
@@ -47,18 +47,15 @@ function SimilarSensorRow({ sensor }: { sensor: Sensor }) {
 
 const SensorDetailScreen: React.FC<SensorDetailScreenProps> = ({ route }) => {
   const { sensorId } = route.params;
-  const sensor = initialSensors.find((s) => s.id === sensorId);
+  const { sensors } = useSensorFeedContext();
+  const sensor = sensors.find((s) => s.id === sensorId);
   const [activeSort, setActiveSort] = useState<ActiveSort>(null);
 
   const similarSensors = useMemo(() => {
     if (!sensor) return [];
-    const others = filterSimilarSensors(initialSensors, sensor);
+    const others = filterSimilarSensors(sensors, sensor);
     return activeSort ? sortSensors(others, activeSort.field, activeSort.direction) : others;
-    // sensor is read once above from a stable, static import — re-reading
-    // it here on every render would defeat the memo, so it's intentionally
-    // omitted from deps in favor of the (also static) sensorId + activeSort.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [sensorId, activeSort]);
+  }, [sensors, sensor, activeSort]);
 
   // Same toggle-off behavior as HomeScreen's applySort: pressing the
   // already-active chip clears the sort rather than being a no-op.

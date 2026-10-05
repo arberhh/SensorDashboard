@@ -7,6 +7,8 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { StatusBar } from "react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import theme from "@/theme";
+import { SensorFeedProvider } from "@/context/SensorFeedContext";
+import SensorFeedModeToggle from "@/components/SensorFeedModeToggle";
 import HomeScreen from "@/screens/HomeScreen";
 import SensorDetailScreen from "@/screens/SensorDetailScreen";
 
@@ -21,25 +23,28 @@ function RootStack() {
   return (
     <SafeAreaProvider>
       <StatusBar barStyle="light-content" />
-      <NavigationContainer>
-        <Stack.Navigator
-          screenOptions={{
-            headerStyle: { backgroundColor: theme.colors.background },
-            headerTintColor: theme.colors.text,
-          }}
-        >
-          <Stack.Screen
-            name="Home"
-            component={HomeScreen}
-            options={{ title: "Sensor Dashboard" }}
-          />
-          <Stack.Screen
-            name="SensorDetail"
-            component={SensorDetailScreen}
-            options={{ title: "" }}
-          />
-        </Stack.Navigator>
-      </NavigationContainer>
+      <SensorFeedProvider>
+        <NavigationContainer>
+          <Stack.Navigator
+            screenOptions={{
+              headerStyle: { backgroundColor: theme.colors.background },
+              headerTintColor: theme.colors.text,
+              headerRight: SensorFeedModeToggle,
+            }}
+          >
+            <Stack.Screen
+              name="Home"
+              component={HomeScreen}
+              options={{ title: "Sensor Dashboard" }}
+            />
+            <Stack.Screen
+              name="SensorDetail"
+              component={SensorDetailScreen}
+              options={{ title: "" }}
+            />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </SensorFeedProvider>
     </SafeAreaProvider>
   );
 }
