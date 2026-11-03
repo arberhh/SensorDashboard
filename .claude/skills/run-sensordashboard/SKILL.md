@@ -6,9 +6,12 @@ description: Launch and drive this bare React Native CLI app (SensorDashboard) f
 # Running this app
 
 This is a **bare React Native CLI** app (0.87, new architecture) —
-not Expo. There's no backend: sensor data comes from a static
-generated JSON file (`src/data/sensor_readings.json`), so there are
-no env vars or network calls to configure before launch.
+not Expo. The app starts in LOCAL mode, where sensor data comes from a
+static generated JSON file (`src/data/sensor_readings.json`) and a 5s
+simulated tick, so there are no env vars or network calls to configure
+before launch. The header's LIVE toggle expects a backend on
+`localhost:3000` that doesn't exist in this repo yet, so LIVE mode shows
+an error status and retries; that's expected.
 
 ## Setup (first run, or after `Podfile`/native deps change)
 
@@ -58,7 +61,7 @@ rendered sensor data:
 app` in the CLI output), not a fixed sleep.
 2. Screenshot the simulator: `xcrun simctl io <udid> screenshot
 /tmp/verify.png`, then look at it. Confirm sensor cards with
-   "Sensor Name" / "Current Reading" / "DP" are rendering, not a
+   a location icon, name, READING and DEVIATION are rendering, not a
    blank navy screen or a red RN error overlay.
 3. `console.log` output does **not** appear in Xcode's build log —
    it streams to whichever terminal is running `react-native start`
@@ -75,17 +78,27 @@ app` in the CLI output), not a fixed sleep.
   `.xcodeproj`.** Opening the `.xcodeproj` directly skips CocoaPods
   integration and reproduces the missing-xcconfig build errors from
   Setup above.
-- **DP (`deviationPercent`) does not currently recompute live.** It's
-  a static value baked in at data-generation time — it won't move
-  even though `currentReading` fluctuates every 5s. This is a known
-  gap (see ARB-9 in Linear), not something broken by your change if
-  you see it not updating.
+- **Both the reading and the deviation change every 5s in LOCAL
+  mode.** Readings drift within ±8% of each sensor's baseline, so
+  deviations should stay within about ±8%. A three-digit deviation
+  means the drift logic in `src/utils/sensorReadings.ts` has regressed.
+- **A sort freezes row order at press time.** With TREND sort on,
+  values keep changing but rows don't move until the next chip press.
+  That's intended, not a stale list.
 - **The 5s reading-update interval must clean up on unmount and must
   not re-subscribe on every tick** — it previously leaked (stacked a
   new `setInterval` every update, uncleared). If frame rate degrades
-  the longer the app sits open, check `HomeScreen.tsx`'s `useEffect`
-  first; it should have an empty dependency array and a
-  `clearInterval` cleanup function.
+  the longer the app sits open, check `useLocalSensorFeed.ts`'s
+  `useEffect` first; its only dependency should be `enabled`, and it
+  should return a `clearInterval` cleanup function.
+- **Physical iPhone:** `--udid` only matches simulators, so use
+  `npx react-native run-ios --device "<device name>"`. The Xcode project
+  sets no signing team, so pass one at build time, e.g.
+  `--extra-params "DEVELOPMENT_TEAM=<team id> CODE_SIGN_STYLE=Automatic
+-allowProvisioningUpdates"`, rather than editing the project. With a
+  free Apple account, at most 3 sideloaded apps can be installed at
+  once; an install failing in `MIFreeProfileValidatedAppTracker` means
+  that limit is reached.
 - Duplicate sensor names are expected — the generator picks names
   randomly from a fixed 20-name pool across 500 sensors, so seeing
   e.g. two different "Cleanroom Suite 2" entries (different `id`,
