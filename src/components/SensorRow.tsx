@@ -4,7 +4,7 @@ import { useNavigation } from "@react-navigation/native";
 
 import theme from "@/theme";
 import type { Sensor } from "@/types/sensor";
-import { getLocationIcon } from "@/utils/sensorDisplay";
+import { formatDeviation, getLocationIcon } from "@/utils/sensorDisplay";
 
 function RenderRow({ item: sensor }: { item: Sensor }) {
   const navigation = useNavigation();
@@ -39,7 +39,7 @@ function RenderRow({ item: sensor }: { item: Sensor }) {
         </View>
         <View style={styles.itemStat}>
           <Text style={styles.itemStatLabel}>DEVIATION</Text>
-          <Text style={styles.itemStatValue}>{sensor.deviationPercent}</Text>
+          <Text style={styles.itemStatValue}>{formatDeviation(sensor.deviationPercent)}</Text>
         </View>
       </View>
     </Pressable>
