@@ -54,16 +54,18 @@ of trusted twice.
 
 ## `__tests__/sensorReadings.test.ts` → `src/utils/sensorReadings.ts`
 
-Covers `generateReading`, the formula behind `HomeScreen`'s 5-second live
-tick (the app's headline "live feed" behavior) and the original
-data-generation script's ranges.
+Covers `generateReading`, the formula behind the local feed's 5-second
+live tick (the app's headline "live feed" behavior), plus
+`baselineReading` and `calculateDeviation`, which turn each new reading
+into a live `deviationPercent`.
 
-Since this is a random-in-range formula, these are **statistical, not
-exact** — they assert invariants across many samples (500 per test) rather
-than any single value: temperature stays in `[15, 35]`, humidity stays in
-`[20, 90]`, every value rounds to at most 2 decimal places, and — a sanity
-check on the sanity checks — that repeated calls don't all return the exact
-same number. Protects against: a swapped min/max per type (which would
-silently produce out-of-range readings that only show up as "that number
-looks wrong" in the UI, not as a crash), and a rounding change that adds
-more precision than the UI expects.
+`generateReading` draws within ±8% of a sensor's baseline, matching the
+generator's deviation spread. Since that's random, its tests are
+**statistical, not exact** — they assert invariants across many samples
+(500 per test) rather than any single value: every reading stays within
+±8% of the baseline, rounds to at most 2 decimal places, and — a sanity
+check on the sanity checks — repeated calls don't all return the exact
+same number. One test pins `Math.random` to check the band's edges
+exactly. Protects against: the drift widening (which would bring back
+three-digit deviations), and a rounding change that adds more precision
+than the UI expects.
