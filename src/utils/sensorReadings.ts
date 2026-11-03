@@ -18,3 +18,15 @@ export function generateReading(type: Sensor["type"]): number {
   const { min, max } = READING_RANGES[type];
   return parseFloat((Math.random() * (max - min) + min).toFixed(2));
 }
+
+// The reading a sensor's deviationPercent is measured against, recovered
+// from its seed data (deviationPercent = (reading - baseline) / baseline).
+export function baselineReading(sensor: Sensor): number {
+  return sensor.currentReading / (1 + sensor.deviationPercent / 100);
+}
+
+// Percent change of `reading` from `baseline`, rounded to 2 decimals like
+// the generator's deviationPercent.
+export function calculateDeviation(reading: number, baseline: number): number {
+  return parseFloat((((reading - baseline) / baseline) * 100).toFixed(2));
+}
