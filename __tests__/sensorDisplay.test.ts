@@ -56,14 +56,14 @@ describe("getTypeStyle", () => {
 
 describe("formatDeviation", () => {
   test("prefixes a positive value with +", () => {
-    expect(formatDeviation(4.2)).toBe("+4.2%");
+    expect(formatDeviation(4.2)).toBe("+4.20%");
   });
 
   test("leaves a negative value's own minus sign as the only sign", () => {
-    expect(formatDeviation(-1.5)).toBe("-1.5%");
+    expect(formatDeviation(-1.5)).toBe("-1.50%");
   });
 
   test("adds no sign for exactly zero", () => {
-    expect(formatDeviation(0)).toBe("0%");
+    expect(formatDeviation(0)).toBe("0.00%");
   });
 });

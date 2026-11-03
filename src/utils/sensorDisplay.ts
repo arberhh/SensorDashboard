@@ -23,13 +23,14 @@ export function getLocationIcon(name: string): string {
 // Everything that visually distinguishes a temperature sensor from a
 // humidity one, in one place so the list row and the detail screen can't
 // drift apart.
-// e.g. 4.2 -> "+4.2%", -1.5 -> "-1.5%". deviationPercent already carries
+// e.g. 4.2 -> "+4.20%", -1.5 -> "-1.50%". Always 2 decimals, so the text
+// keeps a steady width as the live value ticks. deviationPercent already carries
 // its own sign in the data, so this only adds the "+" for positive values
 // and the "%" suffix — the raw number alone reads as ambiguous (percent of
 // what?) without it.
 export function formatDeviation(deviationPercent: number): string {
   const sign = deviationPercent > 0 ? "+" : "";
-  return `${sign}${deviationPercent}%`;
+  return `${sign}${deviationPercent.toFixed(2)}%`;
 }
 
 export function getTypeStyle(type: string) {
