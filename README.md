@@ -48,12 +48,12 @@ npm run generate:data  # regenerate src/data/sensor_readings.json
 
 ## Performance notes
 
-| Bottleneck                                                                                    | Mitigation                                                                                                                          |
-| --------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
-| 500 rows with an update every 5s                                                              | `FlashList` cell recycling instead of `FlatList` (ARB-20); `renderSensorRow` is a module-scope function so its identity is stable   |
-| Filtering swaps which sensors occupy visible rows, forcing fresh cell mounts under `FlatList` | Same `FlashList` migration: cells are updated, not remounted                                                                        |
-| Filter taps competing with an in-flight scroll for frame budget                               | TYPE filter changes are deferred with `requestIdleCallback`. The live feed is deliberately not deferred, so readings never go stale |
-| Re-sorting/filtering on every tick                                                            | Sort and filter are derived with `useMemo` from the feed, so the chosen sort survives each new array                                |
+| Bottleneck                                                                                    | Mitigation                                                                                                                                                           |
+| --------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 500 rows with an update every 5s                                                              | `FlashList` cell recycling instead of `FlatList` (ARB-20); `renderSensorRow` is a module-scope function so its identity is stable                                    |
+| Filtering swaps which sensors occupy visible rows, forcing fresh cell mounts under `FlatList` | Same `FlashList` migration: cells are updated, not remounted                                                                                                         |
+| Filter taps competing with an in-flight scroll for frame budget                               | TYPE filter changes are deferred with `requestIdleCallback`. The live feed is deliberately not deferred, so readings never go stale                                  |
+| Live deviation reshuffling a TREND-sorted list every tick                                     | The sorted id order is captured when a chip is pressed and replayed against each snapshot (`orderByIds`); row values stay live, order changes only on the next press |
 
 ### Profiling report
 
