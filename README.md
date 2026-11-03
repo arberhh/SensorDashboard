@@ -57,10 +57,28 @@ npm run generate:data  # regenerate src/data/sensor_readings.json
 
 ### Profiling report
 
-Before/after profiler numbers (frame rate, JS thread time) were **not
-captured** for this work, so none are reported here. The mitigations above
-are the changes made in response to observed frame drops (ARB-20); a
-measured before/after comparison is still to do.
+React commit time for each 5s live-feed tick, on the iOS Simulator (debug
+build), before ARB-20 (`FlatList`) vs `main` (`FlashList`). About 35 ticks
+per version, over 3 alternating 70s runs:
+
+| Per-tick React commit time | Before ARB-20 (`18c055f`) | `main` (`2b74209`) |
+| -------------------------- | ------------------------- | ------------------ |
+| Median                     | 46.5 ms                   | 20.8 ms            |
+| p90                        | 60.5 ms                   | 25.9 ms            |
+| Max                        | 61.6 ms                   | 35.6 ms            |
+
+The median tick takes 55% less render time. Before, a tick took roughly
+three 60fps frames (16.7 ms each) of JS time; now it takes just over one.
+Startup (all mount commits together) was about the same in both versions
+(~199 ms vs ~189 ms, with a wide spread between runs).
+
+These are **JS render times** from a React `<Profiler>`, not device frame
+rates. They don't cover native layout or the UI thread. Debug builds
+inflate absolute numbers, but both versions ran under the same
+conditions. `main` also includes everything after ARB-20, so this compares
+the app before and after the optimisation work, not ARB-20 alone. Filter
+and sort taps weren't measured, because they need manual interaction.
+Method, raw logs and how to reproduce: [`docs/profiling`](docs/profiling/README.md).
 
 ## Testing strategy
 
