@@ -2,7 +2,12 @@
  * @format
  */
 
-import { filterSensorsByType, filterSimilarSensors, sortSensors } from "@/utils/sensorList";
+import {
+  filterSensorsByType,
+  filterSimilarSensors,
+  orderByIds,
+  sortSensors,
+} from "@/utils/sensorList";
 import type { Sensor } from "@/types/sensor";
 
 function makeSensor(overrides: Partial<Sensor>): Sensor {
@@ -102,5 +107,20 @@ describe("filterSimilarSensors", () => {
   test("returns an empty array when no other sensor shares the type", () => {
     const onlyTemperature = [makeSensor({ id: 1, type: "temperature" })];
     expect(filterSimilarSensors(onlyTemperature, onlyTemperature[0])).toEqual([]);
+  });
+});
+
+describe("orderByIds", () => {
+  test("lays sensors out in the given id order", () => {
+    expect(orderByIds(sensors, [3, 1, 4, 2]).map((s) => s.id)).toEqual([3, 1, 4, 2]);
+  });
+
+  test("keeps the new snapshot's objects, not stale ones", () => {
+    const updated = sensors.map((s) => ({ ...s, deviationPercent: 99 }));
+    expect(orderByIds(updated, [2, 1, 3, 4]).every((s) => s.deviationPercent === 99)).toBe(true);
+  });
+
+  test("appends sensors missing from the ids and skips ids missing from the sensors", () => {
+    expect(orderByIds(sensors, [4, 99, 2]).map((s) => s.id)).toEqual([4, 2, 1, 3]);
   });
 });

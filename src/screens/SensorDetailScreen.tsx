@@ -10,6 +10,7 @@ import type { Sensor } from "@/types/sensor";
 import { formatDeviation, getLocationIcon, getTypeStyle } from "@/utils/sensorDisplay";
 import {
   filterSimilarSensors,
+  orderByIds,
   sortSensors,
   type ActiveSort,
   type SortDirection,
@@ -50,19 +51,25 @@ const SensorDetailScreen: React.FC<SensorDetailScreenProps> = ({ route }) => {
   const { sensors } = useSensorFeedContext();
   const sensor = sensors.find((s) => s.id === sensorId);
   const [activeSort, setActiveSort] = useState<ActiveSort>(null);
+  const [sortedIds, setSortedIds] = useState<number[] | null>(null);
 
   const similarSensors = useMemo(() => {
     if (!sensor) return [];
     const others = filterSimilarSensors(sensors, sensor);
-    return activeSort ? sortSensors(others, activeSort.field, activeSort.direction) : others;
-  }, [sensors, sensor, activeSort]);
+    return sortedIds ? orderByIds(others, sortedIds) : others;
+  }, [sensors, sensor, sortedIds]);
 
-  // Same toggle-off behavior as HomeScreen's applySort: pressing the
+  // Same behavior as HomeScreen's applySort: the order is captured at press
+  // time so live deviation doesn't reshuffle the list, and pressing the
   // already-active chip clears the sort rather than being a no-op.
   function applySort(field: SortField, direction: SortDirection): void {
-    setActiveSort((current) =>
-      current?.field === field && current.direction === direction ? null : { field, direction },
-    );
+    if (activeSort?.field === field && activeSort.direction === direction) {
+      setActiveSort(null);
+      setSortedIds(null);
+      return;
+    }
+    setActiveSort({ field, direction });
+    setSortedIds(sortSensors(similarSensors, field, direction).map((s) => s.id));
   }
 
   if (!sensor) {
