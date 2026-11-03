@@ -1,22 +1,15 @@
 import type { Sensor } from "@/types/sensor";
 
-// Same per-type ranges as scripts/genSensorData.js. Duplicated rather than
-// imported from that script, which only runs at data-gen time (via `npm
-// run generate:data`) and isn't part of the app bundle — this keeps
-// HomeScreen's live-tick simulation producing values indistinguishable in
-// shape from the generator's output without pulling a build-time script
-// into the runtime bundle.
-const READING_RANGES: Record<Sensor["type"], { min: number; max: number }> = {
-  temperature: { min: 15, max: 35 },
-  humidity: { min: 20, max: 90 },
-};
+// Same ±8% spread as the generator's deviationPercent
+// (scripts/genSensorData.js), so live deviations stay in the seed data's
+// range instead of swinging across the whole reading range for a type.
+const MAX_DRIFT = 0.08;
 
-// A new random currentReading for one sensor's type, rounded to 2 decimals
-// — the same formula HomeScreen's 5s tick applies to every sensor on each
-// interval.
-export function generateReading(type: Sensor["type"]): number {
-  const { min, max } = READING_RANGES[type];
-  return parseFloat((Math.random() * (max - min) + min).toFixed(2));
+// A new random currentReading within ±8% of a sensor's baseline, rounded to
+// 2 decimals — what the local feed's 5s tick applies to every sensor.
+export function generateReading(baseline: number): number {
+  const drift = (Math.random() * 2 - 1) * MAX_DRIFT;
+  return parseFloat((baseline * (1 + drift)).toFixed(2));
 }
 
 // The reading a sensor's deviationPercent is measured against, recovered

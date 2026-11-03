@@ -15,8 +15,8 @@ describe("useLocalSensorFeed", () => {
 
   test("a tick replaces each reading and recomputes deviation from the seed baseline", async () => {
     jest.useFakeTimers();
-    // 0.5 lands mid-range: temperature 15-35 -> 25, humidity 20-90 -> 55.
-    jest.spyOn(Math, "random").mockReturnValue(0.5);
+    // 0.75 maps to a +4% drift from each sensor's baseline.
+    jest.spyOn(Math, "random").mockReturnValue(0.75);
     const { result } = await renderHook(() => useLocalSensorFeed(true));
 
     await act(async () => {
@@ -25,16 +25,16 @@ describe("useLocalSensorFeed", () => {
 
     const byId = new Map(result.current.sensors.map((s) => [s.id, s]));
     for (const seed of initialSensors) {
-      expect(byId.get(seed.id)?.currentReading).toBe(seed.type === "temperature" ? 25 : 55);
+      expect(byId.get(seed.id)?.currentReading).not.toBe(seed.currentReading);
     }
     // Sensor 1 is seeded as humidity 22.33 at +1.58%, so its baseline is
-    // 22.33 / 1.0158 = 21.98; a 55 reading is +150.2% from that.
+    // 22.33 / 1.0158 = 21.98; +4% of that rounds to 22.86, which is +3.99%.
     expect(initialSensors[0]).toMatchObject({
       id: 1,
       currentReading: 22.33,
       deviationPercent: 1.58,
     });
-    expect(byId.get(1)?.deviationPercent).toBe(150.2);
+    expect(byId.get(1)).toMatchObject({ currentReading: 22.86, deviationPercent: 3.99 });
   });
 
   test("does not tick while disabled", async () => {
