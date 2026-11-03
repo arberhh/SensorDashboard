@@ -61,7 +61,7 @@ export function renderSensorRow({ item }: { item: Sensor }) {
 const styles = StyleSheet.create({
   itemContainer: {
     backgroundColor: theme.colors.surface,
-    borderRadius: 16,
+    borderRadius: theme.radii.l,
     elevation: 8,
     margin: theme.spacing.sm,
     paddingHorizontal: theme.spacing.l,

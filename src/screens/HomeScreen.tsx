@@ -183,21 +183,21 @@ const styles = StyleSheet.create({
   sortBar: {
     backgroundColor: theme.colors.cardBackground,
     borderColor: theme.colors.border,
-    borderRadius: 12,
+    borderRadius: theme.radii.m,
     borderWidth: StyleSheet.hairlineWidth,
     flexDirection: "row",
     flexWrap: "wrap",
-    gap: 16,
-    marginHorizontal: 10,
-    marginTop: 10,
-    paddingHorizontal: 14,
-    paddingVertical: 12,
+    gap: theme.spacing.m,
+    marginHorizontal: theme.spacing.sm,
+    marginTop: theme.spacing.sm,
+    paddingHorizontal: theme.spacing.m,
+    paddingVertical: theme.spacing.sm + theme.spacing.xs,
   },
   sortChip: {
     backgroundColor: theme.colors.chipBackground,
-    borderRadius: 999,
-    paddingHorizontal: 12,
-    paddingVertical: 6,
+    borderRadius: theme.radii.pill,
+    paddingHorizontal: theme.spacing.sm + theme.spacing.xs,
+    paddingVertical: theme.spacing.xs + 2,
   },
   sortChipActive: {
     backgroundColor: theme.colors.accent,
@@ -207,7 +207,7 @@ const styles = StyleSheet.create({
   },
   sortChipRow: {
     flexDirection: "row",
-    gap: 8,
+    gap: theme.spacing.sm,
   },
   sortChipText: {
     color: theme.colors.text,
@@ -215,7 +215,7 @@ const styles = StyleSheet.create({
     fontWeight: "600",
   },
   sortGroup: {
-    gap: 6,
+    gap: theme.spacing.xs + 2,
   },
   sortGroupLabel: {
     color: theme.colors.textMuted,

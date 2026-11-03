@@ -234,7 +234,7 @@ const styles = StyleSheet.create({
   },
   detailsCard: {
     backgroundColor: theme.colors.surface,
-    borderRadius: 16,
+    borderRadius: theme.radii.l,
     marginHorizontal: theme.spacing.sm,
     marginTop: theme.spacing.m,
     padding: theme.spacing.l,
@@ -263,7 +263,7 @@ const styles = StyleSheet.create({
   },
   heroCard: {
     backgroundColor: theme.colors.surface,
-    borderRadius: 16,
+    borderRadius: theme.radii.l,
     elevation: 8,
     margin: theme.spacing.sm,
     padding: theme.spacing.l,
@@ -364,7 +364,7 @@ const styles = StyleSheet.create({
   similarRow: {
     alignItems: "center",
     backgroundColor: theme.colors.surface,
-    borderRadius: 12,
+    borderRadius: theme.radii.m,
     flexDirection: "row",
     gap: theme.spacing.sm,
     marginHorizontal: theme.spacing.sm,
@@ -387,7 +387,7 @@ const styles = StyleSheet.create({
   },
   sortChip: {
     backgroundColor: theme.colors.chipBackground,
-    borderRadius: 999,
+    borderRadius: theme.radii.pill,
     paddingHorizontal: theme.spacing.sm + theme.spacing.xs,
     paddingVertical: theme.spacing.xs + 2,
   },
@@ -417,7 +417,7 @@ const styles = StyleSheet.create({
   },
   typeBadge: {
     alignSelf: "flex-start",
-    borderRadius: 999,
+    borderRadius: theme.radii.pill,
     paddingHorizontal: theme.spacing.sm,
     paddingVertical: theme.spacing.xs,
   },
