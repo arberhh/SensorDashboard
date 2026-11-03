@@ -10,6 +10,7 @@ import type { Sensor } from "@/types/sensor";
 import { formatDeviation, getLocationIcon, getTypeStyle } from "@/utils/sensorDisplay";
 import {
   filterSimilarSensors,
+  orderByIds,
   sortSensors,
   type ActiveSort,
   type SortDirection,
@@ -50,19 +51,25 @@ const SensorDetailScreen: React.FC<SensorDetailScreenProps> = ({ route }) => {
   const { sensors } = useSensorFeedContext();
   const sensor = sensors.find((s) => s.id === sensorId);
   const [activeSort, setActiveSort] = useState<ActiveSort>(null);
+  const [sortedIds, setSortedIds] = useState<number[] | null>(null);
 
   const similarSensors = useMemo(() => {
     if (!sensor) return [];
     const others = filterSimilarSensors(sensors, sensor);
-    return activeSort ? sortSensors(others, activeSort.field, activeSort.direction) : others;
-  }, [sensors, sensor, activeSort]);
+    return sortedIds ? orderByIds(others, sortedIds) : others;
+  }, [sensors, sensor, sortedIds]);
 
-  // Same toggle-off behavior as HomeScreen's applySort: pressing the
+  // Same behavior as HomeScreen's applySort: the order is captured at press
+  // time so live deviation doesn't reshuffle the list, and pressing the
   // already-active chip clears the sort rather than being a no-op.
   function applySort(field: SortField, direction: SortDirection): void {
-    setActiveSort((current) =>
-      current?.field === field && current.direction === direction ? null : { field, direction },
-    );
+    if (activeSort?.field === field && activeSort.direction === direction) {
+      setActiveSort(null);
+      setSortedIds(null);
+      return;
+    }
+    setActiveSort({ field, direction });
+    setSortedIds(sortSensors(similarSensors, field, direction).map((s) => s.id));
   }
 
   if (!sensor) {
@@ -234,7 +241,7 @@ const styles = StyleSheet.create({
   },
   detailsCard: {
     backgroundColor: theme.colors.surface,
-    borderRadius: 16,
+    borderRadius: theme.radii.l,
     marginHorizontal: theme.spacing.sm,
     marginTop: theme.spacing.m,
     padding: theme.spacing.l,
@@ -263,7 +270,7 @@ const styles = StyleSheet.create({
   },
   heroCard: {
     backgroundColor: theme.colors.surface,
-    borderRadius: 16,
+    borderRadius: theme.radii.l,
     elevation: 8,
     margin: theme.spacing.sm,
     padding: theme.spacing.l,
@@ -364,7 +371,7 @@ const styles = StyleSheet.create({
   similarRow: {
     alignItems: "center",
     backgroundColor: theme.colors.surface,
-    borderRadius: 12,
+    borderRadius: theme.radii.m,
     flexDirection: "row",
     gap: theme.spacing.sm,
     marginHorizontal: theme.spacing.sm,
@@ -387,7 +394,7 @@ const styles = StyleSheet.create({
   },
   sortChip: {
     backgroundColor: theme.colors.chipBackground,
-    borderRadius: 999,
+    borderRadius: theme.radii.pill,
     paddingHorizontal: theme.spacing.sm + theme.spacing.xs,
     paddingVertical: theme.spacing.xs + 2,
   },
@@ -417,7 +424,7 @@ const styles = StyleSheet.create({
   },
   typeBadge: {
     alignSelf: "flex-start",
-    borderRadius: 999,
+    borderRadius: theme.radii.pill,
     paddingHorizontal: theme.spacing.sm,
     paddingVertical: theme.spacing.xs,
   },

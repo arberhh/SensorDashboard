@@ -29,14 +29,14 @@ function SensorFeedModeToggle() {
 
 const styles = StyleSheet.create({
   dot: {
-    borderRadius: 999,
+    borderRadius: theme.radii.pill,
     height: theme.spacing.sm,
     width: theme.spacing.sm,
   },
   pill: {
     alignItems: "center",
     backgroundColor: theme.colors.chipBackground,
-    borderRadius: 999,
+    borderRadius: theme.radii.pill,
     flexDirection: "row",
     gap: theme.spacing.sm - theme.spacing.xs,
     paddingHorizontal: theme.spacing.sm + theme.spacing.xs,

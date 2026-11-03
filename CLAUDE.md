@@ -63,7 +63,7 @@ or `SensorRow.tsx`) specifically to avoid a circular import between the
 screen and the row component.
 
 **Theming**: `src/theme/index.ts`, default export only (`colors`,
-`fontSizes`, `spacing` are not separately exported — nothing in the app
+`fontSizes`, `spacing`, `radii` are not separately exported — nothing in the app
 imports them directly, only via `theme.colors.x` etc.). `spacing` is a
 proportional scale derived from one `BASE_SPACING = 16` constant, not five
 independent numbers. Every color, font size, and gutter in the app should

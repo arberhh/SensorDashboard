@@ -28,6 +28,18 @@ export function sortSensors(sensors: TSensor, field: SortField, direction: SortD
   });
 }
 
+// Lays `sensors` out in the order of `ids`, so a sort can be captured once
+// (when its chip is pressed) and replayed against each new feed snapshot
+// without re-sorting on live values. Sensors not in `ids` go at the end in
+// their feed order; ids no longer in the feed are skipped.
+export function orderByIds(sensors: TSensor, ids: number[]): TSensor {
+  const byId = new Map(sensors.map((sensor) => [sensor.id, sensor]));
+  const ordered = ids.flatMap((id) => byId.get(id) ?? []);
+  if (ordered.length === sensors.length) return ordered;
+  const placed = new Set(ids);
+  return [...ordered, ...sensors.filter((sensor) => !placed.has(sensor.id))];
+}
+
 // SensorDetailScreen's "Similar Sensors": same type as the sensor being
 // viewed, excluding the sensor itself.
 export function filterSimilarSensors(sensors: TSensor, sensor: Sensor): TSensor {

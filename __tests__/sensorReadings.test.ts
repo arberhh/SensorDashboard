@@ -2,7 +2,7 @@
  * @format
  */
 
-import { generateReading } from "@/utils/sensorReadings";
+import { baselineReading, calculateDeviation, generateReading } from "@/utils/sensorReadings";
 
 // Statistical, not exact — generateReading is a random-in-range formula,
 // so these assert the invariants that must hold for every call (correct
@@ -38,5 +38,29 @@ describe("generateReading", () => {
   test("does not return the exact same value on every call (sanity check that it's actually random)", () => {
     const readings = new Set(Array.from({ length: 20 }, () => generateReading("temperature")));
     expect(readings.size).toBeGreaterThan(1);
+  });
+});
+
+describe("calculateDeviation", () => {
+  test("is the percent change from the baseline", () => {
+    expect(calculateDeviation(110, 100)).toBe(10);
+    expect(calculateDeviation(90, 100)).toBe(-10);
+    expect(calculateDeviation(100, 100)).toBe(0);
+  });
+
+  test("rounds to 2 decimal places", () => {
+    expect(calculateDeviation(21, 19)).toBe(10.53);
+  });
+});
+
+describe("baselineReading", () => {
+  test("inverts calculateDeviation for a seeded sensor", () => {
+    const sensor = { currentReading: 22.33, deviationPercent: 1.58 };
+    const baseline = baselineReading(sensor);
+    expect(calculateDeviation(sensor.currentReading, baseline)).toBe(1.58);
+  });
+
+  test("falls back to the current reading for a -100% seed instead of Infinity", () => {
+    expect(baselineReading({ currentReading: 30, deviationPercent: -100 })).toBe(30);
   });
 });

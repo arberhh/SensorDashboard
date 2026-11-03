@@ -10,6 +10,7 @@ import { renderSensorRow } from "@/components/SensorRow";
 import { useSensorFeedContext } from "@/context/SensorFeedContext";
 import {
   filterSensorsByType,
+  orderByIds,
   sortSensors,
   type ActiveSort,
   type SortDirection,
@@ -21,6 +22,7 @@ const HomeScreen: React.FC = () => {
   const { sensors } = useSensorFeedContext();
   const [typeFilter, setTypeFilter] = useState<TypeFilter>("all");
   const [activeSort, setActiveSort] = useState<ActiveSort>(null);
+  const [sortedIds, setSortedIds] = useState<number[] | null>(null);
 
   // Deferred so switching the type filter doesn't fight an in-flight
   // scroll/momentum animation for frame budget — requestIdleCallback runs
@@ -38,19 +40,24 @@ const HomeScreen: React.FC = () => {
     });
   }
 
-  // Pressing the already-active sort chip clears it.
+  // Pressing the already-active sort chip clears it. The order is captured
+  // at press time rather than re-derived every tick: deviationPercent is
+  // live, so re-sorting on each 5s tick would reshuffle rows under the
+  // user's finger. Row values stay live; the order changes only on a press.
   function applySort(field: SortField, direction: SortDirection): void {
-    setActiveSort((current) =>
-      current?.field === field && current.direction === direction ? null : { field, direction },
-    );
+    if (activeSort?.field === field && activeSort.direction === direction) {
+      setActiveSort(null);
+      setSortedIds(null);
+      return;
+    }
+    setActiveSort({ field, direction });
+    setSortedIds(sortSensors(sensors, field, direction).map((sensor) => sensor.id));
   }
 
-  // Derived rather than stored, so a new `sensors` array from the feed
-  // (every tick) doesn't discard the chosen sort.
   const filteredSensors = useMemo(() => {
-    const filtered = filterSensorsByType(sensors, typeFilter);
-    return activeSort ? sortSensors(filtered, activeSort.field, activeSort.direction) : filtered;
-  }, [sensors, typeFilter, activeSort]);
+    const ordered = sortedIds ? orderByIds(sensors, sortedIds) : sensors;
+    return filterSensorsByType(ordered, typeFilter);
+  }, [sensors, typeFilter, sortedIds]);
 
   return (
     <SafeAreaView style={styles.container} edges={["bottom", "left", "right"]}>
@@ -183,21 +190,21 @@ const styles = StyleSheet.create({
   sortBar: {
     backgroundColor: theme.colors.cardBackground,
     borderColor: theme.colors.border,
-    borderRadius: 12,
+    borderRadius: theme.radii.m,
     borderWidth: StyleSheet.hairlineWidth,
     flexDirection: "row",
     flexWrap: "wrap",
-    gap: 16,
-    marginHorizontal: 10,
-    marginTop: 10,
-    paddingHorizontal: 14,
-    paddingVertical: 12,
+    gap: theme.spacing.m,
+    marginHorizontal: theme.spacing.sm,
+    marginTop: theme.spacing.sm,
+    paddingHorizontal: theme.spacing.m,
+    paddingVertical: theme.spacing.sm + theme.spacing.xs,
   },
   sortChip: {
     backgroundColor: theme.colors.chipBackground,
-    borderRadius: 999,
-    paddingHorizontal: 12,
-    paddingVertical: 6,
+    borderRadius: theme.radii.pill,
+    paddingHorizontal: theme.spacing.sm + theme.spacing.xs,
+    paddingVertical: theme.spacing.xs + 2,
   },
   sortChipActive: {
     backgroundColor: theme.colors.accent,
@@ -207,7 +214,7 @@ const styles = StyleSheet.create({
   },
   sortChipRow: {
     flexDirection: "row",
-    gap: 8,
+    gap: theme.spacing.sm,
   },
   sortChipText: {
     color: theme.colors.text,
@@ -215,7 +222,7 @@ const styles = StyleSheet.create({
     fontWeight: "600",
   },
   sortGroup: {
-    gap: 6,
+    gap: theme.spacing.xs + 2,
   },
   sortGroupLabel: {
     color: theme.colors.textMuted,

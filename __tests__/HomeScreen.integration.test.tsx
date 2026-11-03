@@ -28,10 +28,11 @@ function renderedSensorIds(): number[] {
     .map((row) => Number(String(row.props.testID).replace("sensor-row-", "")));
 }
 
-// deviationPercent/name never change after the initial 5s-tick simulation
-// starts (only currentReading does — see HomeScreen's tick effect), so
-// looking these up from the static import by id is stable regardless of
-// how many ticks have elapsed.
+// Reads seed values from the static import by id. Safe for asserting a
+// sort's order even if a feed tick fires mid-test: a sort captures its id
+// order at press time (from the values then on screen, which are the seed
+// values in these tests) and ticks don't re-sort, so the rendered order
+// keeps matching the seed values even after deviationPercent goes live.
 function renderedFieldOrder(field: "deviationPercent" | "name"): (number | string)[] {
   return renderedSensorIds().map((id) => sensorsById.get(id)![field]);
 }
@@ -166,6 +167,16 @@ describe("HomeScreen — live feed ticks", () => {
 
     const after = JSON.stringify(screen.toJSON());
     expect(after).not.toEqual(before);
+  });
+
+  test("a TREND sort keeps its row order across a tick even though deviation changes", async () => {
+    const tick = await renderAndGetTick();
+    await fireEvent.press(screen.getByTestId("sort-trend-asc"));
+    const before = renderedSensorIds();
+
+    await act(async () => tick());
+
+    expect(renderedSensorIds()).toEqual(before);
   });
 
   test("a chosen sort survives a feed tick", async () => {

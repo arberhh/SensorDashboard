@@ -61,6 +61,12 @@ const spacing = {
   xl: BASE_SPACING * 2, // 32
 };
 
-const theme = { colors, fontSizes, spacing };
+const radii = {
+  m: 12,
+  l: 16,
+  pill: 999, // fully rounded chips and badges
+};
+
+const theme = { colors, fontSizes, spacing, radii };
 
 export default theme;
