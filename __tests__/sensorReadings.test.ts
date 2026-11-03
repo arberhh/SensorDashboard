@@ -55,10 +55,12 @@ describe("calculateDeviation", () => {
 
 describe("baselineReading", () => {
   test("inverts calculateDeviation for a seeded sensor", () => {
-    const sensor = { currentReading: 22.33, deviationPercent: 1.58 } as Parameters<
-      typeof baselineReading
-    >[0];
+    const sensor = { currentReading: 22.33, deviationPercent: 1.58 };
     const baseline = baselineReading(sensor);
     expect(calculateDeviation(sensor.currentReading, baseline)).toBe(1.58);
+  });
+
+  test("falls back to the current reading for a -100% seed instead of Infinity", () => {
+    expect(baselineReading({ currentReading: 30, deviationPercent: -100 })).toBe(30);
   });
 });

@@ -21,8 +21,13 @@ export function generateReading(type: Sensor["type"]): number {
 
 // The reading a sensor's deviationPercent is measured against, recovered
 // from its seed data (deviationPercent = (reading - baseline) / baseline).
-export function baselineReading(sensor: Sensor): number {
-  return sensor.currentReading / (1 + sensor.deviationPercent / 100);
+// A -100% seed has no recoverable baseline (it would divide by zero), so
+// the current reading stands in and later deviations measure from it.
+export function baselineReading(
+  sensor: Pick<Sensor, "currentReading" | "deviationPercent">,
+): number {
+  const ratio = 1 + sensor.deviationPercent / 100;
+  return ratio === 0 ? sensor.currentReading : sensor.currentReading / ratio;
 }
 
 // Percent change of `reading` from `baseline`, rounded to 2 decimals like
