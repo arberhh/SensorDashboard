@@ -68,7 +68,3 @@ measured before/after comparison is still to do.
   `sensorDisplay`, and the feed hooks.
 - **Integration**: `HomeScreen.integration.test.tsx` drives the real
   screen through filter and sort taps.
-
-## License
-
-[MIT](LICENSE)
