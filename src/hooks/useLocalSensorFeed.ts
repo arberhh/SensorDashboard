@@ -21,8 +21,8 @@ export function useLocalSensorFeed(enabled: boolean): SensorFeedResult {
     const intervalId = setInterval(() => {
       setSensors((prevSensors) =>
         prevSensors.map((sensor) => {
-          const currentReading = generateReading(sensor.type);
-          const baseline = baselines.get(sensor.id) ?? currentReading;
+          const baseline = baselines.get(sensor.id) ?? sensor.currentReading;
+          const currentReading = generateReading(baseline);
           return {
             ...sensor,
             currentReading,
