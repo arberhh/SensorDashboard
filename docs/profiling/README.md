@@ -38,10 +38,10 @@ Raw logs are in `raw/`. Each line is
 scripts/profiling/setup.sh 18c055f /tmp/wt-before
 scripts/profiling/setup.sh main /tmp/wt-after
 for i in 1 2 3; do
-  scripts/profiling/profile.sh /tmp/wt-before /tmp/prof/before-$i.log 70
-  scripts/profiling/profile.sh /tmp/wt-after /tmp/prof/after-$i.log 70
+  scripts/profiling/profile.sh /tmp/wt-before profiling-output/before-$i.log 70
+  scripts/profiling/profile.sh /tmp/wt-after profiling-output/after-$i.log 70
 done
-python3 scripts/profiling/analyze.py summary /tmp/prof
+python3 scripts/profiling/analyze.py summary profiling-output
 git worktree remove --force /tmp/wt-before && git worktree remove --force /tmp/wt-after
 ```
 

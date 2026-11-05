@@ -76,3 +76,6 @@ yarn-error.log
 
 # Task briefing (not part of the app)
 /iot-dashboard-task/
+
+# Local profiling runs (scripts/profiling); committed logs live in docs/profiling/raw
+/profiling-output/

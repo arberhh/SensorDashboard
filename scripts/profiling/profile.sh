@@ -1,9 +1,10 @@
 #!/bin/bash
-# usage: profile.sh <worktree-dir> <out-log> [seconds]
+# usage: profile.sh <worktree-dir> <out-log> [seconds]   (e.g. profiling-output/main.log)
 # Restarts Metro on the worktree, relaunches the installed app on the
 # simulator, and records every React commit for [seconds] (default 70).
 # Env: SIM_UDID (default: booted), APP_ID (default: com.arberhh.sensordashboard).
 W=$1; OUT=$2; SECS=${3:-70}
+mkdir -p "$(dirname "$OUT")"
 U=${SIM_UDID:-booted}; APP=${APP_ID:-com.arberhh.sensordashboard}
 HERE=$(cd "$(dirname "$0")" && pwd)
 P=$(lsof -tiTCP:8081 -sTCP:LISTEN); [ -n "$P" ] && kill $P && sleep 2
