@@ -33,8 +33,8 @@ npm run generate:data  # regenerate src/data/sensor_readings.json
   sensor feed, consumed by both screens, with two modes switched from the
   header toggle:
   - `local` (default): `useLocalSensorFeed` ticks every 5s, giving every
-    sensor a new random reading and recomputing its deviation against a
-    fixed per-sensor baseline. No network.
+    sensor a new reading within ±8% of its fixed baseline and recomputing
+    its deviation from that baseline. No network.
   - `live`: `useBackendSensorFeed` fetches `/sensors` then follows a
     WebSocket at `/ws` (see `src/config.ts`). **No backend exists in this
     repo yet**, so this mode shows an error and retries every 5s.

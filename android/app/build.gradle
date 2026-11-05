@@ -79,7 +79,7 @@ android {
 
     namespace "com.sensordashboard"
     defaultConfig {
-        applicationId "com.sensordashboard"
+        applicationId "com.arberhh.sensordashboard"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
