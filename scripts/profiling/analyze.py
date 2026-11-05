@@ -12,10 +12,35 @@ def clusters(path):
         else: cur.append(r)
     out.append(cur)
     return t0,out
+FRAME_MS = 1000 / 60  # one frame at 60fps
+
+def show(path):
+    t0, cs = clusters(path)
+    startup, ticks = cs[0], cs[1:]
+    sums = [sum(r[2] for r in c) for c in ticks]
+    print(f"Profile: {path}")
+    print(f"Recorded {(cs[-1][-1][4] - t0) / 1000:.0f}s, {sum(len(c) for c in cs)} React commits\n")
+    print("Startup (initial mount of the list)")
+    print(f"  render time  {sum(r[2] for r in startup):7.1f} ms   {len(startup)} commits, slowest {max(r[2] for r in startup):.1f} ms\n")
+    print("Feed ticks (one burst of commits per 5s feed update)")
+    print("  tick   at      render ms   frames@60fps   commits")
+    top = max(sums, default=1)
+    for i, (c, a) in enumerate(zip(ticks, sums), 1):
+        bar = "#" * round(a / top * 20)
+        print(f"  {i:>4}  {(c[0][4] - t0) / 1000:5.1f}s  {a:9.1f}   {a / FRAME_MS:12.1f}   {len(c):7d}   {bar}")
+    if sums:
+        s = sorted(sums)
+        print("\nSummary of ticks")
+        print(f"  median {st.median(s):6.1f} ms   mean {st.mean(s):6.1f} ms   min {s[0]:6.1f} ms   max {s[-1]:6.1f} ms")
+        print(f"  median tick = {st.median(s) / FRAME_MS:.1f} frames of JS render time at 60fps")
+    print("\nHow to read this")
+    print("  render ms  : time React spent rendering that update (JS thread only)")
+    print("  frames     : render ms / 16.7 ms, the budget of one frame at 60fps")
+    print("  commits    : React commits in the burst (usually 2 per tick)")
+    print("  Debug build, JS render time only: no native layout or UI thread.")
+
 if sys.argv[1]=="show":
-    t0,cs=clusters(sys.argv[2])
-    for c in cs:
-        print(f"+{(c[0][4]-t0)/1000:6.1f}s commits={len(c):2d} actual_sum={sum(r[2] for r in c):8.2f} max={max(r[2] for r in c):7.2f} base={c[-1][3]:7.2f}")
+    show(sys.argv[2])
 if sys.argv[1]=="summary":
     for w in ("before","after"):
         ticks=[]; starts=[]
