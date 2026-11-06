@@ -30,6 +30,11 @@ function RootStack() {
               headerStyle: { backgroundColor: theme.colors.background },
               headerTintColor: theme.colors.text,
               headerRight: SensorFeedModeToggle,
+              // iOS 26 wraps header items in a glass capsule; hide it so the
+              // toggle's own pill is the only background.
+              unstable_headerRightItems: () => [
+                { type: "custom", element: <SensorFeedModeToggle />, hidesSharedBackground: true },
+              ],
             }}
           >
             <Stack.Screen
