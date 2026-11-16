@@ -1,4 +1,11 @@
+const path = require("path");
 const { getDefaultConfig, mergeConfig } = require("@react-native/metro-config");
+
+const defaultConfig = getDefaultConfig(__dirname);
+
+// Anchored to this folder so packages with their own server/ dir
+// (react-dom/server) still resolve.
+const serverDir = path.join(__dirname, "server").replace(/[.*+?^${}()|[\]\\/]/g, "\\$&");
 
 /**
  * Metro configuration
@@ -6,6 +13,12 @@ const { getDefaultConfig, mergeConfig } = require("@react-native/metro-config");
  *
  * @type {import('@react-native/metro-config').MetroConfig}
  */
-const config = {};
+const config = {
+  resolver: {
+    // server/ is the Rust backend; its target/ holds thousands of build
+    // artifacts Metro would otherwise crawl.
+    blockList: [defaultConfig.resolver.blockList, new RegExp(`^${serverDir}\\/.*`)],
+  },
+};
 
-module.exports = mergeConfig(getDefaultConfig(__dirname), config);
+module.exports = mergeConfig(defaultConfig, config);

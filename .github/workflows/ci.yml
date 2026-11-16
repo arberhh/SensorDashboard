@@ -47,6 +47,36 @@ jobs:
       - name: Dead code / unused exports / unused deps
         run: npm run deadcode
 
+  # The Rust backend in server/. Independent of the Node checks above, so
+  # it runs in parallel.
+  server:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: server
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Setup Rust
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          components: rustfmt, clippy
+
+      - name: Cache cargo
+        uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: server
+
+      - name: Format
+        run: cargo fmt --check
+
+      - name: Lint
+        run: cargo clippy --all-targets -- -D warnings
+
+      - name: Test
+        run: cargo test
+
   # Native builds are slower and usually gated separately (nightly, or
   # only on release branches) rather than on every PR — add jobs like
   # the ones below only if the project wants build verification in CI,

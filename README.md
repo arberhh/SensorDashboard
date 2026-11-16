@@ -14,6 +14,15 @@ npm start            # Metro only
 
 Node 22+ (see `.github/workflows/ci.yml`).
 
+### Backend (LIVE mode)
+
+```bash
+cd server && cargo run   # http://127.0.0.1:3000, GET /health and /sensors
+```
+
+Rust stable via `rustup`. `cargo fmt --check`, `cargo clippy --all-targets -- -D warnings` and
+`cargo test` run in CI.
+
 ## Test and check
 
 ```bash
@@ -36,8 +45,9 @@ npm run generate:data  # regenerate src/data/sensor_readings.json
     sensor a new reading within ±8% of its fixed baseline and recomputing
     its deviation from that baseline. No network.
   - `live`: `useBackendSensorFeed` fetches `/sensors` then follows a
-    WebSocket at `/ws` (see `src/config.ts`). **No backend exists in this
-    repo yet**, so this mode shows an error and retries every 5s.
+    WebSocket at `/ws` (see `src/config.ts`). The Rust backend in `server/`
+    serves `/sensors`; `/ws` lands in ARB-48, so until then this mode shows an
+    error and retries every 5s.
 - **Screens**: `Home` (list, TYPE filter, TREND/NAME sort) and
   `SensorDetail` (all sensor fields except `id`, plus a Similar Sensors
   list: same type, own TREND/NAME sort, rows are not pressable).
