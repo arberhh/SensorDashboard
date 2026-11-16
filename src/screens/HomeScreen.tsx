@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useMemo, useReducer } from "react";
 
 import { View, Text, StyleSheet, Pressable } from "react-native";
 import { FlashList } from "@shopify/flash-list";
@@ -18,11 +18,45 @@ import {
   type TypeFilter,
 } from "@/utils/sensorList";
 
+type HomeState = {
+  typeFilter: TypeFilter;
+  activeSort: ActiveSort;
+  sortedIds: number[] | null;
+};
+
+type HomeAction =
+  | { type: "typeFilterPressed"; filter: TypeFilter }
+  | { type: "sortPressed"; field: SortField; direction: SortDirection; ids: number[] };
+
+const initialState: HomeState = { typeFilter: "all", activeSort: null, sortedIds: null };
+
+// Reducer rather than separate useState: activeSort and sortedIds must change
+// together, and a press is one transition instead of two setters.
+function homeReducer(state: HomeState, action: HomeAction): HomeState {
+  switch (action.type) {
+    case "typeFilterPressed":
+      // Pressing the active filter toggles it back off (to "all").
+      return {
+        ...state,
+        typeFilter: state.typeFilter === action.filter ? "all" : action.filter,
+      };
+    case "sortPressed": {
+      const { activeSort } = state;
+      if (activeSort?.field === action.field && activeSort.direction === action.direction) {
+        return { ...state, activeSort: null, sortedIds: null };
+      }
+      return {
+        ...state,
+        activeSort: { field: action.field, direction: action.direction },
+        sortedIds: action.ids,
+      };
+    }
+  }
+}
+
 const HomeScreen: React.FC = () => {
   const { sensors } = useSensorFeedContext();
-  const [typeFilter, setTypeFilter] = useState<TypeFilter>("all");
-  const [activeSort, setActiveSort] = useState<ActiveSort>(null);
-  const [sortedIds, setSortedIds] = useState<number[] | null>(null);
+  const [{ typeFilter, activeSort, sortedIds }, dispatch] = useReducer(homeReducer, initialState);
 
   // Deferred so switching the type filter doesn't fight an in-flight
   // scroll/momentum animation for frame budget — requestIdleCallback runs
@@ -31,12 +65,10 @@ const HomeScreen: React.FC = () => {
   // is invisible; the live-reading feed (useSensorFeed) is deliberately NOT
   // deferred the same way, since delaying that would make "current
   // reading" go stale while someone's actively watching it.
-  // Pressing the already-active filter toggles it back off (to "all")
-  // instead of being a no-op; pressing "all" while already on "all" is
-  // still a no-op, since there's nothing to toggle off.
-  function setTypeFilterDeferred(next: TypeFilter): void {
+  // Pressing "all" while already on "all" is still a no-op.
+  function setTypeFilterDeferred(filter: TypeFilter): void {
     requestIdleCallback(() => {
-      setTypeFilter((current) => (current === next ? "all" : next));
+      dispatch({ type: "typeFilterPressed", filter });
     });
   }
 
@@ -45,13 +77,8 @@ const HomeScreen: React.FC = () => {
   // live, so re-sorting on each 5s tick would reshuffle rows under the
   // user's finger. Row values stay live; the order changes only on a press.
   function applySort(field: SortField, direction: SortDirection): void {
-    if (activeSort?.field === field && activeSort.direction === direction) {
-      setActiveSort(null);
-      setSortedIds(null);
-      return;
-    }
-    setActiveSort({ field, direction });
-    setSortedIds(sortSensors(sensors, field, direction).map((sensor) => sensor.id));
+    const ids = sortSensors(sensors, field, direction).map((sensor) => sensor.id);
+    dispatch({ type: "sortPressed", field, direction, ids });
   }
 
   const filteredSensors = useMemo(() => {
