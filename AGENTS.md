@@ -46,8 +46,9 @@ Arber, the owner, is a senior RN/Expo engineer. Don't explain RN basics; explain
 
 ## Git and PRs
 
-- Commit and PR titles start with the Linear id: `ARB-20: Migrate to FlashList`. Branch name is
-  Linear's suggested one (`arberihh/arb-20-...`).
+- Commits and PRs follow the `commit-convention` skill: `arb-20: migrate to flashlist`
+  (lowercase, imperative), a bulleted body, and a PR description sized to the change. Branch
+  name is Linear's suggested one (`arberihh/arb-20-...`). Older history uses `ARB-20: ...`.
 - **Never create a Linear ticket without Arber's say-so**, even when the convention needs an id.
   Ask which ticket to use, or propose a title and wait. Follow-ups go under the current ticket.
   Don't mark tickets Done; the Linear/GitHub integration does it.
@@ -61,8 +62,8 @@ Arber, the owner, is a senior RN/Expo engineer. Don't explain RN basics; explain
   into the commit. Split by working-tree state, or `--no-verify` for already-formatted files.
 - After a merge: switch to `main`, pull, delete merged local and remote branches. Squash merges
   don't show as merged: compare file contents before deleting.
-- Use Mermaid in PR descriptions when a flow helps. Fill the Test plan, then check only the boxes
-  you ran (`verify-pr-testplan` skill). Static reading is not evidence for a runtime item.
+- In the PR's How to test checklist, check only the boxes you ran (`verify-pr-testplan` skill).
+  Static reading is not evidence for a runtime item.
 
 ## Working with Arber
 

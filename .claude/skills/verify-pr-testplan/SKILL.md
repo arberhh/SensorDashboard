@@ -1,11 +1,11 @@
 ---
 name: verify-pr-testplan
-description: Use whenever creating or updating a pull request for this repo (SensorDashboard) that includes a "Test plan" checklist. Instead of leaving the checklist unverified for a human, actually run the app and execute each item, then check off only what was genuinely confirmed.
+description: Use whenever creating or updating a pull request for this repo (SensorDashboard) that includes a "How to test" checklist (see the `commit-convention` skill). Instead of leaving the checklist unverified for a human, actually run the app and execute each item, then check off only what was genuinely confirmed.
 ---
 
 # Verify PR test plan
 
-A PR test plan checklist is a claim, not a formality. Don't hand the
+A PR's How to test checklist is a claim, not a formality. Don't hand the
 reviewer a checklist of `- [ ]` boxes you haven't actually tried —
 that just moves the verification work onto them. Do it yourself
 before (or immediately after) `gh pr create`.
@@ -17,7 +17,7 @@ before (or immediately after) `gh pr create`.
    launch, and how to verify via screenshot/Metro log for this
    project. Load it first; don't restate its steps here.
 
-2. **Work through the test plan line by line.** For each item,
+2. **Work through the How to test checklist line by line.** For each item,
    perform the concrete action it describes and observe real
    output — don't infer behavior from reading the diff. Use
    `run-sensordashboard`'s verification techniques (screenshot,
@@ -40,7 +40,7 @@ before (or immediately after) `gh pr create`.
 
 ## Non-negotiable
 
-Static code reading is not evidence for a runtime test plan item.
+Static code reading is not evidence for a runtime How to test item.
 If the checklist says "confirm X happens when running," the bar is
 watching it happen — screenshot, log line, or simulator interaction
 — not "the code looks like it should do that."
