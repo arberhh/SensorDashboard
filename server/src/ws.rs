@@ -1,13 +1,19 @@
+use std::time::Duration;
+
 use axum::{
     extract::{
         State, WebSocketUpgrade,
-        ws::{Message, WebSocket},
+        ws::{Message, Utf8Bytes, WebSocket},
     },
     response::Response,
 };
-use tokio::sync::broadcast::error::RecvError;
+use tokio::{sync::broadcast::error::RecvError, time::timeout};
 
 use crate::state::AppState;
+
+// A client that stops reading without closing (an app suspended mid-connection)
+// would block a send forever, and with it this task. Two ticks is plenty.
+const SEND_TIMEOUT: Duration = Duration::from_secs(10);
 
 pub async fn ws_handler(ws: WebSocketUpgrade, State(state): State<AppState>) -> Response {
     ws.on_upgrade(move |socket| async move {
@@ -22,10 +28,14 @@ async fn handle_socket(mut socket: WebSocket, state: AppState) {
     // Subscribe before the snapshot, so a tick landing between the two isn't lost.
     let mut rx = state.tx.subscribe();
 
-    let Ok(snapshot) = serde_json::to_string(&*state.sensors.read().await) else {
-        return;
+    let snapshot = match serde_json::to_string(&*state.sensors.read().await) {
+        Ok(snapshot) => snapshot,
+        Err(error) => {
+            tracing::error!(%error, "failed to serialize the sensors");
+            return;
+        }
     };
-    if socket.send(Message::Text(snapshot.into())).await.is_err() {
+    if !send(&mut socket, snapshot.into()).await {
         return;
     }
 
@@ -33,7 +43,7 @@ async fn handle_socket(mut socket: WebSocket, state: AppState) {
         tokio::select! {
             tick = rx.recv() => match tick {
                 Ok(json) => {
-                    if socket.send(Message::Text(json)).await.is_err() {
+                    if !send(&mut socket, json).await {
                         break;
                     }
                 }
@@ -51,6 +61,17 @@ async fn handle_socket(mut socket: WebSocket, state: AppState) {
                 None | Some(Err(_)) => break,
                 Some(Ok(_)) => {}
             },
+        }
+    }
+}
+
+// False when the client is gone or stopped reading.
+async fn send(socket: &mut WebSocket, json: Utf8Bytes) -> bool {
+    match timeout(SEND_TIMEOUT, socket.send(Message::Text(json))).await {
+        Ok(result) => result.is_ok(),
+        Err(_) => {
+            tracing::warn!("socket send timed out");
+            false
         }
     }
 }
