@@ -1,12 +1,10 @@
 use std::time::Duration;
 
-use axum::{Json, Router, extract::State, routing::get};
 use sensor_server::{
-    sensors::{Sensor, apply_tick, generate_sensors},
+    router,
+    sensors::{apply_tick, generate_sensors},
     state::AppState,
-    ws,
 };
-use tower_http::cors::CorsLayer;
 
 // Same port as the app's src/config.ts.
 const ADDR: &str = "127.0.0.1:3000";
@@ -21,23 +19,13 @@ async fn main() {
     let state = AppState::new(generate_sensors(SENSOR_COUNT));
     tokio::spawn(tick(state.clone()));
 
-    let app = Router::new()
-        .route("/health", get(|| async { "ok" }))
-        .route("/sensors", get(sensors))
-        .route("/ws", get(ws::ws_handler))
-        // Native RN ignores CORS; react-native-web doesn't.
-        .layer(CorsLayer::permissive())
-        .with_state(state);
-
     let listener = tokio::net::TcpListener::bind(ADDR)
         .await
         .expect("failed to bind 127.0.0.1:3000");
     tracing::info!("listening on http://{ADDR}");
-    axum::serve(listener, app).await.expect("server error");
-}
-
-async fn sensors(State(state): State<AppState>) -> Json<Vec<Sensor>> {
-    Json(state.sensors.read().await.clone())
+    axum::serve(listener, router(state))
+        .await
+        .expect("server error");
 }
 
 // Moves every reading, serializes the array once and broadcasts it to all sockets.
