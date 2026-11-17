@@ -12,7 +12,8 @@ use tokio::{sync::broadcast::error::RecvError, time::timeout};
 use crate::state::AppState;
 
 // A client that stops reading without closing (an app suspended mid-connection)
-// would block a send forever, and with it this task. Two ticks is plenty.
+// would block a send forever, and with it this task. The clock only starts once
+// the kernel buffers are full, so such a client lingers for several ticks first.
 const SEND_TIMEOUT: Duration = Duration::from_secs(10);
 
 pub async fn ws_handler(ws: WebSocketUpgrade, State(state): State<AppState>) -> Response {

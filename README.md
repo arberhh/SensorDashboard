@@ -17,7 +17,7 @@ Node 22+ (see `.github/workflows/ci.yml`).
 ### Backend (LIVE mode)
 
 ```bash
-cd server && cargo run   # http://127.0.0.1:3000: GET /health, /sensors and /ws
+cd server && cargo run   # http://127.0.0.1:3000: /ws for the app, /health and /sensors for curl
 ```
 
 Then switch the app to LIVE. Endpoints, example clients and checks are in

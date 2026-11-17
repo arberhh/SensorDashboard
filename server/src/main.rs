@@ -16,7 +16,7 @@ const TICK_INTERVAL: Duration = Duration::from_secs(5);
 
 #[tokio::main]
 async fn main() {
-    // Info by default; RUST_LOG=debug also shows every tick.
+    // Info by default; RUST_LOG=sensor_server=debug also shows every tick.
     let filter = EnvFilter::builder()
         .with_default_directive(LevelFilter::INFO.into())
         .from_env_lossy();
@@ -37,7 +37,7 @@ async fn main() {
 // Moves every reading, serializes the array once and broadcasts it to all sockets.
 async fn tick(state: AppState) {
     let mut interval = tokio::time::interval(TICK_INTERVAL);
-    // After the Mac sleeps, carry on from now instead of firing every missed tick at once.
+    // If this task ever stalls, carry on from now instead of firing every missed tick at once.
     interval.set_missed_tick_behavior(MissedTickBehavior::Skip);
     // The first tick fires at once; skip it so the first update comes 5s in.
     interval.tick().await;

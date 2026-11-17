@@ -8,8 +8,8 @@ The backend for the app's LIVE mode: 500 simulated sensors over HTTP and a WebSo
 
 ```bash
 cd server
-cargo run                  # http://127.0.0.1:3000, the port in the app's src/config.ts
-RUST_LOG=debug cargo run   # also log every tick
+cargo run                                # http://127.0.0.1:3000, the port in the app's src/config.ts
+RUST_LOG=sensor_server=debug cargo run   # also log every tick
 ```
 
 Needs Rust stable via `rustup`. With Homebrew, it isn't linked into your PATH:
@@ -27,7 +27,7 @@ Then, in the app, tap the header toggle to switch to LIVE.
 | Endpoint       | Returns                                                                       |
 | -------------- | ----------------------------------------------------------------------------- |
 | `GET /health`  | `ok`                                                                          |
-| `GET /sensors` | The current 500 sensors as a JSON array, the shape of `src/data/sensor_readings.json` |
+| `GET /sensors` | The current 500 sensors as a JSON array, the shape of `src/data/sensor_readings.json`. For `curl` and the HTTP test; the app only uses `/ws` |
 | `GET /ws`      | A WebSocket. Sends the full array on connect, then the full array again every 5s |
 
 Every 5s each reading moves to a random value within ±8% of the sensor's fixed baseline, and `deviationPercent` is recomputed from it, the same as the app's LOCAL feed. Each message replaces the whole list, so a client that misses one loses nothing.
