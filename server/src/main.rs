@@ -16,6 +16,8 @@ const TICK_INTERVAL: Duration = Duration::from_secs(5);
 
 #[tokio::main]
 async fn main() {
+    tracing_subscriber::fmt::init();
+
     let state = AppState::new(generate_sensors(SENSOR_COUNT));
     tokio::spawn(tick(state.clone()));
 
@@ -30,7 +32,7 @@ async fn main() {
     let listener = tokio::net::TcpListener::bind(ADDR)
         .await
         .expect("failed to bind 127.0.0.1:3000");
-    println!("listening on http://{ADDR}");
+    tracing::info!("listening on http://{ADDR}");
     axum::serve(listener, app).await.expect("server error");
 }
 
@@ -52,7 +54,8 @@ async fn tick(state: AppState) {
             serde_json::to_string(&*sensors)
         };
         let Ok(snapshot) = snapshot else { continue };
-        // Only fails when no socket is connected, which is fine.
-        let _ = state.tx.send(snapshot.into());
+        // Err only means no socket is connected right now.
+        let sockets = state.tx.send(snapshot.into()).unwrap_or(0);
+        tracing::info!(sockets, "tick");
     }
 }
