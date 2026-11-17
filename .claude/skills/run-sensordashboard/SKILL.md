@@ -9,9 +9,10 @@ This is a **bare React Native CLI** app (0.87, new architecture) —
 not Expo. The app starts in LOCAL mode, where sensor data comes from a
 static generated JSON file (`src/data/sensor_readings.json`) and a 5s
 simulated tick, so there are no env vars or network calls to configure
-before launch. The header's LIVE toggle expects a backend on
-`localhost:3000` that doesn't exist in this repo yet, so LIVE mode shows
-an error status and retries; that's expected.
+before launch. The header's LIVE toggle expects the Rust backend on
+`localhost:3000`: start it with `cd server && cargo run` (see
+`server/README.md`). Without it, LIVE mode shows an error status and
+retries; that's expected.
 
 ## Setup (first run, or after `Podfile`/native deps change)
 
