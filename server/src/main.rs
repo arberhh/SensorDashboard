@@ -2,6 +2,7 @@ use axum::{Json, Router, extract::State, routing::get};
 use sensor_server::{
     sensors::{Sensor, generate_sensors},
     state::AppState,
+    ws,
 };
 use tower_http::cors::CorsLayer;
 
@@ -16,6 +17,7 @@ async fn main() {
     let app = Router::new()
         .route("/health", get(|| async { "ok" }))
         .route("/sensors", get(sensors))
+        .route("/ws", get(ws::ws_handler))
         // Native RN ignores CORS; react-native-web doesn't.
         .layer(CorsLayer::permissive())
         .with_state(state);
