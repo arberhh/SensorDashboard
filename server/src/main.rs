@@ -5,6 +5,8 @@ use sensor_server::{
     sensors::{apply_tick, generate_sensors},
     state::AppState,
 };
+use tokio::time::MissedTickBehavior;
+use tracing_subscriber::{EnvFilter, filter::LevelFilter};
 
 // Same port as the app's src/config.ts.
 const ADDR: &str = "127.0.0.1:3000";
@@ -14,7 +16,11 @@ const TICK_INTERVAL: Duration = Duration::from_secs(5);
 
 #[tokio::main]
 async fn main() {
-    tracing_subscriber::fmt::init();
+    // Info by default; RUST_LOG=debug also shows every tick.
+    let filter = EnvFilter::builder()
+        .with_default_directive(LevelFilter::INFO.into())
+        .from_env_lossy();
+    tracing_subscriber::fmt().with_env_filter(filter).init();
 
     let state = AppState::new(generate_sensors(SENSOR_COUNT));
     tokio::spawn(tick(state.clone()));
@@ -31,6 +37,8 @@ async fn main() {
 // Moves every reading, serializes the array once and broadcasts it to all sockets.
 async fn tick(state: AppState) {
     let mut interval = tokio::time::interval(TICK_INTERVAL);
+    // After the Mac sleeps, carry on from now instead of firing every missed tick at once.
+    interval.set_missed_tick_behavior(MissedTickBehavior::Skip);
     // The first tick fires at once; skip it so the first update comes 5s in.
     interval.tick().await;
 
@@ -41,9 +49,15 @@ async fn tick(state: AppState) {
             apply_tick(&mut sensors);
             serde_json::to_string(&*sensors)
         };
-        let Ok(snapshot) = snapshot else { continue };
+        let snapshot = match snapshot {
+            Ok(snapshot) => snapshot,
+            Err(error) => {
+                tracing::error!(%error, "failed to serialize the sensors");
+                continue;
+            }
+        };
         // Err only means no socket is connected right now.
         let sockets = state.tx.send(snapshot.into()).unwrap_or(0);
-        tracing::info!(sockets, "tick");
+        tracing::debug!(sockets, "tick");
     }
 }

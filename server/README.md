@@ -8,7 +8,8 @@ The backend for the app's LIVE mode: 500 simulated sensors over HTTP and a WebSo
 
 ```bash
 cd server
-cargo run   # http://127.0.0.1:3000, the port in the app's src/config.ts
+cargo run                  # http://127.0.0.1:3000, the port in the app's src/config.ts
+RUST_LOG=debug cargo run   # also log every tick
 ```
 
 Needs Rust stable via `rustup`. With Homebrew, it isn't linked into your PATH:
