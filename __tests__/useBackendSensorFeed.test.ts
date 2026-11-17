@@ -47,14 +47,17 @@ describe("useBackendSensorFeed", () => {
     expect(result.current.sensors).toEqual(snapshot);
   });
 
-  test("a malformed frame is ignored", async () => {
-    const { result } = await renderHook(() => useBackendSensorFeed(true));
+  test.each(["not json", "null", '{"error":"nope"}'])(
+    "a malformed frame (%s) is ignored",
+    async (data) => {
+      const { result } = await renderHook(() => useBackendSensorFeed(true));
 
-    await act(async () => latestSocket().onmessage?.({ data: "not json" }));
+      await act(async () => latestSocket().onmessage?.({ data }));
 
-    expect(result.current.status).toBe("connecting");
-    expect(result.current.sensors).toBe(initialSensors);
-  });
+      expect(result.current.status).toBe("connecting");
+      expect(result.current.sensors).toBe(initialSensors);
+    },
+  );
 
   test("a closed socket sets 'error', keeps the sensors and reconnects after 5s", async () => {
     jest.useFakeTimers();
@@ -80,6 +83,7 @@ describe("useBackendSensorFeed", () => {
     await act(async () => jest.advanceTimersByTime(5000));
 
     expect(socket.close).toHaveBeenCalled();
+    expect(socket.onmessage).toBeNull();
     expect(socket.onclose).toBeNull();
     expect(FakeSocket.created).toHaveLength(socketsBefore);
   });

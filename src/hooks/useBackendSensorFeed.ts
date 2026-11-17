@@ -25,12 +25,13 @@ export function useBackendSensorFeed(enabled: boolean): SensorFeedResult {
       setStatus("connecting");
       socket = new WebSocket(`${BACKEND_WS_URL}/ws`);
       socket.onmessage = (event) => {
+        // Ignore a malformed frame; the next snapshot replaces it anyway.
         try {
-          setSensors(JSON.parse(event.data));
+          const snapshot: unknown = JSON.parse(event.data);
+          if (!Array.isArray(snapshot)) return;
+          setSensors(snapshot);
           setStatus("connected");
-        } catch {
-          // Ignore a malformed frame; the next snapshot replaces it anyway.
-        }
+        } catch {}
       };
       // A failed or dropped socket always ends in close, so no onerror.
       socket.onclose = () => {
@@ -44,6 +45,8 @@ export function useBackendSensorFeed(enabled: boolean): SensorFeedResult {
     return () => {
       clearTimeout(retryId);
       if (socket) {
+        // close() is async, so unhook both: a late frame or close must not touch state.
+        socket.onmessage = null;
         socket.onclose = null;
         socket.close();
       }
