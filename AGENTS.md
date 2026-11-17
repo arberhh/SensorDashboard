@@ -9,8 +9,9 @@ Arber, the owner, is a senior RN/Expo engineer. Don't explain RN basics; explain
 - **Feed** (`src/hooks`, `src/context/SensorFeedContext.tsx`): one shared feed for both screens,
   switched LOCAL/LIVE by the header toggle. `useLocalSensorFeed` ticks every 5s (not deferred:
   delaying live data makes it stale). `useBackendSensorFeed` does GET `/sensors` then a WebSocket
-  at `/ws` (`src/config.ts`, port 3000). No backend exists in this repo, so LIVE shows an error and
-  retries every 5s. That is expected, not a bug.
+  at `/ws` (`src/config.ts`, port 3000). The Rust backend in `server/` (`cargo run`) serves
+  `/sensors` but has no `/ws` until ARB-48, so LIVE shows an error and retries every 5s. That is
+  expected, not a bug.
 - **Readings**: each sensor has a fixed baseline, `currentReading / (1 + deviationPercent/100)`.
   A tick draws a reading within ±8% of it (`generateReading`, same spread as
   `scripts/genSensorData.js`) and recomputes `deviationPercent` from it.
@@ -45,8 +46,9 @@ Arber, the owner, is a senior RN/Expo engineer. Don't explain RN basics; explain
 
 ## Git and PRs
 
-- Commit and PR titles start with the Linear id: `ARB-20: Migrate to FlashList`. Branch name is
-  Linear's suggested one (`arberihh/arb-20-...`).
+- Commits and PRs follow the `commit-convention` skill: `arb-20: migrate to flashlist`
+  (lowercase, imperative), a bulleted body, and a PR description sized to the change. Branch
+  name is Linear's suggested one (`arberihh/arb-20-...`). Older history uses `ARB-20: ...`.
 - **Never create a Linear ticket without Arber's say-so**, even when the convention needs an id.
   Ask which ticket to use, or propose a title and wait. Follow-ups go under the current ticket.
   Don't mark tickets Done; the Linear/GitHub integration does it.
@@ -60,8 +62,8 @@ Arber, the owner, is a senior RN/Expo engineer. Don't explain RN basics; explain
   into the commit. Split by working-tree state, or `--no-verify` for already-formatted files.
 - After a merge: switch to `main`, pull, delete merged local and remote branches. Squash merges
   don't show as merged: compare file contents before deleting.
-- Use Mermaid in PR descriptions when a flow helps. Fill the Test plan, then check only the boxes
-  you ran (`verify-pr-testplan` skill). Static reading is not evidence for a runtime item.
+- In the PR's How to test checklist, check only the boxes you ran (`verify-pr-testplan` skill).
+  Static reading is not evidence for a runtime item.
 
 ## Working with Arber
 
