@@ -7,43 +7,85 @@ import { act, renderHook } from "@testing-library/react-native";
 import { useBackendSensorFeed } from "@/hooks/useBackendSensorFeed";
 import initialSensors from "@/data/sensor_readings.json";
 
+class FakeSocket {
+  static created: FakeSocket[] = [];
+  onmessage: ((event: { data: string }) => void) | null = null;
+  onclose: (() => void) | null = null;
+  close = jest.fn();
+
+  constructor(public url: string) {
+    FakeSocket.created.push(this);
+  }
+}
+
+function latestSocket(): FakeSocket {
+  return FakeSocket.created[FakeSocket.created.length - 1];
+}
+
 describe("useBackendSensorFeed", () => {
-  afterEach(() => {
-    jest.useRealTimers();
-    jest.restoreAllMocks();
+  beforeEach(() => {
+    FakeSocket.created = [];
+    Object.defineProperty(globalThis, "WebSocket", {
+      value: FakeSocket,
+      configurable: true,
+      writable: true,
+    });
   });
 
-  test("a failed fetch sets status to 'error' and keeps last-known sensors", async () => {
-    globalThis.fetch = jest.fn().mockRejectedValue(new Error("network down"));
+  afterEach(() => {
+    jest.useRealTimers();
+  });
 
+  test("a snapshot replaces the sensors and marks the feed connected", async () => {
     const { result } = await renderHook(() => useBackendSensorFeed(true));
-    await act(async () => {});
+    const snapshot = initialSensors.slice(0, 2);
 
-    expect(result.current.status).toBe("error");
+    await act(async () => latestSocket().onmessage?.({ data: JSON.stringify(snapshot) }));
+
+    expect(latestSocket().url).toMatch(/\/ws$/);
+    expect(result.current.status).toBe("connected");
+    expect(result.current.sensors).toEqual(snapshot);
+  });
+
+  test("a malformed frame is ignored", async () => {
+    const { result } = await renderHook(() => useBackendSensorFeed(true));
+
+    await act(async () => latestSocket().onmessage?.({ data: "not json" }));
+
+    expect(result.current.status).toBe("connecting");
     expect(result.current.sensors).toBe(initialSensors);
   });
 
-  test("a WebSocket failure after bootstrap sets status to 'error'", async () => {
-    const sockets: { onerror?: () => void; close: jest.Mock }[] = [];
-    (globalThis as any).WebSocket = jest.fn(() => {
-      const socket = { close: jest.fn() };
-      sockets.push(socket);
-      return socket;
-    });
-    globalThis.fetch = jest
-      .fn()
-      .mockResolvedValue({ ok: true, json: () => Promise.resolve(initialSensors) });
-
+  test("a closed socket sets 'error', keeps the sensors and reconnects after 5s", async () => {
+    jest.useFakeTimers();
     const { result } = await renderHook(() => useBackendSensorFeed(true));
-    await act(async () => {});
-    await act(async () => sockets[0].onerror?.());
+    const closed = latestSocket();
 
+    await act(async () => closed.onclose?.());
     expect(result.current.status).toBe("error");
+    expect(result.current.sensors).toBe(initialSensors);
+
+    await act(async () => jest.advanceTimersByTime(5000));
+    expect(latestSocket()).not.toBe(closed);
+    expect(result.current.status).toBe("connecting");
+  });
+
+  test("unmounting closes the socket without scheduling a retry", async () => {
+    jest.useFakeTimers();
+    const { unmount } = await renderHook(() => useBackendSensorFeed(true));
+    const socket = latestSocket();
+    const socketsBefore = FakeSocket.created.length;
+
+    await act(async () => unmount());
+    await act(async () => jest.advanceTimersByTime(5000));
+
+    expect(socket.close).toHaveBeenCalled();
+    expect(socket.onclose).toBeNull();
+    expect(FakeSocket.created).toHaveLength(socketsBefore);
   });
 
   test("does nothing while disabled", async () => {
-    globalThis.fetch = jest.fn();
     await renderHook(() => useBackendSensorFeed(false));
-    expect(globalThis.fetch).not.toHaveBeenCalled();
+    expect(FakeSocket.created).toHaveLength(0);
   });
 });

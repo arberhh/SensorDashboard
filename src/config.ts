@@ -5,5 +5,4 @@ import { Platform } from "react-native";
 const HOST = Platform.OS === "android" ? "10.0.2.2" : "localhost";
 const PORT = 3000;
 
-export const BACKEND_HTTP_URL = `http://${HOST}:${PORT}`;
 export const BACKEND_WS_URL = `ws://${HOST}:${PORT}`;
