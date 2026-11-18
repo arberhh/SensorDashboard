@@ -5,7 +5,8 @@ use tokio::sync::{RwLock, broadcast};
 
 use crate::sensors::Sensor;
 
-// Readers (GET /sensors) share the lock; ARB-48's tick task takes the write lock.
+// Readers (a socket's first snapshot, GET /sensors) share the lock; the tick task
+// takes the write lock.
 #[derive(Clone)]
 pub struct AppState {
     pub sensors: Arc<RwLock<Vec<Sensor>>>,

@@ -17,7 +17,7 @@ Node 22+ (see `.github/workflows/ci.yml`).
 ### Backend (LIVE mode)
 
 ```bash
-cd server && cargo run   # http://127.0.0.1:3000: GET /health, /sensors and /ws
+cd server && cargo run   # http://127.0.0.1:3000: /ws for the app, /health and /sensors for curl
 ```
 
 Then switch the app to LIVE. Endpoints, example clients and checks are in
@@ -44,10 +44,10 @@ npm run generate:data  # regenerate src/data/sensor_readings.json
   - `local` (default): `useLocalSensorFeed` ticks every 5s, giving every
     sensor a new reading within ±8% of its fixed baseline and recomputing
     its deviation from that baseline. No network.
-  - `live`: `useBackendSensorFeed` fetches `/sensors` then follows a
-    WebSocket at `/ws` (see `src/config.ts`), both served by the Rust backend
-    in `server/`. Without it running, this mode shows an error and retries
-    every 5s.
+  - `live`: `useBackendSensorFeed` follows the WebSocket at `/ws` (see
+    `src/config.ts`) of the Rust backend in `server/`, which sends the full
+    sensor array on connect and on every tick. Without it running, this mode
+    shows an error and retries every 5s.
 - **Screens**: `Home` (list, TYPE filter, TREND/NAME sort) and
   `SensorDetail` (all sensor fields except `id`, plus a Similar Sensors
   list: same type, own TREND/NAME sort, rows are not pressable).

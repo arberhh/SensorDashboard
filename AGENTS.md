@@ -8,9 +8,9 @@ Arber, the owner, is a senior RN/Expo engineer. Don't explain RN basics; explain
 
 - **Feed** (`src/hooks`, `src/context/SensorFeedContext.tsx`): one shared feed for both screens,
   switched LOCAL/LIVE by the header toggle. `useLocalSensorFeed` ticks every 5s (not deferred:
-  delaying live data makes it stale). `useBackendSensorFeed` does GET `/sensors` then a WebSocket
-  at `/ws` (`src/config.ts`, port 3000). Both come from the Rust backend in `server/` (`cargo run`,
-  see `server/README.md`). Without it running, LIVE shows an error and retries every 5s. That is
+  delaying live data makes it stale). `useBackendSensorFeed` follows the WebSocket at `/ws`
+  (`src/config.ts`, port 3000), which sends the full array on connect and every tick. It comes
+  from the Rust backend in `server/` (`cargo run`, see `server/README.md`). Without it running, LIVE shows an error and retries every 5s. That is
   expected, not a bug.
 - **Readings**: each sensor has a fixed baseline, `currentReading / (1 + deviationPercent/100)`.
   A tick draws a reading within ±8% of it (`generateReading`, same spread as
