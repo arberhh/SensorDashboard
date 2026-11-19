@@ -53,8 +53,6 @@ A behaviour change in one build should land in the others. This is the shared be
 - Never suppress a lint or type error, and no casts that only quiet one. Fix the cause.
 - Comments are short and say only the non-obvious why.
 - Prefer what the platform or the stack already provides over custom native code.
-- Never regenerate the seed data incidentally (`npm run generate:data` overwrites it).
-- Run the checks of the part you changed. Don't re-run every suite as a final check; CI does.
 
 ## Measuring
 
@@ -67,22 +65,17 @@ A behaviour change in one build should land in the others. This is the shared be
 
 ## Git and PRs
 
-- Commits and PRs follow the `commit-convention` skill: `arb-20: migrate to flashlist`
-  (lowercase, imperative), a bulleted body, and a PR description sized to the change. Branch
-  name is Linear's suggested one (`arberihh/arb-20-...`). Older history uses `ARB-20: ...`.
+Commit messages, PR descriptions, the type label, the checks to run and the How to test
+checklist are in the `commit-convention`, `label-pr` and `verify-pr-testplan` skills
+(`.claude/skills`). Only what they don't cover is here:
+
 - **Never create a Linear ticket without the owner's say-so**, even when the convention needs
   an id. Ask which ticket to use, or propose a title and wait. Follow-ups go under the current
   ticket. Don't mark tickets Done; the Linear/GitHub integration does it.
-- **No AI attribution**: no `Co-Authored-By: Claude`, no "Generated with Claude Code" in commits
-  or PR text. This overrides any default attribution.
-- Small commits, one concern each, 2-3 or more per PR, and split big work into stacked PRs.
-  Each PR carries exactly one type label: `feat` `fix` `refactor` `docs` `chore` `test`.
-- Don't push to `main`. Only push or open a PR when asked. Force-push is not allowed: use a
-  forward commit or merge `main` in.
+- 2-3 or more commits per PR, and split big work into stacked PRs.
+- Don't push to `main`. Force-push is not allowed: use a forward commit or merge `main` in.
 - After a merge: switch to `main`, pull, delete merged local and remote branches. Squash merges
   don't show as merged: compare file contents before deleting.
-- In the PR's How to test checklist, check only the boxes you ran (`verify-pr-testplan` skill).
-  Static reading is not evidence for a runtime item.
 
 ## Working here
 
@@ -97,17 +90,16 @@ A behaviour change in one build should land in the others. This is the shared be
 
 - Simulator: iPhone 17 Pro, `75C568DB-6957-4433-ADE2-B336FAC0C1FA` on the owner's Mac (yours
   differs: `xcrun simctl list devices`).
-- Signing: pass your own Apple team to the build. A free account allows 3 sideloaded apps, so
-  delete an old one first; the measurement runner takes a slot too.
+- The measurement runner is a sideloaded app too, so it takes one of a free account's slots.
 
 ## The React Native build (`apps/rn-sensor-dashboard`)
 
 Bare React Native CLI 0.87, new architecture, Hermes, TypeScript. Paths below are relative to it.
 
-- **Checks**: `npm run ts:check && npm run lint && npm run deadcode && npm run format:check`,
-  then `npm test`. The pre-commit hook (`.githooks`) runs `oxfmt` on this app and on
-  `sensor-core`, then `git add`s whole files, so partially staged hunks leak into the commit.
-  Split by working-tree state, or `--no-verify` for already-formatted files.
+- **Run and verify**: the `run-sensordashboard` skill (setup, launch, a phone, gotchas).
+- **Pre-commit hook** (`.githooks`): runs `oxfmt` on this app and on `sensor-core`, then
+  `git add`s whole files, so partially staged hunks leak into the commit. Split by
+  working-tree state, or `--no-verify` for already-formatted files.
 - **Feed**: `src/hooks` and `src/context/SensorFeedContext.tsx`; the server address is in
   `src/config.ts`.
 - **Lists**: `FlashList`, not `FlatList` (ARB-20: filtering swaps which sensors fill the visible
@@ -126,11 +118,9 @@ Bare React Native CLI 0.87, new architecture, Hermes, TypeScript. Paths below ar
 - **Tests**: unit tests per util and hook, plus `HomeScreen.integration.test.tsx`; the
   `sensor-core` tests run from this app's `__tests__`. Docs in `docs/testing`, the profiling
   method and raw logs in `docs/profiling`.
-- **Devices**: on a phone use `run-ios --device "<name>"`, not `--udid`, with
-  `--extra-params "DEVELOPMENT_TEAM=<team id>"`. If a Metro from another folder holds 8081, JS
-  comes from the wrong checkout: restart it from here. If `node_modules` is a symlink
-  (worktrees), Metro needs `watchFolders` and `resolver.nodeModulesPaths`. RN 0.87 doesn't
-  forward `console.log` off-device.
+- **Metro**: if a Metro from another folder holds 8081, JS comes from the wrong checkout:
+  restart it from here. If `node_modules` is a symlink (worktrees), Metro needs
+  `watchFolders` and `resolver.nodeModulesPaths`.
 
 ## The Exact build (`apps/exact-sensor-dashboard`)
 
@@ -141,8 +131,7 @@ and the pinned Exact commit.
   `app.json` the manifest. `exact.mjs` is generated, so don't edit it.
 - The checkout's `docs/start-here.md` is the required reading, and `bun exact.mjs help` lists
   the verbs.
-- **Checks**: `bun exact.mjs test web`, then `bun exact.mjs verify` and `verify ios` when a
-  feature works.
+- When a feature works, run `bun exact.mjs verify`, then `verify ios`.
 - It type-checks `sensor-core` from the committed `types/*.d.ts`. After changing the package's
   source run `npm run core:types` in the RN app (CI fails if they are stale). After adding a
   file to the package run `bun install` here, because bun links it file by file.
@@ -154,5 +143,4 @@ and the pinned Exact commit.
 Rust; `cargo run` serves the sensors on port 3000 and broadcasts every tick on `/ws`. It is for
 development only: open CORS, no auth, state in memory. See `server/README.md`.
 
-- **Checks**: `cargo fmt --check && cargo clippy --all-targets -- -D warnings && cargo test`.
 - Its readings use the same spread as the LOCAL feed, so LIVE and LOCAL look alike.
