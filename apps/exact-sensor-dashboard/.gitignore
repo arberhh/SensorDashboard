@@ -6,3 +6,6 @@
 /app.contract.d.ts
 /.exact/
 /.env.local
+# exact update rewrites these; the repo keeps one AGENTS.md, at the root
+/AGENTS.md
+/CLAUDE.md

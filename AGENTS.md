@@ -11,6 +11,12 @@ Arber, the owner, is a senior RN/Expo engineer. Don't explain RN basics; explain
   from that folder. Shows on a device as "RN SensorDashboard".
 - `apps/exact-sensor-dashboard`: the Expo Exact build (Contract + `app.ts`), run from an Exact
   checkout at `~/Desktop/Dev/exact`; see its README. Shows as "Exact SensorDashboard".
+  `app.contract` is the view, `app.ts` the data module, `app.test.contract` the tests and
+  `app.json` the manifest; `exact.mjs` is generated, so don't edit it. The checkout's
+  `docs/start-here.md` is the required reading, `bun exact.mjs help` lists the verbs, and
+  `bun exact.mjs verify` (then `verify ios`) is the check when a feature works.
+  `bun exact.mjs update` writes its own `AGENTS.md` and `CLAUDE.md` into the app; they are
+  gitignored, because this file is the only one.
 - `packages/sensor-core`: the seed data (`sensor_readings.json`), the `Sensor` type and the pure
   logic (`sensorList`, `sensorReadings`, `sensorSnapshot`) both apps import, so they can't drift.
   Exact type-checks it from the committed `types/*.d.ts`: after changing its source run
