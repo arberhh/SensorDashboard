@@ -1,16 +1,27 @@
 # AGENTS.md
 
-A live sensor dashboard: bare React Native CLI (0.87, new architecture, Hermes, TypeScript), 500
-mock IoT sensors with TYPE filter, TREND/NAME sort and a detail screen. Built as an assessment.
+A live sensor dashboard: 500 mock IoT sensors with TYPE filter, TREND/NAME sort and a detail
+screen. Built as an assessment, then rebuilt in other stacks to measure them against each other.
 Arber, the owner, is a senior RN/Expo engineer. Don't explain RN basics; explain the why of a choice.
 
-## Architecture
+## Layout
+
+- `apps/rn-sensor-dashboard`: the original, bare React Native CLI (0.87, new architecture, Hermes,
+  TypeScript). Its `package.json`, Metro, Jest, tsc and lint live there, so run `npm` commands
+  from that folder. Shows on a device as "RN SensorDashboard".
+- `apps/exact-sensor-dashboard`: the Expo Exact build (Contract + `app.ts`), run from an Exact
+  checkout at `~/Desktop/Dev/exact`; see its README. Shows as "Exact SensorDashboard".
+- `server/`: the Rust backend both apps follow in LIVE mode.
+- Each app is `apps/<stack>-sensor-dashboard` with its own toolchain. A behaviour change in one
+  should land in the others.
+
+## Architecture (RN app; paths are relative to `apps/rn-sensor-dashboard`)
 
 - **Feed** (`src/hooks`, `src/context/SensorFeedContext.tsx`): one shared feed for both screens,
   switched LOCAL/LIVE by the header toggle. `useLocalSensorFeed` ticks every 5s (not deferred:
   delaying live data makes it stale). `useBackendSensorFeed` follows the WebSocket at `/ws`
   (`src/config.ts`, port 3000), which sends the full array on connect and every tick. It comes
-  from the Rust backend in `server/` (`cargo run`, see `server/README.md`). Without it running, LIVE shows an error and retries every 5s. That is
+  from the Rust backend in the repo's `server/` (`cargo run`, see `server/README.md`). Without it running, LIVE shows an error and retries every 5s. That is
   expected, not a bug.
 - **Readings**: each sensor has a fixed baseline, `currentReading / (1 + deviationPercent/100)`.
   A tick draws a reading within ±8% of it (`generateReading`, same spread as
@@ -29,10 +40,6 @@ Arber, the owner, is a senior RN/Expo engineer. Don't explain RN basics; explain
   Every color, font size, gap and radius comes from it; no hex or raw pixels in `StyleSheet`.
 - **Tests**: unit tests per util and hook, plus `HomeScreen.integration.test.tsx`. Docs in
   `docs/testing`. Profiling method and raw logs in `docs/profiling`.
-- **Other builds** of the same app live in `apps/<name>/`, for measuring against this one, each
-  with its own toolchain. Root Metro, Jest, tsc, lint and oxfmt skip `apps/`.
-  `apps/sensor-dashboard` is the Expo Exact build (Contract + `app.ts`), run from an Exact
-  checkout at `~/Desktop/Dev/exact`; see its README. A behaviour change here should land there too.
 
 ## Code rules
 
@@ -88,7 +95,8 @@ Arber, the owner, is a senior RN/Expo engineer. Don't explain RN basics; explain
 - Simulator: iPhone 17 Pro `75C568DB-6957-4433-ADE2-B336FAC0C1FA`. Physical: "Arber’s iPhone",
   `00008150-001058EE0C20401C`. Use `run-ios --device "Arber’s iPhone"`, not `--udid`.
 - Signing: personal team `35QXJ3TNRH` via `--extra-params`. A free account allows 3 sideloaded
-  apps, so delete an old app first. The bundle id is `com.arberhh.sensordashboard`.
+  apps, so delete an old app first. Bundle ids: `com.arberhh.sensordashboard` (RN) and
+  `com.arberhh.sensordashboard.exact` (Exact).
 - If a Metro on another folder holds 8081, JS comes from the wrong checkout. Restart it from here.
 - If `node_modules` is a symlink (worktrees), Metro needs `watchFolders` and
   `resolver.nodeModulesPaths`. RN 0.87 doesn't forward `console.log` off-device.

@@ -1,4 +1,4 @@
-// The bare app's __tests__/HomeScreen.integration.test.tsx and the sort/filter
+// The RN app's (../rn-sensor-dashboard) __tests__/HomeScreen.integration.test.tsx and the sort/filter
 // unit tests, against the same 500-sensor seed.
 
 test "the list opens on every sensor in feed order"

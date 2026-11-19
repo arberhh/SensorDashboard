@@ -1,5 +1,6 @@
-// SensorDashboard in Exact: the same two screens as the bare RN app at the
-// repo root (src/screens), with the same feed, filter and sorts.
+// SensorDashboard in Exact: the same two screens as the bare RN app in
+// ../rn-sensor-dashboard (src/screens), with the same feed, filter and sorts.
+// The src/ paths below are that app's.
 shape Sensor
   id: number
   name: string

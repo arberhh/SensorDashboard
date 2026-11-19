@@ -1,6 +1,7 @@
 import type { Answer, Result, Sources } from './app.contract.d.ts';
-// A copy of ../../src/data/sensor_readings.json: Exact only resolves imports
-// inside the app's folder. __tests__/exactSeed.test.ts keeps the two equal.
+// A copy of ../rn-sensor-dashboard/src/data/sensor_readings.json: Exact only
+// resolves imports inside the app's folder. That app's exactSeed test keeps
+// the two equal.
 import seed from './sensor_readings.json';
 
 type Sensor = Result<'seed'>[number];
@@ -11,8 +12,8 @@ type Live = Result<'liveFeed'>;
 const BACKEND_WS_URL = 'ws://localhost:3000';
 export const grants = `net.websocket ${BACKEND_WS_URL}`;
 
-// The reading maths and the sort below are ports of src/utils/sensorReadings.ts
-// and src/utils/sensorList.ts, for the same reason.
+// The reading maths and the sort below are ports of that app's
+// src/utils/sensorReadings.ts and src/utils/sensorList.ts, for the same reason.
 
 // Same ±8% spread as scripts/genSensorData.js.
 const MAX_DRIFT = 0.08;

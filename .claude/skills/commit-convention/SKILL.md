@@ -61,9 +61,13 @@ Use real numbers from a real run, never invented ones. If a number is an estimat
 Run the checks for the part you changed. The pre-commit hook only formats the staged files, and CI runs everything, so don't re-run the full suite as a final check.
 
 ```
-# app (repo root)
+# RN app
+cd apps/rn-sensor-dashboard
 npm run ts:check && npm run lint && npm run deadcode && npm run format:check
 npm test
+
+# Exact app
+cd apps/exact-sensor-dashboard && bun exact.mjs test web
 
 # backend
 cd server && cargo fmt --check && cargo clippy --all-targets -- -D warnings && cargo test

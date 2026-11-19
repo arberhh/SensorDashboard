@@ -1,6 +1,6 @@
 # SensorDashboard in Expo Exact
 
-The bare RN app at the repo root rebuilt in [Expo Exact](https://github.com/expo/exact): the
+The bare RN app in `../rn-sensor-dashboard` rebuilt in [Expo Exact](https://github.com/expo/exact): the
 same two screens, 500-sensor seed, LOCAL/LIVE feed, TYPE filter and TREND/NAME sorts. It is
 here so both apps can be measured side by side.
 
@@ -48,10 +48,12 @@ retries every 5s, as the RN app does.
   65,536 list steps, so `rankSorted` in `app.ts` sorts and ranks the ids; it is a mutation,
   whose reply arrives on the next commit. Until then the rows stay in feed order.
 - **The seed and the pure logic are copies.** Exact only resolves imports inside this folder,
-  so `sensor_readings.json` is a copy of `src/data` (the root `exactSeed` test fails if they
-  differ) and `app.ts` ports `src/utils/sensorReadings.ts` and `sortSensors` by hand.
+  so `sensor_readings.json` is a copy of the RN app's `src/data` (its `exactSeed` test fails
+  if they differ) and `app.ts` ports its `src/utils/sensorReadings.ts` and `sortSensors` by
+  hand.
 - **Random readings** come from `crypto.getRandomValues` (`Math.random` is unavailable in
   data sources); under the agent they repeat per launch seed.
 - **The sort bar stays pinned above the list**, as in RN. The compiler warns
   (`lower-list-beside-fixed`) because iOS lists usually scroll under a pinned bar.
-- Bundle id `com.arberhh.sensordashboard.exact`, so it installs beside the bare app.
+- Bundle id `com.arberhh.sensordashboard.exact` and display name "Exact SensorDashboard", so
+  it installs beside the RN app ("RN SensorDashboard").

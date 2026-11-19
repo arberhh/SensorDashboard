@@ -1,3 +1,0 @@
-{
-  "ignorePatterns": ["dist/*", "android/*", "ios/*", "iot-dashboard-task/*", "server/*", "apps/*"]
-}

@@ -1,5 +1,5 @@
 {
-  "name": "sensor-dashboard",
+  "name": "exact-sensor-dashboard",
   "private": true,
   "scripts": {
     "build": "bun exact.mjs web-build --out dist",

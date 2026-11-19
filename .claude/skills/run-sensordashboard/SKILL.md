@@ -6,11 +6,12 @@ description: Launch and drive this bare React Native CLI app (SensorDashboard) f
 # Running this app
 
 This is a **bare React Native CLI** app (0.87, new architecture) —
-not Expo. The app starts in LOCAL mode, where sensor data comes from a
+not Expo. It lives in `apps/rn-sensor-dashboard`: run every command
+below from that folder, and paths are relative to it. The app starts in LOCAL mode, where sensor data comes from a
 static generated JSON file (`src/data/sensor_readings.json`) and a 5s
 simulated tick, so there are no env vars or network calls to configure
 before launch. The header's LIVE toggle expects the Rust backend on
-`localhost:3000`: start it with `cd server && cargo run` (see
+`localhost:3000`: start it with `cargo run` in the repo's `server/` (see
 `server/README.md`). Without it, LIVE mode shows an error status and
 retries; that's expected.
 

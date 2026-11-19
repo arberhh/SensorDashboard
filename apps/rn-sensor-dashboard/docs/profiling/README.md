@@ -34,12 +34,16 @@ Raw logs are in `raw/`. Each line is
 
 ## Reproduce
 
+From `apps/rn-sensor-dashboard`. `setup.sh` prints the app's folder in the worktree: the
+worktree's root for a ref from before the app moved into `apps/`, else its
+`apps/rn-sensor-dashboard`.
+
 ```bash
-scripts/profiling/setup.sh 18c055f /tmp/wt-before
-scripts/profiling/setup.sh main /tmp/wt-after
+BEFORE=$(scripts/profiling/setup.sh 18c055f /tmp/wt-before | tail -1)
+AFTER=$(scripts/profiling/setup.sh main /tmp/wt-after | tail -1)
 for i in 1 2 3; do
-  scripts/profiling/profile.sh /tmp/wt-before profiling-output/before-$i.log 70
-  scripts/profiling/profile.sh /tmp/wt-after profiling-output/after-$i.log 70
+  scripts/profiling/profile.sh "$BEFORE" profiling-output/before-$i.log 70
+  scripts/profiling/profile.sh "$AFTER" profiling-output/after-$i.log 70
 done
 python3 scripts/profiling/analyze.py summary profiling-output
 git worktree remove --force /tmp/wt-before && git worktree remove --force /tmp/wt-after

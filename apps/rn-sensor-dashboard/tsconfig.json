@@ -15,5 +15,5 @@
     }
   },
   "include": ["**/*.ts", "**/*.tsx"],
-  "exclude": ["**/node_modules", "**/Pods", "iot-dashboard-task/**", "apps/**"]
+  "exclude": ["**/node_modules", "**/Pods"]
 }
