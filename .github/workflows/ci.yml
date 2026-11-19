@@ -43,6 +43,11 @@ jobs:
       - name: Type check
         run: npm run ts:check
 
+      # Exact type-checks packages/sensor-core from its committed .d.ts
+      # files, so they must match the source.
+      - name: Shared package declarations are current
+        run: npm run core:types && git diff --exit-code -- ../../packages/sensor-core/types
+
       - name: Lint
         run: npm run lint
 

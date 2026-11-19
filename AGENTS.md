@@ -11,6 +11,11 @@ Arber, the owner, is a senior RN/Expo engineer. Don't explain RN basics; explain
   from that folder. Shows on a device as "RN SensorDashboard".
 - `apps/exact-sensor-dashboard`: the Expo Exact build (Contract + `app.ts`), run from an Exact
   checkout at `~/Desktop/Dev/exact`; see its README. Shows as "Exact SensorDashboard".
+- `packages/sensor-core`: the seed data (`sensor_readings.json`), the `Sensor` type and the pure
+  logic (`sensorList`, `sensorReadings`, `sensorSnapshot`) both apps import, so they can't drift.
+  Exact type-checks it from the committed `types/*.d.ts`: after changing its source run
+  `npm run core:types` in the RN app (CI fails if they are stale). After adding a file, run
+  `bun install` in the Exact app, because bun links the package file by file.
 - `server/`: the Rust backend both apps follow in LIVE mode.
 - Each app is `apps/<stack>-sensor-dashboard` with its own toolchain. A behaviour change in one
   should land in the others.
@@ -34,8 +39,9 @@ Arber, the owner, is a senior RN/Expo engineer. Don't explain RN basics; explain
   A sort captures the id order at press time (`sortedIds`, `orderByIds`), so live deviation
   never reshuffles rows. TYPE changes go through `requestIdleCallback` (typed in
   `src/types/globals.d.ts`; `InteractionManager` is gone).
-- **Pure logic** is in `src/utils` (`sensorList`, `sensorReadings`, `sensorDisplay`), tested
-  without rendering. `Sensor`/`TSensor` live in `src/types/sensor.ts` to avoid a screen/row cycle.
+- **Pure logic** is in `packages/sensor-core` (`sensorList`, `sensorReadings`, `sensorSnapshot`,
+  with `Sensor`/`TSensor`) and `src/utils/sensorDisplay.ts`, tested without rendering from this
+  app's `__tests__`.
 - **Theme**: `src/theme/index.ts`, default export (`colors`, `fontSizes`, `spacing`, `radii`).
   Every color, font size, gap and radius comes from it; no hex or raw pixels in `StyleSheet`.
 - **Tests**: unit tests per util and hook, plus `HomeScreen.integration.test.tsx`. Docs in

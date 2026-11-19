@@ -8,7 +8,7 @@ description: Launch and drive this bare React Native CLI app (SensorDashboard) f
 This is a **bare React Native CLI** app (0.87, new architecture) —
 not Expo. It lives in `apps/rn-sensor-dashboard`: run every command
 below from that folder, and paths are relative to it. The app starts in LOCAL mode, where sensor data comes from a
-static generated JSON file (`src/data/sensor_readings.json`) and a 5s
+static generated JSON file (`packages/sensor-core/src/sensor_readings.json`) and a 5s
 simulated tick, so there are no env vars or network calls to configure
 before launch. The header's LIVE toggle expects the Rust backend on
 `localhost:3000`: start it with `cargo run` in the repo's `server/` (see
@@ -30,14 +30,14 @@ fails with `xcodebuild` errors about missing
 cd ios && pod install && cd ..
 ```
 
-**Also not a launch step** — `src/data/sensor_readings.json` is
+**Also not a launch step** — `packages/sensor-core/src/sensor_readings.json` is
 already checked in with 500 sensors. Only run this if explicitly
 asked to regenerate the mock data; it overwrites the file with a
 fresh random set, which isn't something to do incidentally while
 just trying to launch the app:
 
 ```bash
-npm run generate:data   # writes src/data/sensor_readings.json (500 sensors)
+npm run generate:data   # writes packages/sensor-core/src/sensor_readings.json (500 sensors)
 ```
 
 ## Launch
@@ -83,7 +83,7 @@ app` in the CLI output), not a fixed sleep.
 - **Both the reading and the deviation change every 5s in LOCAL
   mode.** Readings drift within ±8% of each sensor's baseline, so
   deviations should stay within about ±8%. A three-digit deviation
-  means the drift logic in `src/utils/sensorReadings.ts` has regressed.
+  means the drift logic in `packages/sensor-core/src/sensorReadings.ts` has regressed.
 - **A sort freezes row order at press time.** With TREND sort on,
   values keep changing but rows don't move until the next chip press.
   That's intended, not a stale list.
