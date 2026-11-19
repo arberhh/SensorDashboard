@@ -17,6 +17,11 @@ Arber, the owner, is a senior RN/Expo engineer. Don't explain RN basics; explain
   `npm run core:types` in the RN app (CI fails if they are stale). After adding a file, run
   `bun install` in the Exact app, because bun links the package file by file.
 - `server/`: the Rust backend both apps follow in LIVE mode.
+- `scripts/measure`: the harness that measures both apps the same way from outside (release
+  builds, scripted swipes); see its README. Results and charts go in `docs/measurements`.
+  agent-device reads the whole accessibility tree before every swipe, on the app's main thread:
+  on the simulator subtract it (`tool_cpu_s`), on a phone keep swipes 3.5s apart. Never compare
+  frames from rapid swipes.
 - Each app is `apps/<stack>-sensor-dashboard` with its own toolchain. A behaviour change in one
   should land in the others.
 
