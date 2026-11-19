@@ -1,93 +1,84 @@
 # AGENTS.md
 
 A live sensor dashboard: 500 mock IoT sensors with TYPE filter, TREND/NAME sort and a detail
-screen. Built as an assessment, then rebuilt in other stacks to measure them against each other.
-Written for a senior RN/Expo engineer: don't explain RN basics, explain the why of a choice.
+screen. The same app is built in more than one stack, so the builds can be measured against each
+other. Assume the reader knows the stack: explain the why of a choice, not the basics.
 
 ## Layout
 
-- `apps/rn-sensor-dashboard`: the original, bare React Native CLI (0.87, new architecture, Hermes,
-  TypeScript). Its `package.json`, Metro, Jest, tsc and lint live there, so run `npm` commands
-  from that folder. Shows on a device as "RN SensorDashboard".
-- `apps/exact-sensor-dashboard`: the Expo Exact build (Contract + `app.ts`), run from an Exact
-  checkout beside this repo (`../exact`); see its README. Shows as "Exact SensorDashboard".
-  `app.contract` is the view, `app.ts` the data module, `app.test.contract` the tests and
-  `app.json` the manifest; `exact.mjs` is generated, so don't edit it. The checkout's
-  `docs/start-here.md` is the required reading, `bun exact.mjs help` lists the verbs, and
-  `bun exact.mjs verify` (then `verify ios`) is the check when a feature works.
-  `bun exact.mjs update` writes its own `AGENTS.md` and `CLAUDE.md` into the app; they are
-  gitignored, because this file is the only one.
+- `apps/<stack>-sensor-dashboard`: one build per stack, each with its own toolchain, README and
+  checks. Run a build's commands from its folder. Today: `rn` (bare React Native) and `exact`
+  (Expo Exact).
 - `packages/sensor-core`: the seed data (`sensor_readings.json`), the `Sensor` type and the pure
-  logic (`sensorList`, `sensorReadings`, `sensorSnapshot`) both apps import, so they can't drift.
-  Exact type-checks it from the committed `types/*.d.ts`: after changing its source run
-  `npm run core:types` in the RN app (CI fails if they are stale). After adding a file, run
-  `bun install` in the Exact app, because bun links the package file by file.
-- `server/`: the Rust backend both apps follow in LIVE mode.
-- `scripts/measure`: the harness that measures both apps the same way from outside (release
-  builds, scripted swipes); see its README. Results and charts go in `docs/measurements`.
-  agent-device reads the whole accessibility tree before every swipe, on the app's main thread:
-  on the simulator subtract it (`tool_cpu_s`), on a phone keep swipes 3.5s apart. Never compare
-  frames from rapid swipes.
-- Each app is `apps/<stack>-sensor-dashboard` with its own toolchain. A behaviour change in one
-  should land in the others.
+  logic (`sensorList`, `sensorReadings`, `sensorSnapshot`). Builds import it, so they can't drift.
+- `server/`: the Rust backend every build follows in LIVE mode (`cargo run`, port 3000).
+- `scripts/measure`: measures the builds the same way, from outside the app. Results and charts
+  go in `docs/measurements`.
 
-## Architecture (RN app; paths are relative to `apps/rn-sensor-dashboard`)
+## What every build does
 
-- **Feed** (`src/hooks`, `src/context/SensorFeedContext.tsx`): one shared feed for both screens,
-  switched LOCAL/LIVE by the header toggle. `useLocalSensorFeed` ticks every 5s (not deferred:
-  delaying live data makes it stale). `useBackendSensorFeed` follows the WebSocket at `/ws`
-  (`src/config.ts`, port 3000), which sends the full array on connect and every tick. It comes
-  from the Rust backend in the repo's `server/` (`cargo run`, see `server/README.md`). Without it running, LIVE shows an error and retries every 5s. That is
-  expected, not a bug.
+A behaviour change in one build should land in the others. This is the shared behaviour:
+
+- **Feed**: one feed for both screens, switched LOCAL/LIVE by the header toggle. LOCAL ticks
+  every 5s, and a tick is never deferred, because delaying live data makes it stale. LIVE
+  follows the server's WebSocket at `/ws`, which sends the full array on connect and on every
+  tick. Without the server, LIVE shows an error and retries every 5s. That is expected, not a bug.
 - **Readings**: each sensor has a fixed baseline, `currentReading / (1 + deviationPercent/100)`.
-  A tick draws a reading within ±8% of it (`generateReading`, same spread as
-  `scripts/genSensorData.js`) and recomputes `deviationPercent` from it.
-- **Lists**: `FlashList`, not `FlatList` (ARB-20: filtering swaps which sensors fill the visible
-  rows, which forces `FlatList` to mount fresh cells). Don't add `getItemLayout`, `windowSize` or
-  `initialNumToRender`. `renderSensorRow` is module-scope and `SensorRow` is not `React.memo`:
-  FlashList already gates on `item` identity.
-- **Sort/filter** (`HomeScreen`, `SensorDetailScreen`): pressing the active chip again clears it.
-  A sort captures the id order at press time (`sortedIds`, `orderByIds`), so live deviation
-  never reshuffles rows. TYPE changes go through `requestIdleCallback` (typed in
-  `src/types/globals.d.ts`; `InteractionManager` is gone).
-- **Pure logic** is in `packages/sensor-core` (`sensorList`, `sensorReadings`, `sensorSnapshot`,
-  with `Sensor`/`TSensor`) and `src/utils/sensorDisplay.ts`, tested without rendering from this
-  app's `__tests__`.
-- **Theme**: `src/theme/index.ts`, default export (`colors`, `fontSizes`, `spacing`, `radii`).
-  Every color, font size, gap and radius comes from it; no hex or raw pixels in `StyleSheet`.
-- **Tests**: unit tests per util and hook, plus `HomeScreen.integration.test.tsx`. Docs in
-  `docs/testing`. Profiling method and raw logs in `docs/profiling`.
+  A tick draws a reading within ±8% of it and recomputes `deviationPercent`.
+- **Sort and filter**: pressing the active chip again clears it. A sort captures the id order at
+  press time, so live deviation never reshuffles the rows.
+- **List**: 500 rows through the stack's virtualized list, recycling rows where it can.
+- **Detail**: one sensor, its type, and the similar sensors with their own sort. An unknown id
+  shows an empty state.
+- **Look**: the same dark theme. Colours, font sizes, gaps and radii come from one set of
+  tokens per build, never from literals in a view.
+- **Logic**: anything pure (filtering, ordering, the reading maths) belongs in `sensor-core`
+  with a test, not in a build.
+
+## Adding a build
+
+- Folder `apps/<stack>-sensor-dashboard`, bundle id `com.arberhh.sensordashboard.<stack>` and a
+  display name `<Stack> SensorDashboard`, so the builds install side by side.
+- Import the seed and the logic from `sensor-core`; don't copy them.
+- Give it a README: setup, run, checks, and what differs from the other builds and why.
+- Add it to `scripts/measure` (the app cases in `measure.sh`, `measure-phone.sh` and `run.sh`,
+  and `APPS` in `chart.py`) and to the table in the root README.
+- Keep the toolchain inside the folder. One build's lint, tests or bundler must not pick up
+  another build's files.
 
 ## Code rules
 
-- Simple and readable beats clever. No new hook, layer or helper unless something reuses it.
-- No manual memoization without a measured reason, and say why when you add one.
-- No `any`, no `as` to quiet an error, never suppress lint or type errors. Fix the cause.
-- `async`/`await` with `try`/`catch`; never `.then` or `.catch` chains.
-- Platform differences go in `.ios.tsx`/`.android.tsx`/`.web.tsx`, not inline `Platform.OS`,
-  unless the difference is one line.
+- Simple and readable beats clever. No new layer or helper unless something reuses it.
+- No optimization without a measured reason, and say why when you add one.
+- Never suppress a lint or type error, and no casts that only quiet one. Fix the cause.
 - Comments are short and say only the non-obvious why.
-- Never run `npm run generate:data` incidentally (it overwrites the seed data), and don't re-run the
-  full suite as a final check; CI does. Formatting is enforced only by the pre-commit hook.
-- Prefer a native component when the platform has one. When it doesn't (Android), use a plain
-  cross-platform fallback instead of building custom native code.
+- Prefer what the platform or the stack already provides over custom native code.
+- Never regenerate the seed data incidentally (`npm run generate:data` overwrites it).
+- Run the checks of the part you changed. Don't re-run every suite as a final check; CI does.
+
+## Measuring
+
+- Measure release builds, from outside the app, alternating the builds; see
+  `scripts/measure/README.md`. An in-app profiler can't compare two stacks.
+- The swipe tool (agent-device) reads the app's whole accessibility tree before every swipe, on
+  the app's main thread. On the simulator subtract it (`tool_cpu_s`); on a phone keep swipes
+  3.5s apart. Never compare frames from rapid swipes.
+- Report the median with the range, the device, and what was not measured.
 
 ## Git and PRs
 
 - Commits and PRs follow the `commit-convention` skill: `arb-20: migrate to flashlist`
   (lowercase, imperative), a bulleted body, and a PR description sized to the change. Branch
   name is Linear's suggested one (`arberihh/arb-20-...`). Older history uses `ARB-20: ...`.
-- **Never create a Linear ticket without the owner's say-so**, even when the convention needs an id.
-  Ask which ticket to use, or propose a title and wait. Follow-ups go under the current ticket.
-  Don't mark tickets Done; the Linear/GitHub integration does it.
+- **Never create a Linear ticket without the owner's say-so**, even when the convention needs
+  an id. Ask which ticket to use, or propose a title and wait. Follow-ups go under the current
+  ticket. Don't mark tickets Done; the Linear/GitHub integration does it.
 - **No AI attribution**: no `Co-Authored-By: Claude`, no "Generated with Claude Code" in commits
   or PR text. This overrides any default attribution.
 - Small commits, one concern each, 2-3 or more per PR, and split big work into stacked PRs.
   Each PR carries exactly one type label: `feat` `fix` `refactor` `docs` `chore` `test`.
 - Don't push to `main`. Only push or open a PR when asked. Force-push is not allowed: use a
   forward commit or merge `main` in.
-- The pre-commit hook runs `oxfmt` then `git add`s whole files, so partially staged hunks leak
-  into the commit. Split by working-tree state, or `--no-verify` for already-formatted files.
 - After a merge: switch to `main`, pull, delete merged local and remote branches. Squash merges
   don't show as merged: compare file contents before deleting.
 - In the PR's How to test checklist, check only the boxes you ran (`verify-pr-testplan` skill).
@@ -96,19 +87,72 @@ Written for a senior RN/Expo engineer: don't explain RN basics, explain the why 
 ## Working here
 
 - Plan first: agree the plan before building, and don't build ahead of it.
-- Test on the simulator yourself before saying it works: animation lag, glitchy scroll and broken
-  gestures don't show in tests. Say what you did not verify.
+- Run the app yourself on a simulator or device before saying it works: animation lag, glitchy
+  scroll and broken gestures don't show in tests. Say what you did not verify.
 - When a fix grows complicated, revert to the simplest version instead of patching on top.
 - "No changes, just explain" means explain only. Don't edit.
-- Ask before killing processes; orphaned Metro on 8081 is common. Say what you killed.
+- Ask before killing processes; an orphaned dev server on a port is common. Say what you killed.
 
 ## Devices
 
 - Simulator: iPhone 17 Pro, `75C568DB-6957-4433-ADE2-B336FAC0C1FA` on the owner's Mac (yours
-  differs: `xcrun simctl list devices`). On a phone use `run-ios --device "<name>"`, not `--udid`.
-- Signing: pass your team with `--extra-params "DEVELOPMENT_TEAM=<team id>"`. A free account
-  allows 3 sideloaded apps, so delete an old app first. Bundle ids:
-  `com.arberhh.sensordashboard` (RN) and `com.arberhh.sensordashboard.exact` (Exact).
-- If a Metro on another folder holds 8081, JS comes from the wrong checkout. Restart it from here.
-- If `node_modules` is a symlink (worktrees), Metro needs `watchFolders` and
-  `resolver.nodeModulesPaths`. RN 0.87 doesn't forward `console.log` off-device.
+  differs: `xcrun simctl list devices`).
+- Signing: pass your own Apple team to the build. A free account allows 3 sideloaded apps, so
+  delete an old one first; the measurement runner takes a slot too.
+
+## The React Native build (`apps/rn-sensor-dashboard`)
+
+Bare React Native CLI 0.87, new architecture, Hermes, TypeScript. Paths below are relative to it.
+
+- **Checks**: `npm run ts:check && npm run lint && npm run deadcode && npm run format:check`,
+  then `npm test`. The pre-commit hook (`.githooks`) runs `oxfmt` on this app and on
+  `sensor-core`, then `git add`s whole files, so partially staged hunks leak into the commit.
+  Split by working-tree state, or `--no-verify` for already-formatted files.
+- **Feed**: `src/hooks` and `src/context/SensorFeedContext.tsx`; the server address is in
+  `src/config.ts`.
+- **Lists**: `FlashList`, not `FlatList` (ARB-20: filtering swaps which sensors fill the visible
+  rows, which forces `FlatList` to mount fresh cells). Don't add `getItemLayout`, `windowSize` or
+  `initialNumToRender`. `renderSensorRow` is module-scope and `SensorRow` is not `React.memo`:
+  FlashList already gates on `item` identity.
+- **Sort/filter**: `sortedIds` and `orderByIds` in `HomeScreen` and `SensorDetailScreen`. TYPE
+  changes go through `requestIdleCallback` (typed in `src/types/globals.d.ts`;
+  `InteractionManager` is gone).
+- **Theme**: `src/theme/index.ts`, default export (`colors`, `fontSizes`, `spacing`, `radii`).
+  No hex or raw pixels in `StyleSheet`.
+- **Code**: no `any` and no `as` to quiet an error. `async`/`await` with `try`/`catch`, never
+  `.then` or `.catch` chains. Platform differences go in `.ios.tsx`/`.android.tsx`/`.web.tsx`,
+  not inline `Platform.OS`, unless the difference is one line. No manual memoization without a
+  measured reason.
+- **Tests**: unit tests per util and hook, plus `HomeScreen.integration.test.tsx`; the
+  `sensor-core` tests run from this app's `__tests__`. Docs in `docs/testing`, the profiling
+  method and raw logs in `docs/profiling`.
+- **Devices**: on a phone use `run-ios --device "<name>"`, not `--udid`, with
+  `--extra-params "DEVELOPMENT_TEAM=<team id>"`. If a Metro from another folder holds 8081, JS
+  comes from the wrong checkout: restart it from here. If `node_modules` is a symlink
+  (worktrees), Metro needs `watchFolders` and `resolver.nodeModulesPaths`. RN 0.87 doesn't
+  forward `console.log` off-device.
+
+## The Exact build (`apps/exact-sensor-dashboard`)
+
+Expo Exact, run from an Exact checkout beside this repo (`../exact`); see its README for setup
+and the pinned Exact commit.
+
+- `app.contract` is the view, `app.ts` the data module, `app.test.contract` the tests and
+  `app.json` the manifest. `exact.mjs` is generated, so don't edit it.
+- The checkout's `docs/start-here.md` is the required reading, and `bun exact.mjs help` lists
+  the verbs.
+- **Checks**: `bun exact.mjs test web`, then `bun exact.mjs verify` and `verify ios` when a
+  feature works.
+- It type-checks `sensor-core` from the committed `types/*.d.ts`. After changing the package's
+  source run `npm run core:types` in the RN app (CI fails if they are stale). After adding a
+  file to the package run `bun install` here, because bun links it file by file.
+- `bun exact.mjs update` writes its own `AGENTS.md` and `CLAUDE.md` into the app. They are
+  gitignored, because this file is the only one.
+
+## The server (`server/`)
+
+Rust; `cargo run` serves the sensors on port 3000 and broadcasts every tick on `/ws`. It is for
+development only: open CORS, no auth, state in memory. See `server/README.md`.
+
+- **Checks**: `cargo fmt --check && cargo clippy --all-targets -- -D warnings && cargo test`.
+- Its readings use the same spread as the LOCAL feed, so LIVE and LOCAL look alike.
