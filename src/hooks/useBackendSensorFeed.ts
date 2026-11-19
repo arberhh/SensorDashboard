@@ -4,6 +4,7 @@ import { BACKEND_WS_URL } from "@/config";
 import initialSensors from "@/data/sensor_readings.json";
 import type { ConnectionStatus, SensorFeedResult } from "@/types/feed";
 import type { TSensor } from "@/types/sensor";
+import { isSensorSnapshot } from "@/utils/sensorSnapshot";
 
 const RETRY_INTERVAL_MS = 5000;
 
@@ -28,7 +29,7 @@ export function useBackendSensorFeed(enabled: boolean): SensorFeedResult {
         // Ignore a malformed frame; the next snapshot replaces it anyway.
         try {
           const snapshot: unknown = JSON.parse(event.data);
-          if (!Array.isArray(snapshot)) return;
+          if (!isSensorSnapshot(snapshot)) return;
           setSensors(snapshot);
           setStatus("connected");
         } catch {}
