@@ -1,0 +1,108 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 848 424" width="848" height="424" role="img" aria-label="RN and Exact on the iOS Simulator">
+<style>
+  .surface { fill: #fcfcfb } .title { fill: #0b0b0b; font-weight: 600 }
+  .text { fill: #52514e } .muted { fill: #898781 } .axis { stroke: #c3c2b7 }
+  .rn { fill: #2a78d6 } .exact { fill: #eb6834 }
+  .run { fill: #0b0b0b; stroke: #fcfcfb; stroke-width: 1.5 }
+  text { font-family: -apple-system, "Segoe UI", Helvetica, Arial, sans-serif; font-size: 12px }
+  @media (prefers-color-scheme: dark) {
+    .surface { fill: #1a1a19 } .title { fill: #f0efec }
+    .text { fill: #c3c2b7 } .axis { stroke: #383835 }
+    .rn { fill: #3987e5 } .exact { fill: #d95926 }
+    .run { fill: #f0efec; stroke: #1a1a19 }
+  }
+</style>
+<rect class="surface" width="848" height="424" rx="8"/>
+<text class="title" x="24" y="30" style="font-size: 15px">RN and Exact on the iOS Simulator</text>
+<text class="muted" x="24" y="48">Bar: median of 5 runs. Dots: each run. Lower is better. Every panel has its own scale, from zero.</text>
+<text class="title" x="24" y="78">CPU during 30 swipes, less the tool's share</text>
+<text class="text" x="24" y="105.0">RN</text>
+<path class="rn" d="M72,92 h211.6 a4,4 0 0 1 4,4 v10 a4,4 0 0 1 -4,4 h-211.6 z"/>
+<circle class="run" cx="281.4" cy="101.0" r="3"/>
+<circle class="run" cx="287.6" cy="101.0" r="3"/>
+<circle class="run" cx="291.1" cy="101.0" r="3"/>
+<circle class="run" cx="284.0" cy="101.0" r="3"/>
+<circle class="run" cx="292.0" cy="101.0" r="3"/>
+<text class="text" x="302.0" y="105.0">2.43 s</text>
+<text class="text" x="24" y="131.0">Exact</text>
+<path class="exact" d="M72,118 h185.0 a4,4 0 0 1 4,4 v10 a4,4 0 0 1 -4,4 h-185.0 z"/>
+<circle class="run" cx="252.1" cy="127.0" r="3"/>
+<circle class="run" cx="280.5" cy="127.0" r="3"/>
+<circle class="run" cx="246.8" cy="127.0" r="3"/>
+<circle class="run" cx="261.0" cy="127.0" r="3"/>
+<circle class="run" cx="266.3" cy="127.0" r="3"/>
+<text class="text" x="290.5" y="131.0">2.13 s</text>
+<line class="axis" x1="72" y1="88" x2="72" y2="140"/>
+<text class="title" x="424" y="78">CPU over 20 s idle</text>
+<text class="text" x="424" y="105.0">RN</text>
+<path class="rn" d="M472,92 h99.5 a4,4 0 0 1 4,4 v10 a4,4 0 0 1 -4,4 h-99.5 z"/>
+<circle class="run" cx="562.6" cy="101.0" r="3"/>
+<circle class="run" cx="575.5" cy="101.0" r="3"/>
+<circle class="run" cx="575.5" cy="101.0" r="3"/>
+<circle class="run" cx="588.5" cy="101.0" r="3"/>
+<circle class="run" cx="588.5" cy="101.0" r="3"/>
+<text class="text" x="598.5" y="105.0">0.08 s</text>
+<text class="text" x="424" y="131.0">Exact</text>
+<path class="exact" d="M472,118 h164.2 a4,4 0 0 1 4,4 v10 a4,4 0 0 1 -4,4 h-164.2 z"/>
+<circle class="run" cx="666.1" cy="127.0" r="3"/>
+<circle class="run" cx="692.0" cy="127.0" r="3"/>
+<circle class="run" cx="627.3" cy="127.0" r="3"/>
+<circle class="run" cx="640.2" cy="127.0" r="3"/>
+<circle class="run" cx="640.2" cy="127.0" r="3"/>
+<text class="text" x="702.0" y="131.0">0.13 s</text>
+<line class="axis" x1="472" y1="88" x2="472" y2="140"/>
+<text class="title" x="24" y="190">Startup</text>
+<text class="text" x="24" y="217.0">RN</text>
+<path class="rn" d="M72,204 h212.5 a4,4 0 0 1 4,4 v10 a4,4 0 0 1 -4,4 h-212.5 z"/>
+<circle class="run" cx="265.0" cy="213.0" r="3"/>
+<circle class="run" cx="288.5" cy="213.0" r="3"/>
+<circle class="run" cx="258.7" cy="213.0" r="3"/>
+<circle class="run" cx="291.8" cy="213.0" r="3"/>
+<circle class="run" cx="292.0" cy="213.0" r="3"/>
+<text class="text" x="302.0" y="217.0">1346 ms</text>
+<text class="text" x="24" y="243.0">Exact</text>
+<path class="exact" d="M72,230 h185.0 a4,4 0 0 1 4,4 v10 a4,4 0 0 1 -4,4 h-185.0 z"/>
+<circle class="run" cx="258.9" cy="239.0" r="3"/>
+<circle class="run" cx="265.5" cy="239.0" r="3"/>
+<circle class="run" cx="261.0" cy="239.0" r="3"/>
+<circle class="run" cx="266.1" cy="239.0" r="3"/>
+<circle class="run" cx="260.3" cy="239.0" r="3"/>
+<text class="text" x="276.1" y="243.0">1175 ms</text>
+<line class="axis" x1="72" y1="200" x2="72" y2="252"/>
+<text class="title" x="424" y="190">Memory after launch</text>
+<text class="text" x="424" y="217.0">RN</text>
+<path class="rn" d="M472,204 h212.2 a4,4 0 0 1 4,4 v10 a4,4 0 0 1 -4,4 h-212.2 z"/>
+<circle class="run" cx="689.0" cy="213.0" r="3"/>
+<circle class="run" cx="686.7" cy="213.0" r="3"/>
+<circle class="run" cx="688.2" cy="213.0" r="3"/>
+<circle class="run" cx="686.7" cy="213.0" r="3"/>
+<circle class="run" cx="689.2" cy="213.0" r="3"/>
+<text class="text" x="699.2" y="217.0">271 MB</text>
+<text class="text" x="424" y="243.0">Exact</text>
+<path class="exact" d="M472,230 h215.8 a4,4 0 0 1 4,4 v10 a4,4 0 0 1 -4,4 h-215.8 z"/>
+<circle class="run" cx="691.7" cy="239.0" r="3"/>
+<circle class="run" cx="691.7" cy="239.0" r="3"/>
+<circle class="run" cx="692.0" cy="239.0" r="3"/>
+<circle class="run" cx="691.8" cy="239.0" r="3"/>
+<circle class="run" cx="691.8" cy="239.0" r="3"/>
+<text class="text" x="702.0" y="243.0">275 MB</text>
+<line class="axis" x1="472" y1="200" x2="472" y2="252"/>
+<text class="title" x="24" y="302">Memory after scroll</text>
+<text class="text" x="24" y="329.0">RN</text>
+<path class="rn" d="M72,316 h215.5 a4,4 0 0 1 4,4 v10 a4,4 0 0 1 -4,4 h-215.5 z"/>
+<circle class="run" cx="292.0" cy="325.0" r="3"/>
+<circle class="run" cx="291.0" cy="325.0" r="3"/>
+<circle class="run" cx="291.5" cy="325.0" r="3"/>
+<circle class="run" cx="291.0" cy="325.0" r="3"/>
+<circle class="run" cx="291.8" cy="325.0" r="3"/>
+<text class="text" x="302.0" y="329.0">318 MB</text>
+<text class="text" x="24" y="355.0">Exact</text>
+<path class="exact" d="M72,342 h213.4 a4,4 0 0 1 4,4 v10 a4,4 0 0 1 -4,4 h-213.4 z"/>
+<circle class="run" cx="289.5" cy="351.0" r="3"/>
+<circle class="run" cx="289.0" cy="351.0" r="3"/>
+<circle class="run" cx="289.0" cy="351.0" r="3"/>
+<circle class="run" cx="289.4" cy="351.0" r="3"/>
+<circle class="run" cx="289.5" cy="351.0" r="3"/>
+<text class="text" x="299.5" y="355.0">316 MB</text>
+<line class="axis" x1="72" y1="312" x2="72" y2="364"/>
+</svg>

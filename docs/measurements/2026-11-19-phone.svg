@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 848 312" width="848" height="312" role="img" aria-label="RN and Exact on an iPhone 17 Pro">
+<style>
+  .surface { fill: #fcfcfb } .title { fill: #0b0b0b; font-weight: 600 }
+  .text { fill: #52514e } .muted { fill: #898781 } .axis { stroke: #c3c2b7 }
+  .rn { fill: #2a78d6 } .exact { fill: #eb6834 }
+  .run { fill: #0b0b0b; stroke: #fcfcfb; stroke-width: 1.5 }
+  text { font-family: -apple-system, "Segoe UI", Helvetica, Arial, sans-serif; font-size: 12px }
+  @media (prefers-color-scheme: dark) {
+    .surface { fill: #1a1a19 } .title { fill: #f0efec }
+    .text { fill: #c3c2b7 } .axis { stroke: #383835 }
+    .rn { fill: #3987e5 } .exact { fill: #d95926 }
+    .run { fill: #f0efec; stroke: #1a1a19 }
+  }
+</style>
+<rect class="surface" width="848" height="312" rx="8"/>
+<text class="title" x="24" y="30" style="font-size: 15px">RN and Exact on an iPhone 17 Pro</text>
+<text class="muted" x="24" y="48">Bar: median of 3 runs. Dots: each run. Lower is better. Every panel has its own scale, from zero.</text>
+<text class="title" x="24" y="78">Late frames during 16 swipes</text>
+<text class="text" x="24" y="105.0">RN</text>
+<path class="rn" d="M72,92 h0.0 a0.0,0.0 0 0 1 0.0,0.0 v18.0 a0.0,0.0 0 0 1 -0.0,0.0 h-0.0 z"/>
+<circle class="run" cx="72.0" cy="101.0" r="3"/>
+<circle class="run" cx="72.0" cy="101.0" r="3"/>
+<circle class="run" cx="72.0" cy="101.0" r="3"/>
+<text class="text" x="82.0" y="105.0">0 </text>
+<text class="text" x="24" y="131.0">Exact</text>
+<path class="exact" d="M72,118 h179.3 a4,4 0 0 1 4,4 v10 a4,4 0 0 1 -4,4 h-179.3 z"/>
+<circle class="run" cx="255.3" cy="127.0" r="3"/>
+<circle class="run" cx="292.0" cy="127.0" r="3"/>
+<circle class="run" cx="255.3" cy="127.0" r="3"/>
+<text class="text" x="302.0" y="131.0">10 </text>
+<line class="axis" x1="72" y1="88" x2="72" y2="140"/>
+<text class="title" x="424" y="78">Hitch time per second of movement</text>
+<text class="text" x="424" y="105.0">RN</text>
+<path class="rn" d="M472,92 h0.0 a0.0,0.0 0 0 1 0.0,0.0 v18.0 a0.0,0.0 0 0 1 -0.0,0.0 h-0.0 z"/>
+<circle class="run" cx="472.0" cy="101.0" r="3"/>
+<circle class="run" cx="472.0" cy="101.0" r="3"/>
+<circle class="run" cx="472.0" cy="101.0" r="3"/>
+<text class="text" x="482.0" y="105.0">0.0 ms/s</text>
+<text class="text" x="424" y="131.0">Exact</text>
+<path class="exact" d="M472,118 h198.2 a4,4 0 0 1 4,4 v10 a4,4 0 0 1 -4,4 h-198.2 z"/>
+<circle class="run" cx="674.2" cy="127.0" r="3"/>
+<circle class="run" cx="692.0" cy="127.0" r="3"/>
+<circle class="run" cx="662.8" cy="127.0" r="3"/>
+<text class="text" x="702.0" y="131.0">1.6 ms/s</text>
+<line class="axis" x1="472" y1="88" x2="472" y2="140"/>
+<text class="title" x="24" y="190">Longest hitch</text>
+<text class="text" x="24" y="217.0">RN</text>
+<path class="rn" d="M72,204 h0.0 a0.0,0.0 0 0 1 0.0,0.0 v18.0 a0.0,0.0 0 0 1 -0.0,0.0 h-0.0 z"/>
+<circle class="run" cx="72.0" cy="213.0" r="3"/>
+<circle class="run" cx="72.0" cy="213.0" r="3"/>
+<circle class="run" cx="72.0" cy="213.0" r="3"/>
+<text class="text" x="82.0" y="217.0">0.0 ms</text>
+<text class="text" x="24" y="243.0">Exact</text>
+<path class="exact" d="M72,230 h216.0 a4,4 0 0 1 4,4 v10 a4,4 0 0 1 -4,4 h-216.0 z"/>
+<circle class="run" cx="292.0" cy="239.0" r="3"/>
+<circle class="run" cx="292.0" cy="239.0" r="3"/>
+<circle class="run" cx="236.7" cy="239.0" r="3"/>
+<text class="text" x="302.0" y="243.0">16.7 ms</text>
+<line class="axis" x1="72" y1="200" x2="72" y2="252"/>
+<text class="title" x="424" y="190">Peak frames per second (higher is better)</text>
+<text class="text" x="424" y="217.0">RN</text>
+<path class="rn" d="M472,204 h197.7 a4,4 0 0 1 4,4 v10 a4,4 0 0 1 -4,4 h-197.7 z"/>
+<circle class="run" cx="679.2" cy="213.0" r="3"/>
+<circle class="run" cx="673.7" cy="213.0" r="3"/>
+<circle class="run" cx="671.8" cy="213.0" r="3"/>
+<text class="text" x="689.2" y="217.0">110 fps</text>
+<text class="text" x="424" y="243.0">Exact</text>
+<path class="exact" d="M472,230 h205.0 a4,4 0 0 1 4,4 v10 a4,4 0 0 1 -4,4 h-205.0 z"/>
+<circle class="run" cx="692.0" cy="239.0" r="3"/>
+<circle class="run" cx="681.0" cy="239.0" r="3"/>
+<circle class="run" cx="673.7" cy="239.0" r="3"/>
+<text class="text" x="702.0" y="243.0">114 fps</text>
+<line class="axis" x1="472" y1="200" x2="472" y2="252"/>
+</svg>

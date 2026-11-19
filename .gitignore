@@ -79,3 +79,6 @@ coverage/
 
 # Local profiling runs (scripts/profiling); committed logs live in docs/profiling/raw
 profiling-output/
+
+# Local measurement runs (scripts/measure)
+measure-output/
