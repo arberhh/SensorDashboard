@@ -29,6 +29,10 @@ Arber, the owner, is a senior RN/Expo engineer. Don't explain RN basics; explain
   Every color, font size, gap and radius comes from it; no hex or raw pixels in `StyleSheet`.
 - **Tests**: unit tests per util and hook, plus `HomeScreen.integration.test.tsx`. Docs in
   `docs/testing`. Profiling method and raw logs in `docs/profiling`.
+- **Other builds** of the same app live in `apps/<name>/`, for measuring against this one, each
+  with its own toolchain. Root Metro, Jest, tsc, lint and oxfmt skip `apps/`.
+  `apps/sensor-dashboard` is the Expo Exact build (Contract + `app.ts`), run from an Exact
+  checkout at `~/Desktop/Dev/exact`; see its README. A behaviour change here should land there too.
 
 ## Code rules
 

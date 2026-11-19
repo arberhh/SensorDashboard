@@ -1,0 +1,30 @@
+{
+  "host": {
+    "web": {},
+    "ios": {
+      "minimumOS": "17.0",
+      "deviceFamily": [
+        "iphone",
+        "ipad"
+      ],
+      "localNetworking": true
+    }
+  },
+  "deploy": {
+    "store": {
+      "web": "0",
+      "ios": "0"
+    }
+  },
+  "$schema": "../../../exact/scripts/app.schema.json",
+  "name": "SensorDashboard Exact",
+  "short_name": "SensorDashboard Exact",
+  "id": "com.arberhh.sensordashboard.exact",
+  "start_url": "/",
+  "display": "standalone",
+  "app": {
+    "id": "com.arberhh.sensordashboard.exact",
+    "name": "SensorDashboard Exact"
+  },
+  "userInterfaceStyle": "dark"
+}

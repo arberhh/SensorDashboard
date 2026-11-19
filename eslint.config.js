@@ -27,6 +27,7 @@ module.exports = [
       "android/*",
       "ios/*",
       "iot-dashboard-task/*",
+      "apps/**",
       "babel.config.js",
       "metro.config.js",
       "jest.config.js",

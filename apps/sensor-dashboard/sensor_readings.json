@@ -1,0 +1,4502 @@
+[
+  {
+    "id": 1,
+    "name": "Cleanroom Suite 2",
+    "sensorId": "CS2",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 22.33,
+    "deviationPercent": 1.58
+  },
+  {
+    "id": 2,
+    "name": "Warehouse B - Loading Dock",
+    "sensorId": "WB-LD",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 51.17,
+    "deviationPercent": -7.19
+  },
+  {
+    "id": 3,
+    "name": "Greenhouse Bay 7",
+    "sensorId": "GB7",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 30.05,
+    "deviationPercent": -4.64
+  },
+  {
+    "id": 4,
+    "name": "Greenhouse Bay 7",
+    "sensorId": "GB7",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 33.05,
+    "deviationPercent": 5.96
+  },
+  {
+    "id": 5,
+    "name": "Loading Bay Exterior",
+    "sensorId": "LBE",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 70.92,
+    "deviationPercent": -2.42
+  },
+  {
+    "id": 6,
+    "name": "Office Floor 2",
+    "sensorId": "OF2",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 85.38,
+    "deviationPercent": 4.37
+  },
+  {
+    "id": 7,
+    "name": "Rooftop Unit B",
+    "sensorId": "RUB",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 53.93,
+    "deviationPercent": -0.8
+  },
+  {
+    "id": 8,
+    "name": "Cold Storage Room 2",
+    "sensorId": "CSR2",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 80.23,
+    "deviationPercent": -2.05
+  },
+  {
+    "id": 9,
+    "name": "Cleanroom Suite 1",
+    "sensorId": "CS1",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 32.13,
+    "deviationPercent": -0.77
+  },
+  {
+    "id": 10,
+    "name": "Greenhouse Bay 3",
+    "sensorId": "GB3",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 21.58,
+    "deviationPercent": -2.81
+  },
+  {
+    "id": 11,
+    "name": "Cold Storage Room 1",
+    "sensorId": "CSR1",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 84.71,
+    "deviationPercent": -3.09
+  },
+  {
+    "id": 12,
+    "name": "Production Line 4",
+    "sensorId": "PL4",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 78.4,
+    "deviationPercent": -1.7
+  },
+  {
+    "id": 13,
+    "name": "Rooftop Unit A",
+    "sensorId": "RUA",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 30.44,
+    "deviationPercent": 2.85
+  },
+  {
+    "id": 14,
+    "name": "Greenhouse Bay 7",
+    "sensorId": "GB7",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 25.43,
+    "deviationPercent": 0.34
+  },
+  {
+    "id": 15,
+    "name": "Rooftop Unit A",
+    "sensorId": "RUA",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 25.26,
+    "deviationPercent": -2.86
+  },
+  {
+    "id": 16,
+    "name": "Cold Storage Room 2",
+    "sensorId": "CSR2",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 15.62,
+    "deviationPercent": -4.18
+  },
+  {
+    "id": 17,
+    "name": "Server Room North",
+    "sensorId": "SRN",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 27.05,
+    "deviationPercent": -6.55
+  },
+  {
+    "id": 18,
+    "name": "Office Floor 2",
+    "sensorId": "OF2",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 73.48,
+    "deviationPercent": 0.69
+  },
+  {
+    "id": 19,
+    "name": "Server Room North",
+    "sensorId": "SRN",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 32.12,
+    "deviationPercent": -5.64
+  },
+  {
+    "id": 20,
+    "name": "Production Line 1",
+    "sensorId": "PL1",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 25.88,
+    "deviationPercent": 6.05
+  },
+  {
+    "id": 21,
+    "name": "Warehouse A - Zone 1",
+    "sensorId": "WA-Z1",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 19.03,
+    "deviationPercent": 1.64
+  },
+  {
+    "id": 22,
+    "name": "Warehouse A - Zone 1",
+    "sensorId": "WA-Z1",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 26.07,
+    "deviationPercent": 4.41
+  },
+  {
+    "id": 23,
+    "name": "Server Room South",
+    "sensorId": "SRS",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 33.85,
+    "deviationPercent": -6.91
+  },
+  {
+    "id": 24,
+    "name": "Cold Storage Room 2",
+    "sensorId": "CSR2",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 62.61,
+    "deviationPercent": 5.97
+  },
+  {
+    "id": 25,
+    "name": "Cleanroom Suite 2",
+    "sensorId": "CS2",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 22.66,
+    "deviationPercent": 5.56
+  },
+  {
+    "id": 26,
+    "name": "Cleanroom Suite 2",
+    "sensorId": "CS2",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 21.21,
+    "deviationPercent": 4.2
+  },
+  {
+    "id": 27,
+    "name": "Rooftop Unit A",
+    "sensorId": "RUA",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 58.66,
+    "deviationPercent": -0.81
+  },
+  {
+    "id": 28,
+    "name": "Server Room North",
+    "sensorId": "SRN",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 24.56,
+    "deviationPercent": 7.19
+  },
+  {
+    "id": 29,
+    "name": "Cleanroom Suite 1",
+    "sensorId": "CS1",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 86.74,
+    "deviationPercent": 5.13
+  },
+  {
+    "id": 30,
+    "name": "Cleanroom Suite 1",
+    "sensorId": "CS1",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 28.38,
+    "deviationPercent": 2.66
+  },
+  {
+    "id": 31,
+    "name": "Production Line 1",
+    "sensorId": "PL1",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 37.37,
+    "deviationPercent": 2.12
+  },
+  {
+    "id": 32,
+    "name": "Greenhouse Bay 7",
+    "sensorId": "GB7",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 26.1,
+    "deviationPercent": 0.57
+  },
+  {
+    "id": 33,
+    "name": "Rooftop Unit A",
+    "sensorId": "RUA",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 78.13,
+    "deviationPercent": 5.17
+  },
+  {
+    "id": 34,
+    "name": "Office Floor 2",
+    "sensorId": "OF2",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 79.75,
+    "deviationPercent": 7.38
+  },
+  {
+    "id": 35,
+    "name": "Rooftop Unit B",
+    "sensorId": "RUB",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 23.27,
+    "deviationPercent": 7.72
+  },
+  {
+    "id": 36,
+    "name": "Loading Bay Exterior",
+    "sensorId": "LBE",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 23.22,
+    "deviationPercent": -6.47
+  },
+  {
+    "id": 37,
+    "name": "Cold Storage Room 2",
+    "sensorId": "CSR2",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 32.31,
+    "deviationPercent": -7.85
+  },
+  {
+    "id": 38,
+    "name": "Rooftop Unit B",
+    "sensorId": "RUB",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 31.48,
+    "deviationPercent": 6.27
+  },
+  {
+    "id": 39,
+    "name": "Rooftop Unit A",
+    "sensorId": "RUA",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 22.5,
+    "deviationPercent": -5.15
+  },
+  {
+    "id": 40,
+    "name": "Server Room North",
+    "sensorId": "SRN",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 25.32,
+    "deviationPercent": -3.24
+  },
+  {
+    "id": 41,
+    "name": "Basement Archive",
+    "sensorId": "BA",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 22.42,
+    "deviationPercent": -6.2
+  },
+  {
+    "id": 42,
+    "name": "Loading Bay Exterior",
+    "sensorId": "LBE",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 72.57,
+    "deviationPercent": -4.69
+  },
+  {
+    "id": 43,
+    "name": "Cold Storage Room 1",
+    "sensorId": "CSR1",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 22.39,
+    "deviationPercent": -0.22
+  },
+  {
+    "id": 44,
+    "name": "Warehouse B - Loading Dock",
+    "sensorId": "WB-LD",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 66.81,
+    "deviationPercent": -4.31
+  },
+  {
+    "id": 45,
+    "name": "Rooftop Unit B",
+    "sensorId": "RUB",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 31.55,
+    "deviationPercent": 2.43
+  },
+  {
+    "id": 46,
+    "name": "Production Line 1",
+    "sensorId": "PL1",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 26.53,
+    "deviationPercent": 2.92
+  },
+  {
+    "id": 47,
+    "name": "Office Floor 5",
+    "sensorId": "OF5",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 49.12,
+    "deviationPercent": 1.59
+  },
+  {
+    "id": 48,
+    "name": "Warehouse B - Loading Dock",
+    "sensorId": "WB-LD",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 26.15,
+    "deviationPercent": -5.13
+  },
+  {
+    "id": 49,
+    "name": "Basement Archive",
+    "sensorId": "BA",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 33.5,
+    "deviationPercent": 2.96
+  },
+  {
+    "id": 50,
+    "name": "Greenhouse Bay 7",
+    "sensorId": "GB7",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 32.96,
+    "deviationPercent": 1.33
+  },
+  {
+    "id": 51,
+    "name": "Cleanroom Suite 2",
+    "sensorId": "CS2",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 65.21,
+    "deviationPercent": 3.77
+  },
+  {
+    "id": 52,
+    "name": "Server Room South",
+    "sensorId": "SRS",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 20.85,
+    "deviationPercent": -1.48
+  },
+  {
+    "id": 53,
+    "name": "Basement Archive",
+    "sensorId": "BA",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 42.25,
+    "deviationPercent": -5.49
+  },
+  {
+    "id": 54,
+    "name": "Office Floor 2",
+    "sensorId": "OF2",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 20.93,
+    "deviationPercent": 0.41
+  },
+  {
+    "id": 55,
+    "name": "Office Floor 2",
+    "sensorId": "OF2",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 74.39,
+    "deviationPercent": 3.06
+  },
+  {
+    "id": 56,
+    "name": "Cold Storage Room 2",
+    "sensorId": "CSR2",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 28.4,
+    "deviationPercent": -5.47
+  },
+  {
+    "id": 57,
+    "name": "Packaging Line 2",
+    "sensorId": "PL2",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 85.58,
+    "deviationPercent": 6.34
+  },
+  {
+    "id": 58,
+    "name": "Warehouse A - Zone 2",
+    "sensorId": "WA-Z2",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 26.83,
+    "deviationPercent": 6.76
+  },
+  {
+    "id": 59,
+    "name": "Office Floor 5",
+    "sensorId": "OF5",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 66.08,
+    "deviationPercent": -6.64
+  },
+  {
+    "id": 60,
+    "name": "Warehouse A - Zone 1",
+    "sensorId": "WA-Z1",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 29.62,
+    "deviationPercent": 6.8
+  },
+  {
+    "id": 61,
+    "name": "Greenhouse Bay 3",
+    "sensorId": "GB3",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 89.33,
+    "deviationPercent": 2.31
+  },
+  {
+    "id": 62,
+    "name": "Office Floor 2",
+    "sensorId": "OF2",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 77.95,
+    "deviationPercent": 2.37
+  },
+  {
+    "id": 63,
+    "name": "Greenhouse Bay 3",
+    "sensorId": "GB3",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 77.81,
+    "deviationPercent": 7.22
+  },
+  {
+    "id": 64,
+    "name": "Warehouse B - Loading Dock",
+    "sensorId": "WB-LD",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 77.88,
+    "deviationPercent": 6.5
+  },
+  {
+    "id": 65,
+    "name": "Server Room North",
+    "sensorId": "SRN",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 59.63,
+    "deviationPercent": -4
+  },
+  {
+    "id": 66,
+    "name": "Warehouse A - Zone 1",
+    "sensorId": "WA-Z1",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 32.26,
+    "deviationPercent": 4.83
+  },
+  {
+    "id": 67,
+    "name": "Office Floor 2",
+    "sensorId": "OF2",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 44.95,
+    "deviationPercent": 1.4
+  },
+  {
+    "id": 68,
+    "name": "Server Room North",
+    "sensorId": "SRN",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 27.5,
+    "deviationPercent": 0.81
+  },
+  {
+    "id": 69,
+    "name": "Packaging Line 2",
+    "sensorId": "PL2",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 16.97,
+    "deviationPercent": 2.35
+  },
+  {
+    "id": 70,
+    "name": "Loading Bay Exterior",
+    "sensorId": "LBE",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 70.11,
+    "deviationPercent": -2.12
+  },
+  {
+    "id": 71,
+    "name": "Packaging Line 2",
+    "sensorId": "PL2",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 24.99,
+    "deviationPercent": 1.57
+  },
+  {
+    "id": 72,
+    "name": "Cleanroom Suite 2",
+    "sensorId": "CS2",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 58.53,
+    "deviationPercent": -7.64
+  },
+  {
+    "id": 73,
+    "name": "Loading Bay Exterior",
+    "sensorId": "LBE",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 57.79,
+    "deviationPercent": -3.47
+  },
+  {
+    "id": 74,
+    "name": "Rooftop Unit A",
+    "sensorId": "RUA",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 27.6,
+    "deviationPercent": 4.46
+  },
+  {
+    "id": 75,
+    "name": "Greenhouse Bay 7",
+    "sensorId": "GB7",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 36.34,
+    "deviationPercent": -2.46
+  },
+  {
+    "id": 76,
+    "name": "Server Room South",
+    "sensorId": "SRS",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 25.43,
+    "deviationPercent": -2.25
+  },
+  {
+    "id": 77,
+    "name": "Warehouse A - Zone 1",
+    "sensorId": "WA-Z1",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 59.98,
+    "deviationPercent": -6.57
+  },
+  {
+    "id": 78,
+    "name": "Loading Bay Exterior",
+    "sensorId": "LBE",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 53.74,
+    "deviationPercent": 5.08
+  },
+  {
+    "id": 79,
+    "name": "Warehouse A - Zone 1",
+    "sensorId": "WA-Z1",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 22.88,
+    "deviationPercent": -5.86
+  },
+  {
+    "id": 80,
+    "name": "Rooftop Unit A",
+    "sensorId": "RUA",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 26.25,
+    "deviationPercent": 2.55
+  },
+  {
+    "id": 81,
+    "name": "Warehouse A - Zone 1",
+    "sensorId": "WA-Z1",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 25.21,
+    "deviationPercent": 0.06
+  },
+  {
+    "id": 82,
+    "name": "Cold Storage Room 1",
+    "sensorId": "CSR1",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 83.91,
+    "deviationPercent": -6.9
+  },
+  {
+    "id": 83,
+    "name": "Basement Archive",
+    "sensorId": "BA",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 38.67,
+    "deviationPercent": -8
+  },
+  {
+    "id": 84,
+    "name": "Warehouse B - Loading Dock",
+    "sensorId": "WB-LD",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 23.24,
+    "deviationPercent": 1.04
+  },
+  {
+    "id": 85,
+    "name": "Office Floor 5",
+    "sensorId": "OF5",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 38.1,
+    "deviationPercent": -6.33
+  },
+  {
+    "id": 86,
+    "name": "Warehouse A - Zone 2",
+    "sensorId": "WA-Z2",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 22.58,
+    "deviationPercent": -7.27
+  },
+  {
+    "id": 87,
+    "name": "Warehouse B - Loading Dock",
+    "sensorId": "WB-LD",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 33.92,
+    "deviationPercent": -2.81
+  },
+  {
+    "id": 88,
+    "name": "Server Room North",
+    "sensorId": "SRN",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 33.96,
+    "deviationPercent": -1.15
+  },
+  {
+    "id": 89,
+    "name": "Cold Storage Room 1",
+    "sensorId": "CSR1",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 71.11,
+    "deviationPercent": 0.84
+  },
+  {
+    "id": 90,
+    "name": "Warehouse B - Loading Dock",
+    "sensorId": "WB-LD",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 21.97,
+    "deviationPercent": 7.45
+  },
+  {
+    "id": 91,
+    "name": "Cold Storage Room 1",
+    "sensorId": "CSR1",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 26.96,
+    "deviationPercent": -4.69
+  },
+  {
+    "id": 92,
+    "name": "Warehouse A - Zone 2",
+    "sensorId": "WA-Z2",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 33.32,
+    "deviationPercent": -0.11
+  },
+  {
+    "id": 93,
+    "name": "Office Floor 2",
+    "sensorId": "OF2",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 19.68,
+    "deviationPercent": -3.24
+  },
+  {
+    "id": 94,
+    "name": "Warehouse B - Loading Dock",
+    "sensorId": "WB-LD",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 16.96,
+    "deviationPercent": 3.48
+  },
+  {
+    "id": 95,
+    "name": "Basement Archive",
+    "sensorId": "BA",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 33.58,
+    "deviationPercent": 3.3
+  },
+  {
+    "id": 96,
+    "name": "Office Floor 5",
+    "sensorId": "OF5",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 29.16,
+    "deviationPercent": -7.72
+  },
+  {
+    "id": 97,
+    "name": "Production Line 4",
+    "sensorId": "PL4",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 21.87,
+    "deviationPercent": -2.55
+  },
+  {
+    "id": 98,
+    "name": "Server Room North",
+    "sensorId": "SRN",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 50.98,
+    "deviationPercent": 2.19
+  },
+  {
+    "id": 99,
+    "name": "Greenhouse Bay 3",
+    "sensorId": "GB3",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 17.86,
+    "deviationPercent": -0.84
+  },
+  {
+    "id": 100,
+    "name": "Production Line 4",
+    "sensorId": "PL4",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 32.5,
+    "deviationPercent": 3.87
+  },
+  {
+    "id": 101,
+    "name": "Server Room South",
+    "sensorId": "SRS",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 34.29,
+    "deviationPercent": 3.41
+  },
+  {
+    "id": 102,
+    "name": "Packaging Line 2",
+    "sensorId": "PL2",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 25.41,
+    "deviationPercent": 2.92
+  },
+  {
+    "id": 103,
+    "name": "Warehouse B - Loading Dock",
+    "sensorId": "WB-LD",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 21.72,
+    "deviationPercent": 0.41
+  },
+  {
+    "id": 104,
+    "name": "Cold Storage Room 1",
+    "sensorId": "CSR1",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 45.88,
+    "deviationPercent": -7.08
+  },
+  {
+    "id": 105,
+    "name": "Basement Archive",
+    "sensorId": "BA",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 62.97,
+    "deviationPercent": -7.36
+  },
+  {
+    "id": 106,
+    "name": "Warehouse B - Loading Dock",
+    "sensorId": "WB-LD",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 28.33,
+    "deviationPercent": 1.07
+  },
+  {
+    "id": 107,
+    "name": "Cleanroom Suite 1",
+    "sensorId": "CS1",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 81.73,
+    "deviationPercent": -0.14
+  },
+  {
+    "id": 108,
+    "name": "Warehouse A - Zone 2",
+    "sensorId": "WA-Z2",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 23.97,
+    "deviationPercent": 0.82
+  },
+  {
+    "id": 109,
+    "name": "Rooftop Unit B",
+    "sensorId": "RUB",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 51.89,
+    "deviationPercent": 7.76
+  },
+  {
+    "id": 110,
+    "name": "Greenhouse Bay 7",
+    "sensorId": "GB7",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 43.27,
+    "deviationPercent": 4.65
+  },
+  {
+    "id": 111,
+    "name": "Packaging Line 2",
+    "sensorId": "PL2",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 44.12,
+    "deviationPercent": -2.46
+  },
+  {
+    "id": 112,
+    "name": "Basement Archive",
+    "sensorId": "BA",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 23.36,
+    "deviationPercent": -6.74
+  },
+  {
+    "id": 113,
+    "name": "Office Floor 2",
+    "sensorId": "OF2",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 33.25,
+    "deviationPercent": 3.05
+  },
+  {
+    "id": 114,
+    "name": "Cleanroom Suite 1",
+    "sensorId": "CS1",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 30.76,
+    "deviationPercent": -1.01
+  },
+  {
+    "id": 115,
+    "name": "Office Floor 5",
+    "sensorId": "OF5",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 19.79,
+    "deviationPercent": -5.78
+  },
+  {
+    "id": 116,
+    "name": "Server Room North",
+    "sensorId": "SRN",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 61.25,
+    "deviationPercent": 0.43
+  },
+  {
+    "id": 117,
+    "name": "Production Line 1",
+    "sensorId": "PL1",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 25.16,
+    "deviationPercent": -2.3
+  },
+  {
+    "id": 118,
+    "name": "Rooftop Unit B",
+    "sensorId": "RUB",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 53.96,
+    "deviationPercent": 5.32
+  },
+  {
+    "id": 119,
+    "name": "Warehouse B - Loading Dock",
+    "sensorId": "WB-LD",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 79.57,
+    "deviationPercent": -3.81
+  },
+  {
+    "id": 120,
+    "name": "Warehouse A - Zone 1",
+    "sensorId": "WA-Z1",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 56.97,
+    "deviationPercent": -2.14
+  },
+  {
+    "id": 121,
+    "name": "Loading Bay Exterior",
+    "sensorId": "LBE",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 17.96,
+    "deviationPercent": -4.77
+  },
+  {
+    "id": 122,
+    "name": "Office Floor 5",
+    "sensorId": "OF5",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 36.35,
+    "deviationPercent": -2.79
+  },
+  {
+    "id": 123,
+    "name": "Basement Archive",
+    "sensorId": "BA",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 62.68,
+    "deviationPercent": -0.43
+  },
+  {
+    "id": 124,
+    "name": "Cleanroom Suite 2",
+    "sensorId": "CS2",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 24.74,
+    "deviationPercent": 3.27
+  },
+  {
+    "id": 125,
+    "name": "Office Floor 5",
+    "sensorId": "OF5",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 85.48,
+    "deviationPercent": -4.87
+  },
+  {
+    "id": 126,
+    "name": "Cold Storage Room 2",
+    "sensorId": "CSR2",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 25.69,
+    "deviationPercent": -4.52
+  },
+  {
+    "id": 127,
+    "name": "Office Floor 2",
+    "sensorId": "OF2",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 38.4,
+    "deviationPercent": 7.07
+  },
+  {
+    "id": 128,
+    "name": "Production Line 1",
+    "sensorId": "PL1",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 71.6,
+    "deviationPercent": -6.23
+  },
+  {
+    "id": 129,
+    "name": "Rooftop Unit B",
+    "sensorId": "RUB",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 49.4,
+    "deviationPercent": 6.08
+  },
+  {
+    "id": 130,
+    "name": "Greenhouse Bay 7",
+    "sensorId": "GB7",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 86.85,
+    "deviationPercent": 3.81
+  },
+  {
+    "id": 131,
+    "name": "Cold Storage Room 1",
+    "sensorId": "CSR1",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 83.14,
+    "deviationPercent": 0.03
+  },
+  {
+    "id": 132,
+    "name": "Cold Storage Room 1",
+    "sensorId": "CSR1",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 29.58,
+    "deviationPercent": 7.94
+  },
+  {
+    "id": 133,
+    "name": "Server Room South",
+    "sensorId": "SRS",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 35.41,
+    "deviationPercent": 2.38
+  },
+  {
+    "id": 134,
+    "name": "Basement Archive",
+    "sensorId": "BA",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 30.32,
+    "deviationPercent": 1.26
+  },
+  {
+    "id": 135,
+    "name": "Rooftop Unit A",
+    "sensorId": "RUA",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 84.8,
+    "deviationPercent": -0.33
+  },
+  {
+    "id": 136,
+    "name": "Cold Storage Room 2",
+    "sensorId": "CSR2",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 23.28,
+    "deviationPercent": -4.91
+  },
+  {
+    "id": 137,
+    "name": "Production Line 1",
+    "sensorId": "PL1",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 25.25,
+    "deviationPercent": 0.68
+  },
+  {
+    "id": 138,
+    "name": "Warehouse A - Zone 1",
+    "sensorId": "WA-Z1",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 86.13,
+    "deviationPercent": 2.97
+  },
+  {
+    "id": 139,
+    "name": "Greenhouse Bay 7",
+    "sensorId": "GB7",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 37.87,
+    "deviationPercent": -5.67
+  },
+  {
+    "id": 140,
+    "name": "Cold Storage Room 2",
+    "sensorId": "CSR2",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 33.45,
+    "deviationPercent": 3.57
+  },
+  {
+    "id": 141,
+    "name": "Production Line 1",
+    "sensorId": "PL1",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 77.96,
+    "deviationPercent": -0.51
+  },
+  {
+    "id": 142,
+    "name": "Server Room North",
+    "sensorId": "SRN",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 25.01,
+    "deviationPercent": -4.11
+  },
+  {
+    "id": 143,
+    "name": "Warehouse A - Zone 2",
+    "sensorId": "WA-Z2",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 49.37,
+    "deviationPercent": 4.56
+  },
+  {
+    "id": 144,
+    "name": "Cold Storage Room 1",
+    "sensorId": "CSR1",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 58.98,
+    "deviationPercent": 5.58
+  },
+  {
+    "id": 145,
+    "name": "Loading Bay Exterior",
+    "sensorId": "LBE",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 72.25,
+    "deviationPercent": -6.23
+  },
+  {
+    "id": 146,
+    "name": "Server Room North",
+    "sensorId": "SRN",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 89.45,
+    "deviationPercent": -7.25
+  },
+  {
+    "id": 147,
+    "name": "Cleanroom Suite 2",
+    "sensorId": "CS2",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 50.75,
+    "deviationPercent": 2.14
+  },
+  {
+    "id": 148,
+    "name": "Packaging Line 2",
+    "sensorId": "PL2",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 84.93,
+    "deviationPercent": -0.94
+  },
+  {
+    "id": 149,
+    "name": "Warehouse B - Loading Dock",
+    "sensorId": "WB-LD",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 20.88,
+    "deviationPercent": -0.72
+  },
+  {
+    "id": 150,
+    "name": "Production Line 4",
+    "sensorId": "PL4",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 73.16,
+    "deviationPercent": 7.85
+  },
+  {
+    "id": 151,
+    "name": "Rooftop Unit A",
+    "sensorId": "RUA",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 19.99,
+    "deviationPercent": -3.18
+  },
+  {
+    "id": 152,
+    "name": "Greenhouse Bay 3",
+    "sensorId": "GB3",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 21.92,
+    "deviationPercent": -1.01
+  },
+  {
+    "id": 153,
+    "name": "Cold Storage Room 1",
+    "sensorId": "CSR1",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 16.26,
+    "deviationPercent": -2.82
+  },
+  {
+    "id": 154,
+    "name": "Rooftop Unit A",
+    "sensorId": "RUA",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 43.07,
+    "deviationPercent": -4.44
+  },
+  {
+    "id": 155,
+    "name": "Greenhouse Bay 3",
+    "sensorId": "GB3",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 22.25,
+    "deviationPercent": 6.57
+  },
+  {
+    "id": 156,
+    "name": "Basement Archive",
+    "sensorId": "BA",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 74.11,
+    "deviationPercent": 0.63
+  },
+  {
+    "id": 157,
+    "name": "Greenhouse Bay 3",
+    "sensorId": "GB3",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 31.79,
+    "deviationPercent": -1.36
+  },
+  {
+    "id": 158,
+    "name": "Greenhouse Bay 3",
+    "sensorId": "GB3",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 22.81,
+    "deviationPercent": 0.53
+  },
+  {
+    "id": 159,
+    "name": "Cleanroom Suite 1",
+    "sensorId": "CS1",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 57.5,
+    "deviationPercent": -1.57
+  },
+  {
+    "id": 160,
+    "name": "Production Line 1",
+    "sensorId": "PL1",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 62.35,
+    "deviationPercent": -4.96
+  },
+  {
+    "id": 161,
+    "name": "Server Room North",
+    "sensorId": "SRN",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 37.39,
+    "deviationPercent": 5.43
+  },
+  {
+    "id": 162,
+    "name": "Rooftop Unit B",
+    "sensorId": "RUB",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 31.89,
+    "deviationPercent": 7.68
+  },
+  {
+    "id": 163,
+    "name": "Office Floor 2",
+    "sensorId": "OF2",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 59.98,
+    "deviationPercent": 3.46
+  },
+  {
+    "id": 164,
+    "name": "Loading Bay Exterior",
+    "sensorId": "LBE",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 32.06,
+    "deviationPercent": -6.23
+  },
+  {
+    "id": 165,
+    "name": "Office Floor 5",
+    "sensorId": "OF5",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 17.68,
+    "deviationPercent": 3.89
+  },
+  {
+    "id": 166,
+    "name": "Warehouse A - Zone 1",
+    "sensorId": "WA-Z1",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 84.34,
+    "deviationPercent": 4.14
+  },
+  {
+    "id": 167,
+    "name": "Warehouse A - Zone 2",
+    "sensorId": "WA-Z2",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 31.47,
+    "deviationPercent": 2.46
+  },
+  {
+    "id": 168,
+    "name": "Warehouse A - Zone 1",
+    "sensorId": "WA-Z1",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 28.6,
+    "deviationPercent": 7.8
+  },
+  {
+    "id": 169,
+    "name": "Warehouse A - Zone 1",
+    "sensorId": "WA-Z1",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 34.81,
+    "deviationPercent": -6.72
+  },
+  {
+    "id": 170,
+    "name": "Cold Storage Room 2",
+    "sensorId": "CSR2",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 42.87,
+    "deviationPercent": 1.56
+  },
+  {
+    "id": 171,
+    "name": "Server Room South",
+    "sensorId": "SRS",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 30.03,
+    "deviationPercent": -2.77
+  },
+  {
+    "id": 172,
+    "name": "Warehouse A - Zone 1",
+    "sensorId": "WA-Z1",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 16.95,
+    "deviationPercent": 1.72
+  },
+  {
+    "id": 173,
+    "name": "Greenhouse Bay 3",
+    "sensorId": "GB3",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 56.75,
+    "deviationPercent": -6.21
+  },
+  {
+    "id": 174,
+    "name": "Greenhouse Bay 3",
+    "sensorId": "GB3",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 15.94,
+    "deviationPercent": -3.4
+  },
+  {
+    "id": 175,
+    "name": "Warehouse A - Zone 1",
+    "sensorId": "WA-Z1",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 86.28,
+    "deviationPercent": 2.79
+  },
+  {
+    "id": 176,
+    "name": "Cleanroom Suite 1",
+    "sensorId": "CS1",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 19.05,
+    "deviationPercent": -6.75
+  },
+  {
+    "id": 177,
+    "name": "Loading Bay Exterior",
+    "sensorId": "LBE",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 29.53,
+    "deviationPercent": -1.08
+  },
+  {
+    "id": 178,
+    "name": "Rooftop Unit B",
+    "sensorId": "RUB",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 49.32,
+    "deviationPercent": 6.46
+  },
+  {
+    "id": 179,
+    "name": "Cold Storage Room 1",
+    "sensorId": "CSR1",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 64.69,
+    "deviationPercent": 6.13
+  },
+  {
+    "id": 180,
+    "name": "Rooftop Unit B",
+    "sensorId": "RUB",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 39.03,
+    "deviationPercent": -2.76
+  },
+  {
+    "id": 181,
+    "name": "Server Room South",
+    "sensorId": "SRS",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 72.71,
+    "deviationPercent": 1.11
+  },
+  {
+    "id": 182,
+    "name": "Warehouse A - Zone 2",
+    "sensorId": "WA-Z2",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 30.64,
+    "deviationPercent": 1.58
+  },
+  {
+    "id": 183,
+    "name": "Office Floor 2",
+    "sensorId": "OF2",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 18.28,
+    "deviationPercent": -3.18
+  },
+  {
+    "id": 184,
+    "name": "Server Room South",
+    "sensorId": "SRS",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 66.52,
+    "deviationPercent": 6.44
+  },
+  {
+    "id": 185,
+    "name": "Office Floor 2",
+    "sensorId": "OF2",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 89.78,
+    "deviationPercent": 5.25
+  },
+  {
+    "id": 186,
+    "name": "Cold Storage Room 1",
+    "sensorId": "CSR1",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 79.72,
+    "deviationPercent": -5.75
+  },
+  {
+    "id": 187,
+    "name": "Office Floor 2",
+    "sensorId": "OF2",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 20.53,
+    "deviationPercent": 5.67
+  },
+  {
+    "id": 188,
+    "name": "Greenhouse Bay 7",
+    "sensorId": "GB7",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 15.09,
+    "deviationPercent": 0.46
+  },
+  {
+    "id": 189,
+    "name": "Office Floor 2",
+    "sensorId": "OF2",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 19.96,
+    "deviationPercent": 6.9
+  },
+  {
+    "id": 190,
+    "name": "Warehouse A - Zone 2",
+    "sensorId": "WA-Z2",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 47.12,
+    "deviationPercent": 0.4
+  },
+  {
+    "id": 191,
+    "name": "Office Floor 2",
+    "sensorId": "OF2",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 18.15,
+    "deviationPercent": -1.52
+  },
+  {
+    "id": 192,
+    "name": "Loading Bay Exterior",
+    "sensorId": "LBE",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 39.85,
+    "deviationPercent": -4.33
+  },
+  {
+    "id": 193,
+    "name": "Cleanroom Suite 2",
+    "sensorId": "CS2",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 29.95,
+    "deviationPercent": 2.29
+  },
+  {
+    "id": 194,
+    "name": "Greenhouse Bay 3",
+    "sensorId": "GB3",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 27.64,
+    "deviationPercent": -0.99
+  },
+  {
+    "id": 195,
+    "name": "Server Room North",
+    "sensorId": "SRN",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 67.19,
+    "deviationPercent": -5.53
+  },
+  {
+    "id": 196,
+    "name": "Cold Storage Room 1",
+    "sensorId": "CSR1",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 51.72,
+    "deviationPercent": 6.76
+  },
+  {
+    "id": 197,
+    "name": "Production Line 4",
+    "sensorId": "PL4",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 16.88,
+    "deviationPercent": -0.12
+  },
+  {
+    "id": 198,
+    "name": "Rooftop Unit B",
+    "sensorId": "RUB",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 26.37,
+    "deviationPercent": 3.79
+  },
+  {
+    "id": 199,
+    "name": "Warehouse A - Zone 1",
+    "sensorId": "WA-Z1",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 53.69,
+    "deviationPercent": -4.61
+  },
+  {
+    "id": 200,
+    "name": "Cold Storage Room 1",
+    "sensorId": "CSR1",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 38.43,
+    "deviationPercent": 4.91
+  },
+  {
+    "id": 201,
+    "name": "Packaging Line 2",
+    "sensorId": "PL2",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 32.58,
+    "deviationPercent": -6.54
+  },
+  {
+    "id": 202,
+    "name": "Server Room North",
+    "sensorId": "SRN",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 85.82,
+    "deviationPercent": -5.36
+  },
+  {
+    "id": 203,
+    "name": "Loading Bay Exterior",
+    "sensorId": "LBE",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 18.47,
+    "deviationPercent": 0.44
+  },
+  {
+    "id": 204,
+    "name": "Basement Archive",
+    "sensorId": "BA",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 20.8,
+    "deviationPercent": 2.02
+  },
+  {
+    "id": 205,
+    "name": "Greenhouse Bay 3",
+    "sensorId": "GB3",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 29.99,
+    "deviationPercent": 4.92
+  },
+  {
+    "id": 206,
+    "name": "Warehouse A - Zone 1",
+    "sensorId": "WA-Z1",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 31.94,
+    "deviationPercent": -2.38
+  },
+  {
+    "id": 207,
+    "name": "Server Room North",
+    "sensorId": "SRN",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 19.35,
+    "deviationPercent": 6.79
+  },
+  {
+    "id": 208,
+    "name": "Warehouse B - Loading Dock",
+    "sensorId": "WB-LD",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 89.56,
+    "deviationPercent": -5.89
+  },
+  {
+    "id": 209,
+    "name": "Warehouse A - Zone 1",
+    "sensorId": "WA-Z1",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 88.06,
+    "deviationPercent": 4.07
+  },
+  {
+    "id": 210,
+    "name": "Cold Storage Room 2",
+    "sensorId": "CSR2",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 74.69,
+    "deviationPercent": -2.47
+  },
+  {
+    "id": 211,
+    "name": "Packaging Line 2",
+    "sensorId": "PL2",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 82.91,
+    "deviationPercent": -0.62
+  },
+  {
+    "id": 212,
+    "name": "Cleanroom Suite 1",
+    "sensorId": "CS1",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 20.17,
+    "deviationPercent": -2.65
+  },
+  {
+    "id": 213,
+    "name": "Office Floor 2",
+    "sensorId": "OF2",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 24.06,
+    "deviationPercent": -4.46
+  },
+  {
+    "id": 214,
+    "name": "Greenhouse Bay 7",
+    "sensorId": "GB7",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 22.3,
+    "deviationPercent": -6.34
+  },
+  {
+    "id": 215,
+    "name": "Office Floor 5",
+    "sensorId": "OF5",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 19.14,
+    "deviationPercent": 2.6
+  },
+  {
+    "id": 216,
+    "name": "Cleanroom Suite 1",
+    "sensorId": "CS1",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 69.82,
+    "deviationPercent": -3.42
+  },
+  {
+    "id": 217,
+    "name": "Office Floor 2",
+    "sensorId": "OF2",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 17.57,
+    "deviationPercent": 6.61
+  },
+  {
+    "id": 218,
+    "name": "Cleanroom Suite 2",
+    "sensorId": "CS2",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 36.82,
+    "deviationPercent": 5.17
+  },
+  {
+    "id": 219,
+    "name": "Warehouse A - Zone 2",
+    "sensorId": "WA-Z2",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 27.21,
+    "deviationPercent": -2.44
+  },
+  {
+    "id": 220,
+    "name": "Cleanroom Suite 1",
+    "sensorId": "CS1",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 52.26,
+    "deviationPercent": -6.98
+  },
+  {
+    "id": 221,
+    "name": "Server Room North",
+    "sensorId": "SRN",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 31.1,
+    "deviationPercent": -4.01
+  },
+  {
+    "id": 222,
+    "name": "Server Room South",
+    "sensorId": "SRS",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 23.82,
+    "deviationPercent": -1.6
+  },
+  {
+    "id": 223,
+    "name": "Cleanroom Suite 2",
+    "sensorId": "CS2",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 27.91,
+    "deviationPercent": -7.82
+  },
+  {
+    "id": 224,
+    "name": "Warehouse B - Loading Dock",
+    "sensorId": "WB-LD",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 86.22,
+    "deviationPercent": 3.79
+  },
+  {
+    "id": 225,
+    "name": "Server Room South",
+    "sensorId": "SRS",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 83.01,
+    "deviationPercent": 3.74
+  },
+  {
+    "id": 226,
+    "name": "Warehouse B - Loading Dock",
+    "sensorId": "WB-LD",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 68.1,
+    "deviationPercent": -2.5
+  },
+  {
+    "id": 227,
+    "name": "Production Line 4",
+    "sensorId": "PL4",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 20.62,
+    "deviationPercent": 2.74
+  },
+  {
+    "id": 228,
+    "name": "Warehouse A - Zone 1",
+    "sensorId": "WA-Z1",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 20.16,
+    "deviationPercent": -7
+  },
+  {
+    "id": 229,
+    "name": "Greenhouse Bay 7",
+    "sensorId": "GB7",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 18.59,
+    "deviationPercent": 6.95
+  },
+  {
+    "id": 230,
+    "name": "Packaging Line 2",
+    "sensorId": "PL2",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 18.93,
+    "deviationPercent": -2.37
+  },
+  {
+    "id": 231,
+    "name": "Production Line 4",
+    "sensorId": "PL4",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 18.63,
+    "deviationPercent": 4.94
+  },
+  {
+    "id": 232,
+    "name": "Greenhouse Bay 3",
+    "sensorId": "GB3",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 25.14,
+    "deviationPercent": 5.57
+  },
+  {
+    "id": 233,
+    "name": "Rooftop Unit B",
+    "sensorId": "RUB",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 79.55,
+    "deviationPercent": -1.2
+  },
+  {
+    "id": 234,
+    "name": "Warehouse A - Zone 2",
+    "sensorId": "WA-Z2",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 33.43,
+    "deviationPercent": -7
+  },
+  {
+    "id": 235,
+    "name": "Server Room North",
+    "sensorId": "SRN",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 16.05,
+    "deviationPercent": -0.36
+  },
+  {
+    "id": 236,
+    "name": "Basement Archive",
+    "sensorId": "BA",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 34.3,
+    "deviationPercent": -4.77
+  },
+  {
+    "id": 237,
+    "name": "Office Floor 5",
+    "sensorId": "OF5",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 59.45,
+    "deviationPercent": -5.13
+  },
+  {
+    "id": 238,
+    "name": "Basement Archive",
+    "sensorId": "BA",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 15.32,
+    "deviationPercent": 7.45
+  },
+  {
+    "id": 239,
+    "name": "Cold Storage Room 2",
+    "sensorId": "CSR2",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 68.57,
+    "deviationPercent": -2.16
+  },
+  {
+    "id": 240,
+    "name": "Packaging Line 2",
+    "sensorId": "PL2",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 26.62,
+    "deviationPercent": -4.63
+  },
+  {
+    "id": 241,
+    "name": "Cold Storage Room 2",
+    "sensorId": "CSR2",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 73.68,
+    "deviationPercent": -2.5
+  },
+  {
+    "id": 242,
+    "name": "Packaging Line 2",
+    "sensorId": "PL2",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 43.76,
+    "deviationPercent": -0.36
+  },
+  {
+    "id": 243,
+    "name": "Rooftop Unit A",
+    "sensorId": "RUA",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 25.37,
+    "deviationPercent": 1.83
+  },
+  {
+    "id": 244,
+    "name": "Warehouse A - Zone 1",
+    "sensorId": "WA-Z1",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 29.39,
+    "deviationPercent": -4
+  },
+  {
+    "id": 245,
+    "name": "Warehouse A - Zone 1",
+    "sensorId": "WA-Z1",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 19.58,
+    "deviationPercent": -3.49
+  },
+  {
+    "id": 246,
+    "name": "Greenhouse Bay 7",
+    "sensorId": "GB7",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 32.42,
+    "deviationPercent": 1.71
+  },
+  {
+    "id": 247,
+    "name": "Cold Storage Room 2",
+    "sensorId": "CSR2",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 86.59,
+    "deviationPercent": -5.93
+  },
+  {
+    "id": 248,
+    "name": "Rooftop Unit B",
+    "sensorId": "RUB",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 28.37,
+    "deviationPercent": -6.19
+  },
+  {
+    "id": 249,
+    "name": "Server Room South",
+    "sensorId": "SRS",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 27.24,
+    "deviationPercent": 3.58
+  },
+  {
+    "id": 250,
+    "name": "Office Floor 5",
+    "sensorId": "OF5",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 28.04,
+    "deviationPercent": -0.66
+  },
+  {
+    "id": 251,
+    "name": "Warehouse A - Zone 1",
+    "sensorId": "WA-Z1",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 24.4,
+    "deviationPercent": -7.28
+  },
+  {
+    "id": 252,
+    "name": "Warehouse B - Loading Dock",
+    "sensorId": "WB-LD",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 65.17,
+    "deviationPercent": 3.66
+  },
+  {
+    "id": 253,
+    "name": "Warehouse A - Zone 2",
+    "sensorId": "WA-Z2",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 21.1,
+    "deviationPercent": 5.06
+  },
+  {
+    "id": 254,
+    "name": "Office Floor 5",
+    "sensorId": "OF5",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 21.88,
+    "deviationPercent": 5.69
+  },
+  {
+    "id": 255,
+    "name": "Packaging Line 2",
+    "sensorId": "PL2",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 32.39,
+    "deviationPercent": 4.87
+  },
+  {
+    "id": 256,
+    "name": "Office Floor 2",
+    "sensorId": "OF2",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 32,
+    "deviationPercent": -0.37
+  },
+  {
+    "id": 257,
+    "name": "Rooftop Unit B",
+    "sensorId": "RUB",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 70.48,
+    "deviationPercent": 2.78
+  },
+  {
+    "id": 258,
+    "name": "Greenhouse Bay 3",
+    "sensorId": "GB3",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 60.59,
+    "deviationPercent": 7.53
+  },
+  {
+    "id": 259,
+    "name": "Cleanroom Suite 1",
+    "sensorId": "CS1",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 39.96,
+    "deviationPercent": -0.66
+  },
+  {
+    "id": 260,
+    "name": "Server Room North",
+    "sensorId": "SRN",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 83.44,
+    "deviationPercent": 7.31
+  },
+  {
+    "id": 261,
+    "name": "Production Line 4",
+    "sensorId": "PL4",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 15.51,
+    "deviationPercent": 4.84
+  },
+  {
+    "id": 262,
+    "name": "Cleanroom Suite 2",
+    "sensorId": "CS2",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 39.47,
+    "deviationPercent": -4.9
+  },
+  {
+    "id": 263,
+    "name": "Cold Storage Room 1",
+    "sensorId": "CSR1",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 68.93,
+    "deviationPercent": -3.52
+  },
+  {
+    "id": 264,
+    "name": "Cold Storage Room 2",
+    "sensorId": "CSR2",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 30.9,
+    "deviationPercent": 0.13
+  },
+  {
+    "id": 265,
+    "name": "Server Room North",
+    "sensorId": "SRN",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 34.02,
+    "deviationPercent": 4.62
+  },
+  {
+    "id": 266,
+    "name": "Greenhouse Bay 7",
+    "sensorId": "GB7",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 44.89,
+    "deviationPercent": -1.33
+  },
+  {
+    "id": 267,
+    "name": "Cold Storage Room 1",
+    "sensorId": "CSR1",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 18.56,
+    "deviationPercent": 3.37
+  },
+  {
+    "id": 268,
+    "name": "Cleanroom Suite 2",
+    "sensorId": "CS2",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 30.49,
+    "deviationPercent": 4.94
+  },
+  {
+    "id": 269,
+    "name": "Office Floor 5",
+    "sensorId": "OF5",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 34.8,
+    "deviationPercent": -4.58
+  },
+  {
+    "id": 270,
+    "name": "Office Floor 2",
+    "sensorId": "OF2",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 57.12,
+    "deviationPercent": 1.55
+  },
+  {
+    "id": 271,
+    "name": "Cold Storage Room 1",
+    "sensorId": "CSR1",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 54.33,
+    "deviationPercent": 1.74
+  },
+  {
+    "id": 272,
+    "name": "Packaging Line 2",
+    "sensorId": "PL2",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 48.81,
+    "deviationPercent": -5.17
+  },
+  {
+    "id": 273,
+    "name": "Greenhouse Bay 3",
+    "sensorId": "GB3",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 34.43,
+    "deviationPercent": -4.32
+  },
+  {
+    "id": 274,
+    "name": "Production Line 4",
+    "sensorId": "PL4",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 67.99,
+    "deviationPercent": 4.66
+  },
+  {
+    "id": 275,
+    "name": "Rooftop Unit A",
+    "sensorId": "RUA",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 24.54,
+    "deviationPercent": 1.73
+  },
+  {
+    "id": 276,
+    "name": "Warehouse A - Zone 2",
+    "sensorId": "WA-Z2",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 15.37,
+    "deviationPercent": -6.52
+  },
+  {
+    "id": 277,
+    "name": "Cold Storage Room 1",
+    "sensorId": "CSR1",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 22.05,
+    "deviationPercent": -1.63
+  },
+  {
+    "id": 278,
+    "name": "Warehouse B - Loading Dock",
+    "sensorId": "WB-LD",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 68.47,
+    "deviationPercent": -7.16
+  },
+  {
+    "id": 279,
+    "name": "Greenhouse Bay 3",
+    "sensorId": "GB3",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 21.26,
+    "deviationPercent": -1.94
+  },
+  {
+    "id": 280,
+    "name": "Cold Storage Room 2",
+    "sensorId": "CSR2",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 33.55,
+    "deviationPercent": 7.09
+  },
+  {
+    "id": 281,
+    "name": "Production Line 1",
+    "sensorId": "PL1",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 31.36,
+    "deviationPercent": 2.52
+  },
+  {
+    "id": 282,
+    "name": "Production Line 1",
+    "sensorId": "PL1",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 62.24,
+    "deviationPercent": -0.51
+  },
+  {
+    "id": 283,
+    "name": "Cold Storage Room 2",
+    "sensorId": "CSR2",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 31.46,
+    "deviationPercent": -1.68
+  },
+  {
+    "id": 284,
+    "name": "Warehouse A - Zone 1",
+    "sensorId": "WA-Z1",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 33.46,
+    "deviationPercent": -4.36
+  },
+  {
+    "id": 285,
+    "name": "Rooftop Unit A",
+    "sensorId": "RUA",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 38.48,
+    "deviationPercent": 6.91
+  },
+  {
+    "id": 286,
+    "name": "Warehouse B - Loading Dock",
+    "sensorId": "WB-LD",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 20.39,
+    "deviationPercent": 5.77
+  },
+  {
+    "id": 287,
+    "name": "Warehouse A - Zone 2",
+    "sensorId": "WA-Z2",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 27.51,
+    "deviationPercent": -2.39
+  },
+  {
+    "id": 288,
+    "name": "Office Floor 2",
+    "sensorId": "OF2",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 59.39,
+    "deviationPercent": -2.46
+  },
+  {
+    "id": 289,
+    "name": "Basement Archive",
+    "sensorId": "BA",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 20.19,
+    "deviationPercent": -1.38
+  },
+  {
+    "id": 290,
+    "name": "Production Line 1",
+    "sensorId": "PL1",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 64.49,
+    "deviationPercent": -6.64
+  },
+  {
+    "id": 291,
+    "name": "Cleanroom Suite 2",
+    "sensorId": "CS2",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 35.67,
+    "deviationPercent": -0.92
+  },
+  {
+    "id": 292,
+    "name": "Cleanroom Suite 2",
+    "sensorId": "CS2",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 17.77,
+    "deviationPercent": -2.17
+  },
+  {
+    "id": 293,
+    "name": "Warehouse A - Zone 1",
+    "sensorId": "WA-Z1",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 32.17,
+    "deviationPercent": -7.3
+  },
+  {
+    "id": 294,
+    "name": "Cleanroom Suite 1",
+    "sensorId": "CS1",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 45.66,
+    "deviationPercent": 5
+  },
+  {
+    "id": 295,
+    "name": "Basement Archive",
+    "sensorId": "BA",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 66.45,
+    "deviationPercent": -5.02
+  },
+  {
+    "id": 296,
+    "name": "Production Line 1",
+    "sensorId": "PL1",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 62.81,
+    "deviationPercent": 7.11
+  },
+  {
+    "id": 297,
+    "name": "Warehouse A - Zone 1",
+    "sensorId": "WA-Z1",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 16.43,
+    "deviationPercent": -0.68
+  },
+  {
+    "id": 298,
+    "name": "Production Line 1",
+    "sensorId": "PL1",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 39.02,
+    "deviationPercent": -1.3
+  },
+  {
+    "id": 299,
+    "name": "Warehouse A - Zone 2",
+    "sensorId": "WA-Z2",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 23.62,
+    "deviationPercent": -4.96
+  },
+  {
+    "id": 300,
+    "name": "Production Line 1",
+    "sensorId": "PL1",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 81.43,
+    "deviationPercent": 0.72
+  },
+  {
+    "id": 301,
+    "name": "Cleanroom Suite 1",
+    "sensorId": "CS1",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 24.31,
+    "deviationPercent": -5
+  },
+  {
+    "id": 302,
+    "name": "Greenhouse Bay 3",
+    "sensorId": "GB3",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 18.82,
+    "deviationPercent": 5.97
+  },
+  {
+    "id": 303,
+    "name": "Warehouse B - Loading Dock",
+    "sensorId": "WB-LD",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 32.23,
+    "deviationPercent": 5.34
+  },
+  {
+    "id": 304,
+    "name": "Server Room North",
+    "sensorId": "SRN",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 85.72,
+    "deviationPercent": -3.17
+  },
+  {
+    "id": 305,
+    "name": "Cleanroom Suite 2",
+    "sensorId": "CS2",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 49.79,
+    "deviationPercent": 0.01
+  },
+  {
+    "id": 306,
+    "name": "Warehouse A - Zone 1",
+    "sensorId": "WA-Z1",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 19.49,
+    "deviationPercent": -0.74
+  },
+  {
+    "id": 307,
+    "name": "Cold Storage Room 1",
+    "sensorId": "CSR1",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 24.82,
+    "deviationPercent": -0.84
+  },
+  {
+    "id": 308,
+    "name": "Warehouse A - Zone 2",
+    "sensorId": "WA-Z2",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 71.13,
+    "deviationPercent": -3.91
+  },
+  {
+    "id": 309,
+    "name": "Warehouse A - Zone 2",
+    "sensorId": "WA-Z2",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 19.94,
+    "deviationPercent": -0.14
+  },
+  {
+    "id": 310,
+    "name": "Greenhouse Bay 3",
+    "sensorId": "GB3",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 27.78,
+    "deviationPercent": 2.39
+  },
+  {
+    "id": 311,
+    "name": "Basement Archive",
+    "sensorId": "BA",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 23.2,
+    "deviationPercent": 6.18
+  },
+  {
+    "id": 312,
+    "name": "Cleanroom Suite 2",
+    "sensorId": "CS2",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 31.14,
+    "deviationPercent": -6.1
+  },
+  {
+    "id": 313,
+    "name": "Office Floor 5",
+    "sensorId": "OF5",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 44.54,
+    "deviationPercent": 3.43
+  },
+  {
+    "id": 314,
+    "name": "Warehouse B - Loading Dock",
+    "sensorId": "WB-LD",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 17.14,
+    "deviationPercent": 1.16
+  },
+  {
+    "id": 315,
+    "name": "Cold Storage Room 1",
+    "sensorId": "CSR1",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 24.32,
+    "deviationPercent": 4.34
+  },
+  {
+    "id": 316,
+    "name": "Cold Storage Room 2",
+    "sensorId": "CSR2",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 56.2,
+    "deviationPercent": -7.61
+  },
+  {
+    "id": 317,
+    "name": "Packaging Line 2",
+    "sensorId": "PL2",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 27.06,
+    "deviationPercent": 4.26
+  },
+  {
+    "id": 318,
+    "name": "Office Floor 2",
+    "sensorId": "OF2",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 82.54,
+    "deviationPercent": -3.18
+  },
+  {
+    "id": 319,
+    "name": "Packaging Line 2",
+    "sensorId": "PL2",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 17.74,
+    "deviationPercent": 5.25
+  },
+  {
+    "id": 320,
+    "name": "Office Floor 5",
+    "sensorId": "OF5",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 24.77,
+    "deviationPercent": -6.79
+  },
+  {
+    "id": 321,
+    "name": "Warehouse B - Loading Dock",
+    "sensorId": "WB-LD",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 32.12,
+    "deviationPercent": -4.26
+  },
+  {
+    "id": 322,
+    "name": "Warehouse A - Zone 2",
+    "sensorId": "WA-Z2",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 45.28,
+    "deviationPercent": 3.44
+  },
+  {
+    "id": 323,
+    "name": "Cleanroom Suite 2",
+    "sensorId": "CS2",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 23.66,
+    "deviationPercent": 5.38
+  },
+  {
+    "id": 324,
+    "name": "Warehouse A - Zone 1",
+    "sensorId": "WA-Z1",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 36.74,
+    "deviationPercent": -4.59
+  },
+  {
+    "id": 325,
+    "name": "Cleanroom Suite 2",
+    "sensorId": "CS2",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 33.14,
+    "deviationPercent": 1.83
+  },
+  {
+    "id": 326,
+    "name": "Cold Storage Room 1",
+    "sensorId": "CSR1",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 74.69,
+    "deviationPercent": -0.9
+  },
+  {
+    "id": 327,
+    "name": "Greenhouse Bay 7",
+    "sensorId": "GB7",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 55.87,
+    "deviationPercent": -1.72
+  },
+  {
+    "id": 328,
+    "name": "Production Line 1",
+    "sensorId": "PL1",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 31.59,
+    "deviationPercent": -6.63
+  },
+  {
+    "id": 329,
+    "name": "Server Room South",
+    "sensorId": "SRS",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 28.83,
+    "deviationPercent": -6.42
+  },
+  {
+    "id": 330,
+    "name": "Server Room North",
+    "sensorId": "SRN",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 31.42,
+    "deviationPercent": 4.21
+  },
+  {
+    "id": 331,
+    "name": "Cleanroom Suite 1",
+    "sensorId": "CS1",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 87.31,
+    "deviationPercent": -6.7
+  },
+  {
+    "id": 332,
+    "name": "Warehouse A - Zone 2",
+    "sensorId": "WA-Z2",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 71.89,
+    "deviationPercent": -6.71
+  },
+  {
+    "id": 333,
+    "name": "Packaging Line 2",
+    "sensorId": "PL2",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 21.82,
+    "deviationPercent": -0.15
+  },
+  {
+    "id": 334,
+    "name": "Warehouse B - Loading Dock",
+    "sensorId": "WB-LD",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 18.76,
+    "deviationPercent": -5.24
+  },
+  {
+    "id": 335,
+    "name": "Cold Storage Room 2",
+    "sensorId": "CSR2",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 18.63,
+    "deviationPercent": 3.13
+  },
+  {
+    "id": 336,
+    "name": "Warehouse A - Zone 2",
+    "sensorId": "WA-Z2",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 33.69,
+    "deviationPercent": 6.96
+  },
+  {
+    "id": 337,
+    "name": "Cleanroom Suite 1",
+    "sensorId": "CS1",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 25.24,
+    "deviationPercent": 3.1
+  },
+  {
+    "id": 338,
+    "name": "Cold Storage Room 1",
+    "sensorId": "CSR1",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 37.38,
+    "deviationPercent": -4.27
+  },
+  {
+    "id": 339,
+    "name": "Cleanroom Suite 1",
+    "sensorId": "CS1",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 50.64,
+    "deviationPercent": 7.01
+  },
+  {
+    "id": 340,
+    "name": "Production Line 4",
+    "sensorId": "PL4",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 20.85,
+    "deviationPercent": 6.33
+  },
+  {
+    "id": 341,
+    "name": "Cold Storage Room 2",
+    "sensorId": "CSR2",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 33.22,
+    "deviationPercent": -4.56
+  },
+  {
+    "id": 342,
+    "name": "Packaging Line 2",
+    "sensorId": "PL2",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 22.37,
+    "deviationPercent": -6.26
+  },
+  {
+    "id": 343,
+    "name": "Office Floor 5",
+    "sensorId": "OF5",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 81.47,
+    "deviationPercent": 3.19
+  },
+  {
+    "id": 344,
+    "name": "Warehouse B - Loading Dock",
+    "sensorId": "WB-LD",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 28.58,
+    "deviationPercent": -7.15
+  },
+  {
+    "id": 345,
+    "name": "Office Floor 5",
+    "sensorId": "OF5",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 69.36,
+    "deviationPercent": -7.34
+  },
+  {
+    "id": 346,
+    "name": "Office Floor 2",
+    "sensorId": "OF2",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 23.53,
+    "deviationPercent": 0.21
+  },
+  {
+    "id": 347,
+    "name": "Cold Storage Room 1",
+    "sensorId": "CSR1",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 66.15,
+    "deviationPercent": 7.92
+  },
+  {
+    "id": 348,
+    "name": "Server Room South",
+    "sensorId": "SRS",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 30.68,
+    "deviationPercent": -0.43
+  },
+  {
+    "id": 349,
+    "name": "Greenhouse Bay 3",
+    "sensorId": "GB3",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 30.93,
+    "deviationPercent": -0.38
+  },
+  {
+    "id": 350,
+    "name": "Warehouse A - Zone 1",
+    "sensorId": "WA-Z1",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 26.32,
+    "deviationPercent": 4.68
+  },
+  {
+    "id": 351,
+    "name": "Production Line 1",
+    "sensorId": "PL1",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 46.61,
+    "deviationPercent": 7.91
+  },
+  {
+    "id": 352,
+    "name": "Greenhouse Bay 3",
+    "sensorId": "GB3",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 67.01,
+    "deviationPercent": -2.76
+  },
+  {
+    "id": 353,
+    "name": "Greenhouse Bay 3",
+    "sensorId": "GB3",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 78.43,
+    "deviationPercent": -3.58
+  },
+  {
+    "id": 354,
+    "name": "Server Room North",
+    "sensorId": "SRN",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 83.75,
+    "deviationPercent": 4.55
+  },
+  {
+    "id": 355,
+    "name": "Packaging Line 2",
+    "sensorId": "PL2",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 63.85,
+    "deviationPercent": 2.52
+  },
+  {
+    "id": 356,
+    "name": "Production Line 1",
+    "sensorId": "PL1",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 65.47,
+    "deviationPercent": -3.4
+  },
+  {
+    "id": 357,
+    "name": "Rooftop Unit A",
+    "sensorId": "RUA",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 61.99,
+    "deviationPercent": -6.36
+  },
+  {
+    "id": 358,
+    "name": "Office Floor 2",
+    "sensorId": "OF2",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 25.42,
+    "deviationPercent": -5.64
+  },
+  {
+    "id": 359,
+    "name": "Rooftop Unit B",
+    "sensorId": "RUB",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 24.84,
+    "deviationPercent": -5.77
+  },
+  {
+    "id": 360,
+    "name": "Greenhouse Bay 3",
+    "sensorId": "GB3",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 80.95,
+    "deviationPercent": -2.87
+  },
+  {
+    "id": 361,
+    "name": "Greenhouse Bay 7",
+    "sensorId": "GB7",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 34.04,
+    "deviationPercent": -5.08
+  },
+  {
+    "id": 362,
+    "name": "Office Floor 2",
+    "sensorId": "OF2",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 16.55,
+    "deviationPercent": -6.99
+  },
+  {
+    "id": 363,
+    "name": "Office Floor 2",
+    "sensorId": "OF2",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 18.84,
+    "deviationPercent": 4.59
+  },
+  {
+    "id": 364,
+    "name": "Cleanroom Suite 1",
+    "sensorId": "CS1",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 87.4,
+    "deviationPercent": 6.03
+  },
+  {
+    "id": 365,
+    "name": "Warehouse B - Loading Dock",
+    "sensorId": "WB-LD",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 34.3,
+    "deviationPercent": -1.08
+  },
+  {
+    "id": 366,
+    "name": "Packaging Line 2",
+    "sensorId": "PL2",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 23.86,
+    "deviationPercent": -6.57
+  },
+  {
+    "id": 367,
+    "name": "Loading Bay Exterior",
+    "sensorId": "LBE",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 70.06,
+    "deviationPercent": 3.91
+  },
+  {
+    "id": 368,
+    "name": "Loading Bay Exterior",
+    "sensorId": "LBE",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 78.92,
+    "deviationPercent": 6.55
+  },
+  {
+    "id": 369,
+    "name": "Warehouse A - Zone 2",
+    "sensorId": "WA-Z2",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 27.54,
+    "deviationPercent": -4.17
+  },
+  {
+    "id": 370,
+    "name": "Cleanroom Suite 1",
+    "sensorId": "CS1",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 58.64,
+    "deviationPercent": -1.42
+  },
+  {
+    "id": 371,
+    "name": "Rooftop Unit B",
+    "sensorId": "RUB",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 33.45,
+    "deviationPercent": -4.57
+  },
+  {
+    "id": 372,
+    "name": "Production Line 1",
+    "sensorId": "PL1",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 20.55,
+    "deviationPercent": 4.81
+  },
+  {
+    "id": 373,
+    "name": "Warehouse A - Zone 2",
+    "sensorId": "WA-Z2",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 22.84,
+    "deviationPercent": 7.52
+  },
+  {
+    "id": 374,
+    "name": "Warehouse A - Zone 2",
+    "sensorId": "WA-Z2",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 17,
+    "deviationPercent": 7.78
+  },
+  {
+    "id": 375,
+    "name": "Cleanroom Suite 1",
+    "sensorId": "CS1",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 32.18,
+    "deviationPercent": -0.57
+  },
+  {
+    "id": 376,
+    "name": "Server Room North",
+    "sensorId": "SRN",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 15.65,
+    "deviationPercent": 0.45
+  },
+  {
+    "id": 377,
+    "name": "Cold Storage Room 1",
+    "sensorId": "CSR1",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 75.06,
+    "deviationPercent": -3.91
+  },
+  {
+    "id": 378,
+    "name": "Cold Storage Room 2",
+    "sensorId": "CSR2",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 18.1,
+    "deviationPercent": -2.21
+  },
+  {
+    "id": 379,
+    "name": "Cleanroom Suite 1",
+    "sensorId": "CS1",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 26.95,
+    "deviationPercent": 0.94
+  },
+  {
+    "id": 380,
+    "name": "Cold Storage Room 1",
+    "sensorId": "CSR1",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 24.54,
+    "deviationPercent": 6.95
+  },
+  {
+    "id": 381,
+    "name": "Rooftop Unit B",
+    "sensorId": "RUB",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 27.96,
+    "deviationPercent": 0.77
+  },
+  {
+    "id": 382,
+    "name": "Server Room North",
+    "sensorId": "SRN",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 24.8,
+    "deviationPercent": -6.85
+  },
+  {
+    "id": 383,
+    "name": "Greenhouse Bay 3",
+    "sensorId": "GB3",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 34.35,
+    "deviationPercent": -6.79
+  },
+  {
+    "id": 384,
+    "name": "Warehouse A - Zone 1",
+    "sensorId": "WA-Z1",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 24.29,
+    "deviationPercent": 5.5
+  },
+  {
+    "id": 385,
+    "name": "Cleanroom Suite 2",
+    "sensorId": "CS2",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 85.56,
+    "deviationPercent": -0.21
+  },
+  {
+    "id": 386,
+    "name": "Cold Storage Room 2",
+    "sensorId": "CSR2",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 45.27,
+    "deviationPercent": 0.37
+  },
+  {
+    "id": 387,
+    "name": "Warehouse A - Zone 2",
+    "sensorId": "WA-Z2",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 20.22,
+    "deviationPercent": 5.42
+  },
+  {
+    "id": 388,
+    "name": "Cold Storage Room 2",
+    "sensorId": "CSR2",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 29.14,
+    "deviationPercent": 1.07
+  },
+  {
+    "id": 389,
+    "name": "Warehouse A - Zone 2",
+    "sensorId": "WA-Z2",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 32.89,
+    "deviationPercent": -1.4
+  },
+  {
+    "id": 390,
+    "name": "Rooftop Unit A",
+    "sensorId": "RUA",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 61.65,
+    "deviationPercent": 4.82
+  },
+  {
+    "id": 391,
+    "name": "Cold Storage Room 2",
+    "sensorId": "CSR2",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 85.72,
+    "deviationPercent": 1.49
+  },
+  {
+    "id": 392,
+    "name": "Production Line 1",
+    "sensorId": "PL1",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 33.89,
+    "deviationPercent": -1.88
+  },
+  {
+    "id": 393,
+    "name": "Greenhouse Bay 7",
+    "sensorId": "GB7",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 39.58,
+    "deviationPercent": -2.45
+  },
+  {
+    "id": 394,
+    "name": "Production Line 1",
+    "sensorId": "PL1",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 31.66,
+    "deviationPercent": -4.61
+  },
+  {
+    "id": 395,
+    "name": "Warehouse A - Zone 2",
+    "sensorId": "WA-Z2",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 55.28,
+    "deviationPercent": 5.56
+  },
+  {
+    "id": 396,
+    "name": "Office Floor 5",
+    "sensorId": "OF5",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 75.36,
+    "deviationPercent": -4.2
+  },
+  {
+    "id": 397,
+    "name": "Rooftop Unit B",
+    "sensorId": "RUB",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 21.45,
+    "deviationPercent": -3.4
+  },
+  {
+    "id": 398,
+    "name": "Cleanroom Suite 1",
+    "sensorId": "CS1",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 34.82,
+    "deviationPercent": -5.09
+  },
+  {
+    "id": 399,
+    "name": "Office Floor 5",
+    "sensorId": "OF5",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 18.59,
+    "deviationPercent": -4.98
+  },
+  {
+    "id": 400,
+    "name": "Server Room North",
+    "sensorId": "SRN",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 30.15,
+    "deviationPercent": -3
+  },
+  {
+    "id": 401,
+    "name": "Basement Archive",
+    "sensorId": "BA",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 22.79,
+    "deviationPercent": 3.28
+  },
+  {
+    "id": 402,
+    "name": "Warehouse A - Zone 2",
+    "sensorId": "WA-Z2",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 33.68,
+    "deviationPercent": 3.61
+  },
+  {
+    "id": 403,
+    "name": "Rooftop Unit A",
+    "sensorId": "RUA",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 15.94,
+    "deviationPercent": -5.96
+  },
+  {
+    "id": 404,
+    "name": "Rooftop Unit B",
+    "sensorId": "RUB",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 18.2,
+    "deviationPercent": -6.11
+  },
+  {
+    "id": 405,
+    "name": "Packaging Line 2",
+    "sensorId": "PL2",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 42.98,
+    "deviationPercent": 5.38
+  },
+  {
+    "id": 406,
+    "name": "Server Room South",
+    "sensorId": "SRS",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 29.43,
+    "deviationPercent": -2.48
+  },
+  {
+    "id": 407,
+    "name": "Production Line 4",
+    "sensorId": "PL4",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 43.38,
+    "deviationPercent": 0.55
+  },
+  {
+    "id": 408,
+    "name": "Cleanroom Suite 1",
+    "sensorId": "CS1",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 16.45,
+    "deviationPercent": 5.47
+  },
+  {
+    "id": 409,
+    "name": "Rooftop Unit A",
+    "sensorId": "RUA",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 27.99,
+    "deviationPercent": 6.95
+  },
+  {
+    "id": 410,
+    "name": "Warehouse A - Zone 1",
+    "sensorId": "WA-Z1",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 73.43,
+    "deviationPercent": -5.27
+  },
+  {
+    "id": 411,
+    "name": "Server Room South",
+    "sensorId": "SRS",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 34.21,
+    "deviationPercent": 2.89
+  },
+  {
+    "id": 412,
+    "name": "Rooftop Unit B",
+    "sensorId": "RUB",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 73.44,
+    "deviationPercent": 0.96
+  },
+  {
+    "id": 413,
+    "name": "Office Floor 2",
+    "sensorId": "OF2",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 18.7,
+    "deviationPercent": -4.07
+  },
+  {
+    "id": 414,
+    "name": "Cleanroom Suite 2",
+    "sensorId": "CS2",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 27.31,
+    "deviationPercent": -1.71
+  },
+  {
+    "id": 415,
+    "name": "Loading Bay Exterior",
+    "sensorId": "LBE",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 57.11,
+    "deviationPercent": 2.38
+  },
+  {
+    "id": 416,
+    "name": "Production Line 1",
+    "sensorId": "PL1",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 32.03,
+    "deviationPercent": 6.35
+  },
+  {
+    "id": 417,
+    "name": "Cold Storage Room 1",
+    "sensorId": "CSR1",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 21.34,
+    "deviationPercent": 6.93
+  },
+  {
+    "id": 418,
+    "name": "Cold Storage Room 2",
+    "sensorId": "CSR2",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 26.81,
+    "deviationPercent": -1.02
+  },
+  {
+    "id": 419,
+    "name": "Production Line 4",
+    "sensorId": "PL4",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 86.88,
+    "deviationPercent": -3.27
+  },
+  {
+    "id": 420,
+    "name": "Warehouse A - Zone 2",
+    "sensorId": "WA-Z2",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 26.43,
+    "deviationPercent": -4.69
+  },
+  {
+    "id": 421,
+    "name": "Basement Archive",
+    "sensorId": "BA",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 48.4,
+    "deviationPercent": -2.21
+  },
+  {
+    "id": 422,
+    "name": "Rooftop Unit B",
+    "sensorId": "RUB",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 25.81,
+    "deviationPercent": 1.53
+  },
+  {
+    "id": 423,
+    "name": "Packaging Line 2",
+    "sensorId": "PL2",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 67.83,
+    "deviationPercent": 4.31
+  },
+  {
+    "id": 424,
+    "name": "Cold Storage Room 2",
+    "sensorId": "CSR2",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 33.4,
+    "deviationPercent": -2.13
+  },
+  {
+    "id": 425,
+    "name": "Loading Bay Exterior",
+    "sensorId": "LBE",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 85.83,
+    "deviationPercent": -3.83
+  },
+  {
+    "id": 426,
+    "name": "Cold Storage Room 2",
+    "sensorId": "CSR2",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 40.15,
+    "deviationPercent": 3.48
+  },
+  {
+    "id": 427,
+    "name": "Cleanroom Suite 2",
+    "sensorId": "CS2",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 88.68,
+    "deviationPercent": 4.48
+  },
+  {
+    "id": 428,
+    "name": "Rooftop Unit B",
+    "sensorId": "RUB",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 32.87,
+    "deviationPercent": -6.66
+  },
+  {
+    "id": 429,
+    "name": "Cleanroom Suite 1",
+    "sensorId": "CS1",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 71.62,
+    "deviationPercent": 2.78
+  },
+  {
+    "id": 430,
+    "name": "Greenhouse Bay 3",
+    "sensorId": "GB3",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 17.16,
+    "deviationPercent": 7.41
+  },
+  {
+    "id": 431,
+    "name": "Cleanroom Suite 1",
+    "sensorId": "CS1",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 26.01,
+    "deviationPercent": -0.15
+  },
+  {
+    "id": 432,
+    "name": "Cleanroom Suite 2",
+    "sensorId": "CS2",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 24.64,
+    "deviationPercent": -7.42
+  },
+  {
+    "id": 433,
+    "name": "Production Line 1",
+    "sensorId": "PL1",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 76.81,
+    "deviationPercent": 5.25
+  },
+  {
+    "id": 434,
+    "name": "Basement Archive",
+    "sensorId": "BA",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 57.04,
+    "deviationPercent": 6.95
+  },
+  {
+    "id": 435,
+    "name": "Cleanroom Suite 2",
+    "sensorId": "CS2",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 15.15,
+    "deviationPercent": 4.3
+  },
+  {
+    "id": 436,
+    "name": "Cold Storage Room 2",
+    "sensorId": "CSR2",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 29.94,
+    "deviationPercent": 0.7
+  },
+  {
+    "id": 437,
+    "name": "Greenhouse Bay 7",
+    "sensorId": "GB7",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 20.56,
+    "deviationPercent": -3.91
+  },
+  {
+    "id": 438,
+    "name": "Office Floor 2",
+    "sensorId": "OF2",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 34.49,
+    "deviationPercent": 4.15
+  },
+  {
+    "id": 439,
+    "name": "Server Room North",
+    "sensorId": "SRN",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 62.53,
+    "deviationPercent": 5.44
+  },
+  {
+    "id": 440,
+    "name": "Office Floor 5",
+    "sensorId": "OF5",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 42.7,
+    "deviationPercent": -3.23
+  },
+  {
+    "id": 441,
+    "name": "Production Line 4",
+    "sensorId": "PL4",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 46.98,
+    "deviationPercent": 7.33
+  },
+  {
+    "id": 442,
+    "name": "Cold Storage Room 2",
+    "sensorId": "CSR2",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 78.79,
+    "deviationPercent": 4.04
+  },
+  {
+    "id": 443,
+    "name": "Greenhouse Bay 3",
+    "sensorId": "GB3",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 26,
+    "deviationPercent": 6.08
+  },
+  {
+    "id": 444,
+    "name": "Cold Storage Room 1",
+    "sensorId": "CSR1",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 27.78,
+    "deviationPercent": -7.54
+  },
+  {
+    "id": 445,
+    "name": "Packaging Line 2",
+    "sensorId": "PL2",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 23.55,
+    "deviationPercent": 5.42
+  },
+  {
+    "id": 446,
+    "name": "Cleanroom Suite 1",
+    "sensorId": "CS1",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 41.89,
+    "deviationPercent": -4.83
+  },
+  {
+    "id": 447,
+    "name": "Loading Bay Exterior",
+    "sensorId": "LBE",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 33.9,
+    "deviationPercent": -4.79
+  },
+  {
+    "id": 448,
+    "name": "Rooftop Unit A",
+    "sensorId": "RUA",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 26.36,
+    "deviationPercent": 6.07
+  },
+  {
+    "id": 449,
+    "name": "Office Floor 5",
+    "sensorId": "OF5",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 33.21,
+    "deviationPercent": 5.15
+  },
+  {
+    "id": 450,
+    "name": "Cleanroom Suite 2",
+    "sensorId": "CS2",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 27.16,
+    "deviationPercent": 6.24
+  },
+  {
+    "id": 451,
+    "name": "Greenhouse Bay 3",
+    "sensorId": "GB3",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 23.81,
+    "deviationPercent": 6.68
+  },
+  {
+    "id": 452,
+    "name": "Packaging Line 2",
+    "sensorId": "PL2",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 27.87,
+    "deviationPercent": 6.21
+  },
+  {
+    "id": 453,
+    "name": "Cold Storage Room 1",
+    "sensorId": "CSR1",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 43.18,
+    "deviationPercent": -0.6
+  },
+  {
+    "id": 454,
+    "name": "Warehouse A - Zone 2",
+    "sensorId": "WA-Z2",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 25.79,
+    "deviationPercent": -6.03
+  },
+  {
+    "id": 455,
+    "name": "Packaging Line 2",
+    "sensorId": "PL2",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 70.99,
+    "deviationPercent": -6.25
+  },
+  {
+    "id": 456,
+    "name": "Cold Storage Room 1",
+    "sensorId": "CSR1",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 32.04,
+    "deviationPercent": 4.25
+  },
+  {
+    "id": 457,
+    "name": "Greenhouse Bay 7",
+    "sensorId": "GB7",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 25.61,
+    "deviationPercent": 3.52
+  },
+  {
+    "id": 458,
+    "name": "Basement Archive",
+    "sensorId": "BA",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 15.3,
+    "deviationPercent": -1.63
+  },
+  {
+    "id": 459,
+    "name": "Rooftop Unit A",
+    "sensorId": "RUA",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 61.58,
+    "deviationPercent": 7.61
+  },
+  {
+    "id": 460,
+    "name": "Production Line 4",
+    "sensorId": "PL4",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 21.56,
+    "deviationPercent": -3.17
+  },
+  {
+    "id": 461,
+    "name": "Production Line 1",
+    "sensorId": "PL1",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 16.38,
+    "deviationPercent": 1.75
+  },
+  {
+    "id": 462,
+    "name": "Cold Storage Room 1",
+    "sensorId": "CSR1",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 30.75,
+    "deviationPercent": 3.87
+  },
+  {
+    "id": 463,
+    "name": "Warehouse A - Zone 2",
+    "sensorId": "WA-Z2",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 59.09,
+    "deviationPercent": -4.61
+  },
+  {
+    "id": 464,
+    "name": "Office Floor 2",
+    "sensorId": "OF2",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 22.33,
+    "deviationPercent": -2.01
+  },
+  {
+    "id": 465,
+    "name": "Rooftop Unit B",
+    "sensorId": "RUB",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 63.37,
+    "deviationPercent": -1.11
+  },
+  {
+    "id": 466,
+    "name": "Greenhouse Bay 3",
+    "sensorId": "GB3",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 85.69,
+    "deviationPercent": -7.43
+  },
+  {
+    "id": 467,
+    "name": "Production Line 1",
+    "sensorId": "PL1",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 66.07,
+    "deviationPercent": -6.47
+  },
+  {
+    "id": 468,
+    "name": "Rooftop Unit B",
+    "sensorId": "RUB",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 48.43,
+    "deviationPercent": 5.69
+  },
+  {
+    "id": 469,
+    "name": "Cold Storage Room 1",
+    "sensorId": "CSR1",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 29.04,
+    "deviationPercent": 0.77
+  },
+  {
+    "id": 470,
+    "name": "Production Line 1",
+    "sensorId": "PL1",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 24.34,
+    "deviationPercent": -4.03
+  },
+  {
+    "id": 471,
+    "name": "Server Room North",
+    "sensorId": "SRN",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 30.57,
+    "deviationPercent": 7.78
+  },
+  {
+    "id": 472,
+    "name": "Production Line 4",
+    "sensorId": "PL4",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 49.36,
+    "deviationPercent": 4.7
+  },
+  {
+    "id": 473,
+    "name": "Cold Storage Room 2",
+    "sensorId": "CSR2",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 45.31,
+    "deviationPercent": -6.25
+  },
+  {
+    "id": 474,
+    "name": "Cold Storage Room 2",
+    "sensorId": "CSR2",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 54.85,
+    "deviationPercent": 4.42
+  },
+  {
+    "id": 475,
+    "name": "Warehouse A - Zone 2",
+    "sensorId": "WA-Z2",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 39.24,
+    "deviationPercent": 2.59
+  },
+  {
+    "id": 476,
+    "name": "Basement Archive",
+    "sensorId": "BA",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 30.66,
+    "deviationPercent": 7.16
+  },
+  {
+    "id": 477,
+    "name": "Cold Storage Room 2",
+    "sensorId": "CSR2",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 24.15,
+    "deviationPercent": 0.73
+  },
+  {
+    "id": 478,
+    "name": "Cold Storage Room 2",
+    "sensorId": "CSR2",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 20.57,
+    "deviationPercent": 2.6
+  },
+  {
+    "id": 479,
+    "name": "Basement Archive",
+    "sensorId": "BA",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 59.3,
+    "deviationPercent": 7.64
+  },
+  {
+    "id": 480,
+    "name": "Office Floor 5",
+    "sensorId": "OF5",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 24.24,
+    "deviationPercent": -1.67
+  },
+  {
+    "id": 481,
+    "name": "Warehouse A - Zone 2",
+    "sensorId": "WA-Z2",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 24.95,
+    "deviationPercent": -7.92
+  },
+  {
+    "id": 482,
+    "name": "Warehouse A - Zone 1",
+    "sensorId": "WA-Z1",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 30.51,
+    "deviationPercent": -3.48
+  },
+  {
+    "id": 483,
+    "name": "Warehouse A - Zone 1",
+    "sensorId": "WA-Z1",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 27.69,
+    "deviationPercent": -5.36
+  },
+  {
+    "id": 484,
+    "name": "Greenhouse Bay 7",
+    "sensorId": "GB7",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 32.62,
+    "deviationPercent": 0.61
+  },
+  {
+    "id": 485,
+    "name": "Rooftop Unit A",
+    "sensorId": "RUA",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 31.65,
+    "deviationPercent": 7.83
+  },
+  {
+    "id": 486,
+    "name": "Warehouse B - Loading Dock",
+    "sensorId": "WB-LD",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 17.42,
+    "deviationPercent": -3.67
+  },
+  {
+    "id": 487,
+    "name": "Cold Storage Room 2",
+    "sensorId": "CSR2",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 68.7,
+    "deviationPercent": -1.1
+  },
+  {
+    "id": 488,
+    "name": "Warehouse A - Zone 1",
+    "sensorId": "WA-Z1",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 71.69,
+    "deviationPercent": 6.51
+  },
+  {
+    "id": 489,
+    "name": "Warehouse A - Zone 1",
+    "sensorId": "WA-Z1",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 37.7,
+    "deviationPercent": -3.51
+  },
+  {
+    "id": 490,
+    "name": "Warehouse B - Loading Dock",
+    "sensorId": "WB-LD",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 32.5,
+    "deviationPercent": -4.55
+  },
+  {
+    "id": 491,
+    "name": "Cold Storage Room 1",
+    "sensorId": "CSR1",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 60.5,
+    "deviationPercent": -7.53
+  },
+  {
+    "id": 492,
+    "name": "Basement Archive",
+    "sensorId": "BA",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 25.29,
+    "deviationPercent": -4.59
+  },
+  {
+    "id": 493,
+    "name": "Cold Storage Room 1",
+    "sensorId": "CSR1",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 52.77,
+    "deviationPercent": -0.81
+  },
+  {
+    "id": 494,
+    "name": "Rooftop Unit B",
+    "sensorId": "RUB",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 19.44,
+    "deviationPercent": 7.83
+  },
+  {
+    "id": 495,
+    "name": "Basement Archive",
+    "sensorId": "BA",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 60.93,
+    "deviationPercent": 6.82
+  },
+  {
+    "id": 496,
+    "name": "Cleanroom Suite 2",
+    "sensorId": "CS2",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 46.39,
+    "deviationPercent": -7.35
+  },
+  {
+    "id": 497,
+    "name": "Server Room North",
+    "sensorId": "SRN",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 62.56,
+    "deviationPercent": 0.81
+  },
+  {
+    "id": 498,
+    "name": "Production Line 4",
+    "sensorId": "PL4",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 63.49,
+    "deviationPercent": -2.8
+  },
+  {
+    "id": 499,
+    "name": "Office Floor 5",
+    "sensorId": "OF5",
+    "type": "humidity",
+    "unit": "%",
+    "currentReading": 61.13,
+    "deviationPercent": -3.95
+  },
+  {
+    "id": 500,
+    "name": "Greenhouse Bay 3",
+    "sensorId": "GB3",
+    "type": "temperature",
+    "unit": "°C",
+    "currentReading": 34.75,
+    "deviationPercent": -3.4
+  }
+]

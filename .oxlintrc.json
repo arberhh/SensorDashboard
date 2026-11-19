@@ -12,5 +12,5 @@
   "env": {
     "builtin": true
   },
-  "ignorePatterns": ["dist/*", "android/*", "ios/*", "iot-dashboard-task/*"]
+  "ignorePatterns": ["dist/*", "android/*", "ios/*", "iot-dashboard-task/*", "apps/**"]
 }
