@@ -2,41 +2,33 @@
  * @format
  */
 
-import { baselineReading, calculateDeviation, generateReading } from "@/utils/sensorReadings";
+import { baselineReading, calculateDeviation, generateReading } from "sensor-core";
 
-// Statistical, not exact — generateReading is a random-in-range formula,
-// so these assert the invariants that must hold for every call (within ±8%
-// of the baseline, at most 2 decimal places) across many samples rather
-// than any single value.
+// Statistical, not exact — these assert the invariants that must hold for
+// every roll (within ±8% of the baseline, at most 2 decimal places) across
+// many samples rather than any single value.
 const SAMPLE_SIZE = 500;
 
 describe("generateReading", () => {
   test("readings stay within ±8% of the baseline", () => {
     for (let i = 0; i < SAMPLE_SIZE; i++) {
-      const reading = generateReading(50);
+      const reading = generateReading(50, Math.random());
       expect(reading).toBeGreaterThanOrEqual(46);
       expect(reading).toBeLessThanOrEqual(54);
     }
   });
 
-  test("the extremes of Math.random map to the edges of the ±8% band", () => {
-    jest.spyOn(Math, "random").mockReturnValueOnce(0).mockReturnValueOnce(0.5);
-    expect(generateReading(50)).toBe(46);
-    expect(generateReading(50)).toBe(50);
-    jest.restoreAllMocks();
+  test("a roll of 0 maps to the bottom of the ±8% band and 0.5 to the baseline", () => {
+    expect(generateReading(50, 0)).toBe(46);
+    expect(generateReading(50, 0.5)).toBe(50);
   });
 
   test("readings are rounded to at most 2 decimal places", () => {
     for (let i = 0; i < SAMPLE_SIZE; i++) {
-      const reading = generateReading(21.982673754676114);
+      const reading = generateReading(21.982673754676114, Math.random());
       const decimalPlaces = (String(reading).split(".")[1] ?? "").length;
       expect(decimalPlaces).toBeLessThanOrEqual(2);
     }
-  });
-
-  test("does not return the exact same value on every call (sanity check that it's actually random)", () => {
-    const readings = new Set(Array.from({ length: 20 }, () => generateReading(25)));
-    expect(readings.size).toBeGreaterThan(1);
   });
 });
 

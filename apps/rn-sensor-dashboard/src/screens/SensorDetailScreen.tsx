@@ -6,8 +6,6 @@ import type { NativeStackScreenProps } from "@react-navigation/native-stack";
 
 import theme from "@/theme";
 import { useSensorFeedContext } from "@/context/SensorFeedContext";
-import type { Sensor } from "@/types/sensor";
-import { formatDeviation, getLocationIcon, getTypeStyle } from "@/utils/sensorDisplay";
 import {
   filterSimilarSensors,
   orderByIds,
@@ -15,7 +13,9 @@ import {
   type ActiveSort,
   type SortDirection,
   type SortField,
-} from "@/utils/sensorList";
+  type Sensor,
+} from "sensor-core";
+import { formatDeviation, getLocationIcon, getTypeStyle } from "@/utils/sensorDisplay";
 import type { RootStackParamList } from "@/navigation/RootStack";
 
 type SensorDetailScreenProps = NativeStackScreenProps<RootStackParamList, "SensorDetail">;

@@ -62,7 +62,7 @@ function generateSensors(numSensors = 500) {
 }
 
 const sensors = generateSensors();
-const outFile = path.join(__dirname, "..", "src", "data", "sensor_readings.json");
+const outFile = path.join(__dirname, "../../../packages/sensor-core/src/sensor_readings.json");
 
 fs.writeFile(outFile, JSON.stringify(sensors, null, 4), (err) => {
   if (err) {

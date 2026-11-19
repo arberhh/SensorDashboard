@@ -6,7 +6,7 @@ import React from "react";
 import { act, render, screen, fireEvent } from "@testing-library/react-native";
 
 import RootStack from "@/navigation/RootStack";
-import initialSensors from "@/data/sensor_readings.json";
+import { initialSensors } from "sensor-core";
 
 // FlashList sizes its viewport off a real onLayout pass, which never fires
 // under this project's test renderer, so the real component renders zero

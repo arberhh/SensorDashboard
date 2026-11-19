@@ -4,7 +4,7 @@
 
 import { act, renderHook } from "@testing-library/react-native";
 
-import initialSensors from "@/data/sensor_readings.json";
+import { initialSensors } from "sensor-core";
 import { useLocalSensorFeed } from "@/hooks/useLocalSensorFeed";
 
 describe("useLocalSensorFeed", () => {

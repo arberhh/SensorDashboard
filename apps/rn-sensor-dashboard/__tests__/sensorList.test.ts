@@ -7,8 +7,8 @@ import {
   filterSimilarSensors,
   orderByIds,
   sortSensors,
-} from "@/utils/sensorList";
-import type { Sensor } from "@/types/sensor";
+  type Sensor,
+} from "sensor-core";
 
 function makeSensor(overrides: Partial<Sensor>): Sensor {
   return {
