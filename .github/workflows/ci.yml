@@ -7,6 +7,19 @@ on:
     branches: [main]
 
 jobs:
+  # Same check as the pre-commit hook, which --no-verify can skip.
+  private-data:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0 # the check diffs against the base branch
+
+      - name: No private data in the added lines
+        run: scripts/check-private-data.sh "origin/${{ github.base_ref }}"
+
   # The RN app in apps/rn-sensor-dashboard.
   checks:
     runs-on: ubuntu-latest
