@@ -3,10 +3,10 @@
 # One measured run of one app on the iOS Simulator: relaunch it, let it sit
 # through idle ticks, then scroll the list down and back up with the same
 # scripted swipes for both apps (agent-device). Appends one CSV row.
-# Env: SIM_UDID (default: the iPhone 17 Pro from AGENTS.md).
+# Env: SIM_UDID (required: the simulator's UDID).
 set -euo pipefail
 APP=$1; RUN=$2; OUT=$3
-SIM=${SIM_UDID:-75C568DB-6957-4433-ADE2-B336FAC0C1FA}
+SIM=${SIM_UDID:?set SIM_UDID to the UDID of the simulator, from xcrun simctl list devices}
 IDLE_SECONDS=20   # four 5s feed ticks
 SWIPES=15         # each way
 

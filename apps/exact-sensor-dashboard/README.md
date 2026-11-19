@@ -15,7 +15,7 @@ Built and tested against Exact `8be4aafa45aa93ca62b36f9be4703721cd11c93f`. Exact
 and changes daily, so pin that commit when comparing numbers.
 
 ```sh
-git clone https://github.com/expo/exact.git ../../../exact   # i.e. ~/Desktop/Dev/exact
+git clone https://github.com/expo/exact.git ../../../exact   # beside this repo
 git -C ../../../exact checkout 8be4aafa45aa93ca62b36f9be4703721cd11c93f
 bun ../../../exact/scripts/exact.mjs setup                   # needs rustup and Bun 1.4.2
 bun install                                                  # links ../../packages/sensor-core
