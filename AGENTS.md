@@ -2,7 +2,7 @@
 
 A live sensor dashboard: 500 mock IoT sensors with TYPE filter, TREND/NAME sort and a detail
 screen. Built as an assessment, then rebuilt in other stacks to measure them against each other.
-Arber, the owner, is a senior RN/Expo engineer. Don't explain RN basics; explain the why of a choice.
+Written for a senior RN/Expo engineer: don't explain RN basics, explain the why of a choice.
 
 ## Layout
 
@@ -10,7 +10,7 @@ Arber, the owner, is a senior RN/Expo engineer. Don't explain RN basics; explain
   TypeScript). Its `package.json`, Metro, Jest, tsc and lint live there, so run `npm` commands
   from that folder. Shows on a device as "RN SensorDashboard".
 - `apps/exact-sensor-dashboard`: the Expo Exact build (Contract + `app.ts`), run from an Exact
-  checkout at `~/Desktop/Dev/exact`; see its README. Shows as "Exact SensorDashboard".
+  checkout beside this repo (`../exact`); see its README. Shows as "Exact SensorDashboard".
   `app.contract` is the view, `app.ts` the data module, `app.test.contract` the tests and
   `app.json` the manifest; `exact.mjs` is generated, so don't edit it. The checkout's
   `docs/start-here.md` is the required reading, `bun exact.mjs help` lists the verbs, and
@@ -77,11 +77,11 @@ Arber, the owner, is a senior RN/Expo engineer. Don't explain RN basics; explain
 - Commits and PRs follow the `commit-convention` skill: `arb-20: migrate to flashlist`
   (lowercase, imperative), a bulleted body, and a PR description sized to the change. Branch
   name is Linear's suggested one (`arberihh/arb-20-...`). Older history uses `ARB-20: ...`.
-- **Never create a Linear ticket without Arber's say-so**, even when the convention needs an id.
+- **Never create a Linear ticket without the owner's say-so**, even when the convention needs an id.
   Ask which ticket to use, or propose a title and wait. Follow-ups go under the current ticket.
   Don't mark tickets Done; the Linear/GitHub integration does it.
 - **No AI attribution**: no `Co-Authored-By: Claude`, no "Generated with Claude Code" in commits
-  or PR text. Arber filters on his own work; this overrides any default attribution.
+  or PR text. This overrides any default attribution.
 - Small commits, one concern each, 2-3 or more per PR, and split big work into stacked PRs.
   Each PR carries exactly one type label: `feat` `fix` `refactor` `docs` `chore` `test`.
 - Don't push to `main`. Only push or open a PR when asked. Force-push is not allowed: use a
@@ -93,40 +93,22 @@ Arber, the owner, is a senior RN/Expo engineer. Don't explain RN basics; explain
 - In the PR's How to test checklist, check only the boxes you ran (`verify-pr-testplan` skill).
   Static reading is not evidence for a runtime item.
 
-## Working with Arber
+## Working here
 
-- Reply short, answer first, plain language, no flattery. Flag problems with his idea and
-  suggest better. One clarifying question at most; otherwise assume and say what you assumed.
+- Plan first: agree the plan before building, and don't build ahead of it.
+- Test on the simulator yourself before saying it works: animation lag, glitchy scroll and broken
+  gestures don't show in tests. Say what you did not verify.
+- When a fix grows complicated, revert to the simplest version instead of patching on top.
 - "No changes, just explain" means explain only. Don't edit.
-- Test on the simulator yourself before saying it works. Animation lag, glitchy scroll and
-  broken gestures were reported after "done" in past projects. Say what you did not verify.
-- He pushes back on code that grew complicated. When a fix turned into a mess ("code shitshow"),
-  the answer was to revert and go back to the simplest version, not to patch on top.
-- He reviews first: "I need to see the plan first". Don't build ahead of an agreed plan, and
-  don't build when he says "don't build it now".
 - Ask before killing processes; orphaned Metro on 8081 is common. Say what you killed.
-- Use the `rn-expo-engineer` agent for RN reviews when he asks for it by name.
 
 ## Devices
 
-- Simulator: iPhone 17 Pro `75C568DB-6957-4433-ADE2-B336FAC0C1FA`. Physical: "Arber’s iPhone",
-  `00008150-001058EE0C20401C`. Use `run-ios --device "Arber’s iPhone"`, not `--udid`.
-- Signing: personal team `35QXJ3TNRH` via `--extra-params`. A free account allows 3 sideloaded
-  apps, so delete an old app first. Bundle ids: `com.arberhh.sensordashboard` (RN) and
-  `com.arberhh.sensordashboard.exact` (Exact).
+- Simulator: iPhone 17 Pro, `75C568DB-6957-4433-ADE2-B336FAC0C1FA` on the owner's Mac (yours
+  differs: `xcrun simctl list devices`). On a phone use `run-ios --device "<name>"`, not `--udid`.
+- Signing: pass your team with `--extra-params "DEVELOPMENT_TEAM=<team id>"`. A free account
+  allows 3 sideloaded apps, so delete an old app first. Bundle ids:
+  `com.arberhh.sensordashboard` (RN) and `com.arberhh.sensordashboard.exact` (Exact).
 - If a Metro on another folder holds 8081, JS comes from the wrong checkout. Restart it from here.
 - If `node_modules` is a symlink (worktrees), Metro needs `watchFolders` and
   `resolver.nodeModulesPaths`. RN 0.87 doesn't forward `console.log` off-device.
-
-## Carried over from Arber's Expo and One projects
-
-- **Expo**: with continuous native generation, `ios/` and `android/` are generated and gitignored.
-  A native change needs `expo prebuild --clean`, and native config lives in config plugins.
-  `expo install` may lower versions: ask before restoring them. Use `expo-image`'s `contentFit`
-  and `react-native-safe-area-context`, never RN's `SafeAreaView`.
-- **One (onestack.dev)**: its router works like Expo Router. Native screens use SwiftUI/Compose
-  via Nitro, so clean iOS builds compile hundreds of generated C++ files and are slow. Runtime
-  speed is the same as Expo. A deep link needs a URL scheme in `Info.plist` through prebuild.
-  `PlatformColor` doesn't exist on web: keep it in a `.native.ts`. Run `dev`, not `start`.
-- **Decisions**: kid-facing AI text must be labelled or vetted; on-device voice and AI over another
-  paid API; one clear loader first, then the animation, never both at once.
