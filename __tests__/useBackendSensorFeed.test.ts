@@ -47,7 +47,7 @@ describe("useBackendSensorFeed", () => {
     expect(result.current.sensors).toEqual(snapshot);
   });
 
-  test.each(["not json", "null", '{"error":"nope"}'])(
+  test.each(["not json", "null", '{"error":"nope"}', "[null]", '[{"id":1,"name":"no readings"}]'])(
     "a malformed frame (%s) is ignored",
     async (data) => {
       const { result } = await renderHook(() => useBackendSensorFeed(true));
