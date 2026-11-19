@@ -1,0 +1,52 @@
+// The bare app's __tests__/HomeScreen.integration.test.tsx and the sort/filter
+// unit tests, against the same 500-sensor seed.
+
+test "the list opens on every sensor in feed order"
+  expect tree has "sensor-row-1"
+  expect state homeRows.0.id == 1
+  expect text "feed-mode-toggle" == "LOCAL"
+
+test "a TYPE chip filters, and pressing it again clears it"
+  tap "type-filter-temperature"
+  clock +100
+  expect state homeRows.0.id == 3
+  expect tree missing "sensor-row-1"
+  tap "type-filter-temperature"
+  clock +100
+  expect state typeFilter == "all"
+  expect state homeRows.0.id == 1
+
+test "a sort holds its order across ticks"
+  tap "sort-trend-desc"
+  clock data
+  expect state homeRows.0.id == 132
+  clock +5000
+  expect state tick == 1
+  expect state homeRows.0.id == 132
+
+test "pressing the active sort clears it"
+  tap "sort-name-asc"
+  clock data
+  expect state homeRows.0.id == 41
+  tap "sort-name-asc"
+  expect state sortField == ""
+  expect state homeRows.0.id == 1
+
+test "a filter keeps the captured sort"
+  tap "sort-name-desc"
+  clock data
+  tap "type-filter-temperature"
+  clock +100
+  expect state homeRows.0.type == "temperature"
+  expect state sortField == "name"
+
+test "a row opens its detail"
+  tap "sensor-row-1"
+  clock settle
+  expect text "detail-name" == "Cleanroom Suite 2"
+  expect text "similar-count" == "271"
+
+test "the header toggle switches to the live feed"
+  tap "feed-mode-toggle"
+  expect state mode == "live"
+  expect text "feed-mode-toggle" == "LIVE"
