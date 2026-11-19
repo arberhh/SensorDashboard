@@ -32,6 +32,16 @@ test "pressing the active sort clears it"
   expect state sortField == ""
   expect state homeRows.0.id == 1
 
+test "switching feeds and back keeps the local readings"
+  clock +5000
+  expect state tick == 1
+  expect state homeRows.0.currentReading == 23.67
+  tap "feed-mode-toggle"
+  tap "feed-mode-toggle"
+  clock data
+  expect state mode == "local"
+  expect state homeRows.0.currentReading == 23.67
+
 test "a filter keeps the captured sort"
   tap "sort-name-desc"
   clock data

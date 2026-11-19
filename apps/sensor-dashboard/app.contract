@@ -14,6 +14,7 @@ shape Live
   sensors: Sensor[]
 
 shape Ranks
+  seq: number
   ranks: number[]
 
 routes nav
@@ -41,19 +42,17 @@ fn typeIcon(t: string): string = t == "temperature" ? "🌡️" : "💧"
 fn typeLabel(t: string): string = t == "temperature" ? "Temperature" : "Humidity"
 
 // src/utils/sensorList.ts. A sort is captured once, when its chip is pressed,
-// as each id's rank (ranks[id - 1], built by app.ts's rankIds), so live
+// as each id's rank (ranks[id - 1], built by app.ts's rankSorted), so live
 // deviation never reshuffles rows. Ids not ranked go last in feed order, as
 // orderByIds does.
-fn sortSensors(xs: Sensor[], field: string, dir: string): Sensor[] = (
-  field == "trend"
-    ? (dir == "desc" ? sortBy(xs, s => s.deviationPercent, "desc") : sortBy(xs, s => s.deviationPercent))
-    : (dir == "desc" ? sortBy(xs, s => s.name, "desc") : sortBy(xs, s => s.name)))
 fn rankOf(ranks: number[], id: number): number =
   match ranks.at(id - 1) { case some(r) => r < 0 ? 1000000 + id : r, case none => 1000000 + id }
 fn orderByRanks(xs: Sensor[], ranks: number[]): Sensor[] =
   ranks.isEmpty() ? xs : sortBy(xs, s => rankOf(ranks, s.id))
-fn ranksOf(sortField: string, ranked: option<Ranks>): number[] =
-  sortField == "" ? [] : match ranked { case some(r) => r.ranks, case none => [] }
+// A reply for an earlier press (seq) is not this sort's order, so the rows
+// stay in feed order until this press's reply lands.
+fn ranksOf(sortField: string, seq: number, ranked: option<Ranks>): number[] =
+  sortField == "" ? [] : match ranked { case some(r) => r.seq == seq ? r.ranks : [], case none => [] }
 fn statusColor(status: string): string =
   status == "connected" ? "status.connected" : status == "connecting" ? "status.connecting" : "status.offline"
 
@@ -88,6 +87,7 @@ component SensorDashboard
   state pendingType = ""
   state sortField = ""
   state sortDir = ""
+  state sortSeq = 0
 
   resource seed = seed() as shape Sensor[] else seed()
   resource local = localFeed(tick) when mode == "local" as shape Sensor[] else localFeed(0)
@@ -97,7 +97,7 @@ component SensorDashboard
   // Before the first frame, LIVE shows the seed, as the RN hook's initial state does.
   derive sensors = mode == "local" ? local : live.sensors.isEmpty() ? seed : live.sensors
   mutation homeRanked as shape Ranks queue
-  derive homeRows = orderByRanks(typeFilter == "all" ? sensors : sensors.filter(s => s.type == typeFilter), ranksOf(sortField, homeRanked))
+  derive homeRows = orderByRanks(typeFilter == "all" ? sensors : sensors.filter(s => s.type == typeFilter), ranksOf(sortField, sortSeq, homeRanked))
 
   // The local feed ticks every 5s; not deferred, since delaying live data
   // makes it stale.
@@ -131,7 +131,8 @@ component SensorDashboard
     else
       sortField = field
       sortDir = dir
-      send homeRanked = rankIds(sortSensors(sensors, field, dir).map(s => s.id))
+      send homeRanked = rankSorted(sensors, field, dir, sortSeq + 1)
+      sortSeq = sortSeq + 1
   action follow(url: string)
     nav = go(nav, url)
 
@@ -220,8 +221,9 @@ component SensorDetail
     routeId: string
   state sortField = ""
   state sortDir = ""
+  state sortSeq = 0
   mutation similarRanked as shape Ranks queue
-  derive ranks = ranksOf(sortField, similarRanked)
+  derive ranks = ranksOf(sortField, sortSeq, similarRanked)
   // Same as the home sort: captured at press time, pressing the active chip clears it.
   action pressSort(field: string, dir: string, type: string, id: number)
     if sortField == field and sortDir == dir
@@ -230,7 +232,8 @@ component SensorDetail
     else
       sortField = field
       sortDir = dir
-      send similarRanked = rankIds(sortSensors(orderByRanks(sensors.filter(c => c.type == type and c.id != id), ranks), field, dir).map(s => s.id))
+      send similarRanked = rankSorted(orderByRanks(sensors.filter(c => c.type == type and c.id != id), ranks), field, dir, sortSeq + 1)
+      sortSeq = sortSeq + 1
   view
     match first(sensors.filter(s => s.id.toString() == routeId))
       case some(sensor)

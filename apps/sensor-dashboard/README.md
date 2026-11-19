@@ -37,7 +37,7 @@ retries every 5s, as the RN app does.
 | --- | --- |
 | `useLocalSensorFeed` 5s interval | `task localTick` re-asks `localFeed(tick)` |
 | `useBackendSensorFeed` WebSocket | `liveFeed(attempt)`, a `fetch` with `exactStream`; `task retry` bumps `attempt` |
-| `HomeScreen` reducer, `sortedIds` | `sortField`/`sortDir` state; ranks from `rankIds` |
+| `HomeScreen` reducer, `sortedIds` | `sortField`/`sortDir` state; ranks from `rankSorted` |
 | `requestIdleCallback` on TYPE | `after(1, commitType, wait=idle)` |
 | `FlashList` | `list virtualized=true` |
 | native-stack | `routes nav`, a row is a `link` |
@@ -45,8 +45,11 @@ retries every 5s, as the RN app does.
 ## Differences from the RN app
 
 - **The sort's reorder lands one commit after the press.** Contract caps one evaluation at
-  65,536 list steps, so inverting the sorted ids (n² with `indexOf`) is done by `rankIds`
-  in `app.ts`, a mutation whose reply arrives on the next commit.
+  65,536 list steps, so `rankSorted` in `app.ts` sorts and ranks the ids; it is a mutation,
+  whose reply arrives on the next commit. Until then the rows stay in feed order.
+- **The seed and the pure logic are copies.** Exact only resolves imports inside this folder,
+  so `sensor_readings.json` is a copy of `src/data` (the root `exactSeed` test fails if they
+  differ) and `app.ts` ports `src/utils/sensorReadings.ts` and `sortSensors` by hand.
 - **Random readings** come from `crypto.getRandomValues` (`Math.random` is unavailable in
   data sources); under the agent they repeat per launch seed.
 - **The sort bar stays pinned above the list**, as in RN. The compiler warns
