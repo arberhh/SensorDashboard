@@ -25,7 +25,7 @@ shared by `SensorRow` (the Home list) and `SensorDetailScreen`:
   and exactly zero. Protects against: a sign-formatting regression that's
   easy to eyeball-miss (e.g. `-1.5` becoming `+-1.5` or `0` becoming `+0`).
 
-## `__tests__/sensorList.test.ts` → `src/utils/sensorList.ts`
+## `__tests__/sensorList.test.ts` → `sensor-core`'s `sensorList.ts`
 
 Covers the sort/filter logic shared by `HomeScreen`'s TYPE/TREND/NAME chips
 and `SensorDetailScreen`'s Similar Sensors section — this is the "complex
@@ -52,20 +52,18 @@ of trusted twice.
   itself" check silently dropping (which would show a sensor in its own
   Similar Sensors list) or the type filter loosening to include everything.
 
-## `__tests__/sensorReadings.test.ts` → `src/utils/sensorReadings.ts`
+## `__tests__/sensorReadings.test.ts` → `sensor-core`'s `sensorReadings.ts`
 
 Covers `generateReading`, the formula behind the local feed's 5-second
 live tick (the app's headline "live feed" behavior), plus
 `baselineReading` and `calculateDeviation`, which turn each new reading
 into a live `deviationPercent`.
 
-`generateReading` draws within ±8% of a sensor's baseline, matching the
-generator's deviation spread. Since that's random, its tests are
-**statistical, not exact** — they assert invariants across many samples
-(500 per test) rather than any single value: every reading stays within
-±8% of the baseline, rounds to at most 2 decimal places, and — a sanity
-check on the sanity checks — repeated calls don't all return the exact
-same number. One test pins `Math.random` to check the band's edges
-exactly. Protects against: the drift widening (which would bring back
+`generateReading` maps a random roll in [0, 1) to a reading within ±8% of
+a sensor's baseline, matching the generator's deviation spread. Its tests
+are mostly **statistical, not exact** — they assert invariants across many
+random rolls (500 per test) rather than any single value: every reading
+stays within ±8% of the baseline and rounds to at most 2 decimal places.
+One test passes fixed rolls to check the band's edge and centre exactly. Protects against: the drift widening (which would bring back
 three-digit deviations), and a rounding change that adds more precision
 than the UI expects.

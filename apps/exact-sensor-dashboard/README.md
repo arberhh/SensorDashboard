@@ -18,6 +18,7 @@ and changes daily, so pin that commit when comparing numbers.
 git clone https://github.com/expo/exact.git ../../../exact   # i.e. ~/Desktop/Dev/exact
 git -C ../../../exact checkout 8be4aafa45aa93ca62b36f9be4703721cd11c93f
 bun ../../../exact/scripts/exact.mjs setup                   # needs rustup and Bun 1.4.2
+bun install                                                  # links ../../packages/sensor-core
 ```
 
 ## Run
@@ -47,10 +48,10 @@ retries every 5s, as the RN app does.
 - **The sort's reorder lands one commit after the press.** Contract caps one evaluation at
   65,536 list steps, so `rankSorted` in `app.ts` sorts and ranks the ids; it is a mutation,
   whose reply arrives on the next commit. Until then the rows stay in feed order.
-- **The seed and the pure logic are copies.** Exact only resolves imports inside this folder,
-  so `sensor_readings.json` is a copy of the RN app's `src/data` (its `exactSeed` test fails
-  if they differ) and `app.ts` ports its `src/utils/sensorReadings.ts` and `sortSensors` by
-  hand.
+- **The seed and the pure logic are shared**, not ported: `app.ts` imports `sensor-core`
+  (`../../packages/sensor-core`), the package the RN app uses. Exact type-checks it from its
+  `types/*.d.ts`, and bun links it file by file, so run `bun install` again after a file is
+  added there.
 - **Random readings** come from `crypto.getRandomValues` (`Math.random` is unavailable in
   data sources); under the agent they repeat per launch seed.
 - **The sort bar stays pinned above the list**, as in RN. The compiler warns

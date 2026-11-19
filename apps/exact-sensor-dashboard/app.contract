@@ -42,7 +42,7 @@ fn typeTint(t: string): string = t == "temperature" ? "temperature.tint" : "humi
 fn typeIcon(t: string): string = t == "temperature" ? "🌡️" : "💧"
 fn typeLabel(t: string): string = t == "temperature" ? "Temperature" : "Humidity"
 
-// src/utils/sensorList.ts. A sort is captured once, when its chip is pressed,
+// sensor-core's sensorList.ts. A sort is captured once, when its chip is pressed,
 // as each id's rank (ranks[id - 1], built by app.ts's rankSorted), so live
 // deviation never reshuffles rows. Ids not ranked go last in feed order, as
 // orderByIds does.

@@ -1,10 +1,8 @@
 import { useEffect, useState } from "react";
 
 import { BACKEND_WS_URL } from "@/config";
-import initialSensors from "@/data/sensor_readings.json";
+import { initialSensors, isSensorSnapshot, type TSensor } from "sensor-core";
 import type { ConnectionStatus, SensorFeedResult } from "@/types/feed";
-import type { TSensor } from "@/types/sensor";
-import { isSensorSnapshot } from "@/utils/sensorSnapshot";
 
 const RETRY_INTERVAL_MS = 5000;
 

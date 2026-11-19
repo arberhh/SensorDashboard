@@ -1,4 +1,4 @@
-import type { TSensor } from "@/types/sensor";
+import type { TSensor } from "sensor-core";
 
 export type FeedMode = "local" | "live";
 export type ConnectionStatus = "connecting" | "connected" | "error";

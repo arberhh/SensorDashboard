@@ -15,8 +15,8 @@ These call small, pure functions directly — no rendering, no navigation, no
 duplicated inline in two places (easy for the two copies to drift apart
 silently), and the display-formatting rules (which icon a location gets,
 whether a deviation shows a `+` sign, which color a sensor type renders in)
-had no coverage at all. That logic now lives in `src/utils/sensorList.ts`,
-`src/utils/sensorReadings.ts`, and `src/utils/sensorDisplay.ts` specifically
+had no coverage at all. That logic now lives in `sensor-core`'s `sensorList.ts`,
+`sensor-core`'s `sensorReadings.ts`, and `src/utils/sensorDisplay.ts` specifically
 so it _can_ be unit tested in isolation.
 
 **What they catch:** an off-by-one in a comparator, a flipped `asc`/`desc`,

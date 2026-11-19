@@ -1,14 +1,16 @@
-import type { Sensor } from "@/types/sensor";
+import type { Sensor } from "./sensor";
 
 // Same ±8% spread as the generator's deviationPercent
 // (scripts/genSensorData.js), so live deviations stay in the seed data's
 // range instead of swinging across the whole reading range for a type.
 const MAX_DRIFT = 0.08;
 
-// A new random currentReading within ±8% of a sensor's baseline, rounded to
-// 2 decimals — what the local feed's 5s tick applies to every sensor.
-export function generateReading(baseline: number): number {
-  const drift = (Math.random() * 2 - 1) * MAX_DRIFT;
+// A new currentReading within ±8% of a sensor's baseline, rounded to 2
+// decimals — what the local feed's 5s tick applies to every sensor. `roll`
+// is a random number in [0, 1), passed in because Exact's data module has no
+// Math.random.
+export function generateReading(baseline: number, roll: number): number {
+  const drift = (roll * 2 - 1) * MAX_DRIFT;
   return parseFloat((baseline * (1 + drift)).toFixed(2));
 }
 

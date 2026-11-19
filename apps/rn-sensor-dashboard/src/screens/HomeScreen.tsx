@@ -5,9 +5,6 @@ import { FlashList } from "@shopify/flash-list";
 
 import { SafeAreaView } from "react-native-safe-area-context";
 import theme from "@/theme";
-import type { Sensor } from "@/types/sensor";
-import { renderSensorRow } from "@/components/SensorRow";
-import { useSensorFeedContext } from "@/context/SensorFeedContext";
 import {
   filterSensorsByType,
   orderByIds,
@@ -16,7 +13,10 @@ import {
   type SortDirection,
   type SortField,
   type TypeFilter,
-} from "@/utils/sensorList";
+  type Sensor,
+} from "sensor-core";
+import { renderSensorRow } from "@/components/SensorRow";
+import { useSensorFeedContext } from "@/context/SensorFeedContext";
 
 type HomeState = {
   typeFilter: TypeFilter;

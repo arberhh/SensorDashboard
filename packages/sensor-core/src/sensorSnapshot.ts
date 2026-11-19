@@ -1,11 +1,13 @@
-import type { TSensor } from "@/types/sensor";
+import type { TSensor } from "./sensor";
 
 function isSensor(row: unknown): boolean {
   return (
     typeof row === "object" &&
     row !== null &&
     "id" in row &&
+    typeof row.id === "number" &&
     Number.isInteger(row.id) &&
+    row.id > 0 &&
     "name" in row &&
     typeof row.name === "string" &&
     "sensorId" in row &&
@@ -22,8 +24,7 @@ function isSensor(row: unknown): boolean {
 }
 
 // Whether a parsed backend frame is a full sensor array. Both feeds drop a
-// frame that isn't, so a bad row never reaches a list (shared with the Exact
-// build in apps/sensor-dashboard).
+// frame that isn't, so a bad row never reaches a list.
 export function isSensorSnapshot(frame: unknown): frame is TSensor {
   return Array.isArray(frame) && frame.every(isSensor);
 }

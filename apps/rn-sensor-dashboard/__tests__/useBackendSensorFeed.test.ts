@@ -5,7 +5,7 @@
 import { act, renderHook } from "@testing-library/react-native";
 
 import { useBackendSensorFeed } from "@/hooks/useBackendSensorFeed";
-import initialSensors from "@/data/sensor_readings.json";
+import { initialSensors } from "sensor-core";
 
 class FakeSocket {
   static created: FakeSocket[] = [];

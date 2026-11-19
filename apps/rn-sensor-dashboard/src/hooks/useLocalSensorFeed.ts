@@ -1,9 +1,13 @@
 import { useEffect, useState } from "react";
 
-import initialSensors from "@/data/sensor_readings.json";
+import {
+  initialSensors,
+  baselineReading,
+  calculateDeviation,
+  generateReading,
+  type TSensor,
+} from "sensor-core";
 import type { SensorFeedResult } from "@/types/feed";
-import type { TSensor } from "@/types/sensor";
-import { baselineReading, calculateDeviation, generateReading } from "@/utils/sensorReadings";
 
 // Fixed per sensor for the app's lifetime, so deviationPercent keeps
 // measuring against the same baseline as the readings fluctuate.
@@ -22,7 +26,7 @@ export function useLocalSensorFeed(enabled: boolean): SensorFeedResult {
       setSensors((prevSensors) =>
         prevSensors.map((sensor) => {
           const baseline = baselines.get(sensor.id) ?? sensor.currentReading;
-          const currentReading = generateReading(baseline);
+          const currentReading = generateReading(baseline, Math.random());
           return {
             ...sensor,
             currentReading,
