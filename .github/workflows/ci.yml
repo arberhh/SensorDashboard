@@ -7,8 +7,12 @@ on:
     branches: [main]
 
 jobs:
+  # The RN app in apps/rn-sensor-dashboard.
   checks:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: apps/rn-sensor-dashboard
     steps:
       - name: Checkout
         uses: actions/checkout@v7
@@ -22,6 +26,7 @@ jobs:
           # ^22.13.0 || >=24.
           node-version: 22
           cache: npm
+          cache-dependency-path: apps/rn-sensor-dashboard/package-lock.json
 
       - name: Install dependencies
         run: npm ci
@@ -89,11 +94,11 @@ jobs:
   #     - uses: actions/checkout@v7
   #     - uses: actions/setup-java@v4
   #       with: { distribution: temurin, java-version: "17" }
-  #     - run: cd android && ./gradlew assembleDebug
+  #     - run: cd apps/rn-sensor-dashboard/android && ./gradlew assembleDebug
   #
   # ios-build:
   #   runs-on: macos-latest
   #   steps:
   #     - uses: actions/checkout@v7
-  #     - run: cd ios && pod install
-  #     - run: xcodebuild -workspace ios/*.xcworkspace -scheme <Scheme> -configuration Debug -sdk iphonesimulator build
+  #     - run: cd apps/rn-sensor-dashboard/ios && pod install
+  #     - run: xcodebuild -workspace apps/rn-sensor-dashboard/ios/*.xcworkspace -scheme <Scheme> -configuration Debug -sdk iphonesimulator build

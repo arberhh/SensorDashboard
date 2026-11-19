@@ -1,7 +1,10 @@
 #!/bin/sh
-# Installed via `npm run prepare` running `git config core.hooksPath .githooks`.
-if git diff --cached --quiet --diff-filter=ACMR; then
+# Installed via `npm run prepare` in apps/rn-sensor-dashboard, which runs
+# `git config core.hooksPath .githooks`. Formats the RN app's staged files
+# with its oxfmt; the other apps have their own toolchains.
+RN=apps/rn-sensor-dashboard
+if git diff --cached --quiet --diff-filter=ACMR -- "$RN"; then
   exit 0
 fi
-git diff --cached --name-only --diff-filter=ACMR -z | xargs -0 ./node_modules/.bin/oxfmt --no-error-on-unmatched-pattern
-git diff --cached --name-only --diff-filter=ACMR -z | xargs -0 git add
+git diff --cached --name-only --diff-filter=ACMR -z -- "$RN" | xargs -0 "$RN/node_modules/.bin/oxfmt" -c "$RN/.oxfmtrc.json" --no-error-on-unmatched-pattern
+git diff --cached --name-only --diff-filter=ACMR -z -- "$RN" | xargs -0 git add
