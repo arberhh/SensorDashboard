@@ -40,6 +40,7 @@ second on a phone, and at 400ms apart it lands on the previous fling and shows u
 (11 to 15 ms/s in both apps, against 0 to 2 once spaced).
 
 ```sh
+export PHONE_UDID=<udid>  # from: xcrun xctrace list devices
 export AGENT_DEVICE_IOS_TEAM_ID=<team id> AGENT_DEVICE_IOS_BUNDLE_ID=<any id you own>.runner
 TARGET=phone scripts/measure/run.sh 3  # about 5 minutes a run: saving a trace is slow
 ```

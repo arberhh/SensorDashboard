@@ -3,11 +3,11 @@
 # One measured run of one app on a physical iPhone over USB: relaunch it, then
 # record Instruments' Animation Hitches while the same scripted swipes as
 # measure.sh scroll the list down and back up. Appends one CSV row.
-# Env: PHONE_UDID (default: the phone from AGENTS.md), plus agent-device's
+# Env: PHONE_UDID (required: the phone's UDID), plus agent-device's
 # runner signing (AGENT_DEVICE_IOS_TEAM_ID, AGENT_DEVICE_IOS_BUNDLE_ID).
 set -euo pipefail
 APP=$1; RUN=$2; OUT=$3
-PHONE=${PHONE_UDID:-00008150-001058EE0C20401C}
+PHONE=${PHONE_UDID:?set PHONE_UDID to the UDID of the phone, from xcrun xctrace list devices}
 SWIPES=8 # each way
 # agent-device reads the whole accessibility tree before every swipe, which
 # blocks the app's main thread for about half a second on a phone. The pause
