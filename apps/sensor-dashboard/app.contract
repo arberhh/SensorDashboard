@@ -1,0 +1,302 @@
+// SensorDashboard in Exact: the same two screens as the bare RN app at the
+// repo root (src/screens), with the same feed, filter and sorts.
+shape Sensor
+  id: number
+  name: string
+  sensorId: string
+  type: string
+  unit: string
+  currentReading: number
+  deviationPercent: number
+
+shape Live
+  status: string
+  sensors: Sensor[]
+
+shape Ranks
+  ranks: number[]
+
+routes nav
+  home "/"
+    sensor "/sensor/:id"
+
+// src/utils/sensorDisplay.ts
+fn locationIcon(name: string): string = (
+  name.includes("Warehouse") ? "🏭"
+  : name.includes("Cold Storage") ? "🧊"
+  : name.includes("Greenhouse") ? "🌿"
+  : name.includes("Server Room") ? "🖥️"
+  : name.includes("Office") ? "🏢"
+  : name.includes("Production Line") ? "⚙️"
+  : name.includes("Loading Bay") ? "🚛"
+  : name.includes("Rooftop") ? "🏙️"
+  : name.includes("Basement") ? "🗄️"
+  : name.includes("Packaging") ? "📦"
+  : name.includes("Cleanroom") ? "🧪"
+  : "📍")
+fn formatDeviation(p: number): string = `${p > 0 ? "+" : ""}${p.toFixed(2)}%`
+fn typeColor(t: string): string = t == "temperature" ? "temperature" : "humidity"
+fn typeTint(t: string): string = t == "temperature" ? "temperature.tint" : "humidity.tint"
+fn typeIcon(t: string): string = t == "temperature" ? "🌡️" : "💧"
+fn typeLabel(t: string): string = t == "temperature" ? "Temperature" : "Humidity"
+
+// src/utils/sensorList.ts. A sort is captured once, when its chip is pressed,
+// as each id's rank (ranks[id - 1], built by app.ts's rankIds), so live
+// deviation never reshuffles rows. Ids not ranked go last in feed order, as
+// orderByIds does.
+fn sortSensors(xs: Sensor[], field: string, dir: string): Sensor[] = (
+  field == "trend"
+    ? (dir == "desc" ? sortBy(xs, s => s.deviationPercent, "desc") : sortBy(xs, s => s.deviationPercent))
+    : (dir == "desc" ? sortBy(xs, s => s.name, "desc") : sortBy(xs, s => s.name)))
+fn rankOf(ranks: number[], id: number): number =
+  match ranks.at(id - 1) { case some(r) => r < 0 ? 1000000 + id : r, case none => 1000000 + id }
+fn orderByRanks(xs: Sensor[], ranks: number[]): Sensor[] =
+  ranks.isEmpty() ? xs : sortBy(xs, s => rankOf(ranks, s.id))
+fn ranksOf(sortField: string, ranked: option<Ranks>): number[] =
+  sortField == "" ? [] : match ranked { case some(r) => r.ranks, case none => [] }
+fn statusColor(status: string): string =
+  status == "connected" ? "status.connected" : status == "connecting" ? "status.connecting" : "status.offline"
+
+style screen
+  background-color="background" color-scheme="dark"
+style sortBar
+  display="flex" flex-direction="row" flex-wrap="wrap" gap=16
+  margin="8px 8px 0px 8px" padding="12px 16px" border-radius=12
+  background-color="card.background" border="0.33px solid" border-color="border"
+style sortGroup
+  display="flex" flex-direction="column" gap=6
+style groupLabel
+  color="text.muted" font-size="0.75rem" font-weight=700 letter-spacing="0.6px"
+style chipRow
+  display="flex" flex-direction="row" gap=8
+style chip
+  padding="6px 12px" border-radius=999
+style chipText
+  color="text" font-size="0.875rem" font-weight=600
+style card
+  background-color="surface" border-radius=16 box-shadow="0px 4px 16px var(--shadow)"
+style statLabel
+  color="text.muted" font-size="0.75rem" font-weight=700 letter-spacing="0.6px"
+style statValue
+  color="text" font-size="0.875rem" font-weight=700
+
+component SensorDashboard
+  state mode = "local"
+  state tick = 0
+  state attempt = 0
+  state typeFilter = "all"
+  state pendingType = ""
+  state sortField = ""
+  state sortDir = ""
+
+  resource seed = seed() as shape Sensor[] else seed()
+  resource local = localFeed(tick) when mode == "local" as shape Sensor[] else localFeed(0)
+  resource live = liveFeed(attempt) when mode == "live" as shape Live else empty(status="connecting", sensors=[])
+
+  derive status = mode == "local" ? "connected" : failed(live) ? "error" : pending(live) ? "connecting" : live.status
+  // Before the first frame, LIVE shows the seed, as the RN hook's initial state does.
+  derive sensors = mode == "local" ? local : live.sensors.isEmpty() ? seed : live.sensors
+  mutation homeRanked as shape Ranks queue
+  derive homeRows = orderByRanks(typeFilter == "all" ? sensors : sensors.filter(s => s.type == typeFilter), ranksOf(sortField, homeRanked))
+
+  // The local feed ticks every 5s; not deferred, since delaying live data
+  // makes it stale.
+  task localTick when mode == "local"
+    every(5000, nextTick)
+  // A dropped socket shows the error and retries on a flat 5s cadence.
+  task retry when mode == "live" and status == "error"
+    after(5000, reconnect)
+  // A TYPE press waits for idle so it doesn't fight an in-flight scroll.
+  task applyType when pendingType != ""
+    after(1, commitType, wait=idle)
+
+  action nextTick
+    tick = tick + 1
+  action reconnect
+    attempt = attempt + 1
+  action toggleMode
+    mode = mode == "local" ? "live" : "local"
+  action pressType(filter: string)
+    pendingType = filter
+  // Pressing the active filter toggles it back off (to "all").
+  action commitType
+    typeFilter = typeFilter == pendingType ? "all" : pendingType
+    pendingType = ""
+  // Pressing the active sort chip clears it; otherwise the order is captured
+  // from the whole feed now.
+  action pressSort(field: string, dir: string)
+    if sortField == field and sortDir == dir
+      sortField = ""
+      sortDir = ""
+    else
+      sortField = field
+      sortDir = dir
+      send homeRanked = rankIds(sortSensors(sensors, field, dir).map(s => s.id))
+  action follow(url: string)
+    nav = go(nav, url)
+
+  view
+    main testId="root" navigationKey=`${top(nav).id}` navigate=follow width="100%" height="100%" status-bar-style="light-content" class=screen
+      for e in stack(nav) key=e.id
+        if e.name == "home"
+          column navigationKey=`${e.id}` navigationScroll="sensor-list" position="absolute" inset=0 display="flex" flex-direction="column" class=screen
+            header
+              text "Sensor Dashboard" role="heading" aria-level=2
+              FeedToggle(mode=mode, status=status, toggle=toggleMode)
+            row class=sortBar
+              column class=sortGroup
+                text "TYPE" class=groupLabel
+                row class=chipRow
+                  Chip(label="All", active=(typeFilter == "all"), press=pressType("all"), chipId="type-filter-all")
+                  Chip(label="Temperature", active=(typeFilter == "temperature"), press=pressType("temperature"), chipId="type-filter-temperature")
+                  Chip(label="Humidity", active=(typeFilter == "humidity"), press=pressType("humidity"), chipId="type-filter-humidity")
+              column class=sortGroup
+                text "TREND" class=groupLabel
+                row class=chipRow
+                  Chip(label="Asc ↑", active=(sortField == "trend" and sortDir == "asc"), press=pressSort("trend", "asc"), chipId="sort-trend-asc")
+                  Chip(label="Desc ↓", active=(sortField == "trend" and sortDir == "desc"), press=pressSort("trend", "desc"), chipId="sort-trend-desc")
+              column class=sortGroup
+                text "NAME" class=groupLabel
+                row class=chipRow
+                  Chip(label="Asc ↑", active=(sortField == "name" and sortDir == "asc"), press=pressSort("name", "asc"), chipId="sort-name-asc")
+                  Chip(label="Desc ↓", active=(sortField == "name" and sortDir == "desc"), press=pressSort("name", "desc"), chipId="sort-name-desc")
+            list id="sensor-list" testId="sensor-list" virtualized=true appearance="none" estimated-item-height=116 flex=1 min-height=0
+              for s in homeRows key=s.id
+                SensorRow(sensor=s)
+        if e.name == "sensor"
+          column navigationKey=`${e.id}` navigationScroll="similar-list" position="absolute" inset=0 display="flex" flex-direction="column" class=screen
+            header
+              FeedToggle(mode=mode, status=status, toggle=toggleMode)
+            SensorDetail(sensors=sensors, routeId=e.params.id)
+
+// Header-right pill: current mode and a connection status dot.
+component FeedToggle
+  props
+    mode: string
+    status: string
+    toggle: action
+  view
+    // iOS 26 still wraps this bar item in its glass capsule; RN hides it with
+    // hidesSharedBackground, which Exact has no equivalent for.
+    button press=toggle testId="feed-mode-toggle" display="flex" flex-direction="row" align-items="center" gap=4 padding="6px 12px" border-radius=999 background-color="chip.background"
+      view width=8 height=8 border-radius=999 background-color=statusColor(status)
+      text (mode == "local" ? "LOCAL" : "LIVE") color="text" font-size="0.75rem" font-weight=700 letter-spacing="0.6px"
+
+component Chip
+  props
+    label: string
+    active: bool
+    press: action
+    chipId: string
+  view
+    button press=press testId=chipId aria-pressed=active class=chip background-color=(active ? "accent" : "chip.background")
+      :active
+        background-color="chip.pressed"
+      text label class=chipText
+
+// src/components/SensorRow.tsx
+component SensorRow
+  props
+    sensor: Sensor
+  view
+    // A virtualized row takes no margin, so the gap is the link's padding.
+    link href=path("sensor", sensor.id.toString()) testId=`sensor-row-${sensor.id}` display="block" padding=8
+      column padding=24 class=card
+        row align-items="center" gap=8 margin-bottom=16
+          text locationIcon(sensor.name) font-size="1.25rem"
+          text sensor.name color="text" flex=1 font-size="1rem" font-weight=700 white-space="nowrap" overflow="hidden" text-overflow="ellipsis"
+        row gap=32
+          column gap=4
+            text `${typeIcon(sensor.type)} READING` class=statLabel
+            text `${sensor.currentReading}${sensor.unit}` class=statValue color=typeColor(sensor.type)
+          column gap=4
+            text "DEVIATION" class=statLabel
+            text formatDeviation(sensor.deviationPercent) class=statValue
+
+// src/screens/SensorDetailScreen.tsx
+component SensorDetail
+  props
+    sensors: Sensor[]
+    routeId: string
+  state sortField = ""
+  state sortDir = ""
+  mutation similarRanked as shape Ranks queue
+  derive ranks = ranksOf(sortField, similarRanked)
+  // Same as the home sort: captured at press time, pressing the active chip clears it.
+  action pressSort(field: string, dir: string, type: string, id: number)
+    if sortField == field and sortDir == dir
+      sortField = ""
+      sortDir = ""
+    else
+      sortField = field
+      sortDir = dir
+      send similarRanked = rankIds(sortSensors(orderByRanks(sensors.filter(c => c.type == type and c.id != id), ranks), field, dir).map(s => s.id))
+  view
+    match first(sensors.filter(s => s.id.toString() == routeId))
+      case some(sensor)
+        list id="similar-list" virtualized=true appearance="none" estimated-item-height=72 flex=1 min-height=0 padding-bottom=24
+          column margin=8 padding=24 class=card
+            row align-items="flex-start" gap=16 margin-bottom=24
+              text locationIcon(sensor.name) font-size="2.5rem"
+              column flex=1 gap=4
+                text sensor.name color="text" font-size="1.25rem" font-weight=700 testId="detail-name"
+                view align-self="flex-start" border-radius=999 padding="4px 8px" background-color=typeTint(sensor.type)
+                  text `${typeIcon(sensor.type)} ${typeLabel(sensor.type)}` color=typeColor(sensor.type) font-size="0.75rem" font-weight=700
+            column gap=4
+              text "CURRENT READING" class=statLabel
+              row align-items="baseline"
+                text `${sensor.currentReading}` color=typeColor(sensor.type) font-size="2.5rem" font-weight=700
+                text sensor.unit color=typeColor(sensor.type) font-size="1.25rem" font-weight=700
+              text `${formatDeviation(sensor.deviationPercent)} deviation` color="text.muted" font-size="0.875rem" font-weight=600
+          column margin="16px 8px 0px 8px" padding=24 border-radius=16 background-color="surface"
+            text "Sensor Details" color="text" font-size="1rem" font-weight=700
+            DetailRow(label="Sensor ID", value=sensor.sensorId, last=false)
+            DetailRow(label="Type", value=typeLabel(sensor.type), last=false)
+            DetailRow(label="Unit", value=sensor.unit, last=false)
+            DetailRow(label="Deviation", value=formatDeviation(sensor.deviationPercent), last=true)
+          row align-items="center" justify-content="space-between" margin="24px 8px 0px 8px"
+            text "Similar Sensors" color="text" font-size="1rem" font-weight=700
+            text `${sensors.filter(c => c.type == sensor.type and c.id != sensor.id).length}` color="text.muted" font-size="0.875rem" font-weight=600 testId="similar-count"
+          row flex-wrap="wrap" gap=16 margin="8px 8px 0px 8px"
+            column class=sortGroup
+              text "TREND" class=groupLabel
+              row class=chipRow
+                Chip(label="Asc ↑", active=(sortField == "trend" and sortDir == "asc"), press=pressSort("trend", "asc", sensor.type, sensor.id), chipId="similar-trend-asc")
+                Chip(label="Desc ↓", active=(sortField == "trend" and sortDir == "desc"), press=pressSort("trend", "desc", sensor.type, sensor.id), chipId="similar-trend-desc")
+            column class=sortGroup
+              text "NAME" class=groupLabel
+              row class=chipRow
+                Chip(label="Asc ↑", active=(sortField == "name" and sortDir == "asc"), press=pressSort("name", "asc", sensor.type, sensor.id), chipId="similar-name-asc")
+                Chip(label="Desc ↓", active=(sortField == "name" and sortDir == "desc"), press=pressSort("name", "desc", sensor.type, sensor.id), chipId="similar-name-desc")
+          for c in orderByRanks(sensors.filter(c => c.type == sensor.type and c.id != sensor.id), ranks) key=c.id
+            SimilarRow(sensor=c)
+      case none
+        column flex=1 align-items="center" justify-content="center" gap=4 padding=24
+          text "🔍" font-size="2.5rem" margin-bottom=8
+          text "Sensor not found" color="text" font-size="1.25rem" font-weight=700 testId="not-found"
+          text `No sensor with ID ${routeId} exists in the current dataset.` color="text.muted" font-size="0.875rem" text-align="center"
+
+component DetailRow
+  props
+    label: string
+    value: string
+    last: bool
+  view
+    row justify-content="space-between" padding="16px 0px" border-bottom=(last ? "0px solid" : "0.33px solid") border-bottom-color="border"
+      text label color="text.muted" font-size="0.875rem"
+      text value color="text" font-size="0.875rem" font-weight=600
+
+// Not pressable by design (ARB-10): unlike the home row, it doesn't navigate.
+component SimilarRow
+  props
+    sensor: Sensor
+  view
+    column padding="8px 8px 0px 8px"
+      row align-items="center" gap=8 padding=16 border-radius=12 background-color="surface"
+        text locationIcon(sensor.name) font-size="1.25rem"
+        column flex=1 gap=4 min-width=0
+          text sensor.name color="text" font-size="0.875rem" font-weight=600 white-space="nowrap" overflow="hidden" text-overflow="ellipsis"
+          text sensor.sensorId color="text.muted" font-size="0.75rem"
+        column align-items="flex-end"
+          text `${sensor.currentReading}${sensor.unit}` color=typeColor(sensor.type) font-size="0.875rem" font-weight=700
+          text formatDeviation(sensor.deviationPercent) color="text.muted" font-size="0.75rem" margin-top=4

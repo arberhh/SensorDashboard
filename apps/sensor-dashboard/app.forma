@@ -1,0 +1,24 @@
+// The bare app's src/theme/index.ts colours. That app is dark only, so every
+// token is fixed rather than following the scheme.
+forma brand
+
+theme
+  AccentColor = #4a5cff  scheme=fixed
+  background = #151544  scheme=fixed
+  surface = #1f1f5c  scheme=fixed
+  accent = #4a5cff  scheme=fixed
+  text = #ffffff  scheme=fixed
+  text.muted = rgba(255, 255, 255, 0.45)  scheme=fixed
+  border = rgba(255, 255, 255, 0.08)  scheme=fixed
+  card.background = rgba(255, 255, 255, 0.05)  scheme=fixed
+  chip.background = rgba(255, 255, 255, 0.08)  scheme=fixed
+  chip.pressed = rgba(255, 255, 255, 0.18)  scheme=fixed
+  temperature = #ff9152  scheme=fixed
+  humidity = #4fc3f7  scheme=fixed
+  temperature.tint = rgba(255, 145, 82, 0.15)  scheme=fixed
+  humidity.tint = rgba(79, 195, 247, 0.15)  scheme=fixed
+  status.connected = #4caf50  scheme=fixed
+  status.connecting = #ffc107  scheme=fixed
+  status.offline = #f44336  scheme=fixed
+  // RN's shadowColor #000 at shadowOpacity 0.35, as one colour.
+  shadow = rgba(0, 0, 0, 0.35)  scheme=fixed
