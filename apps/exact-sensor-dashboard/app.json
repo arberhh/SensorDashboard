@@ -17,14 +17,14 @@
     }
   },
   "$schema": "../../../exact/scripts/app.schema.json",
-  "name": "SensorDashboard Exact",
-  "short_name": "SensorDashboard Exact",
+  "name": "Exact SensorDashboard",
+  "short_name": "Exact SensorDashboard",
   "id": "com.arberhh.sensordashboard.exact",
   "start_url": "/",
   "display": "standalone",
   "app": {
     "id": "com.arberhh.sensordashboard.exact",
-    "name": "SensorDashboard Exact"
+    "name": "Exact SensorDashboard"
   },
   "userInterfaceStyle": "dark"
 }
