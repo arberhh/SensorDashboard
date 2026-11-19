@@ -53,6 +53,9 @@ A behaviour change in one build should land in the others. This is the shared be
 - Never suppress a lint or type error, and no casts that only quiet one. Fix the cause.
 - Comments are short and say only the non-obvious why.
 - Prefer what the platform or the stack already provides over custom native code.
+- No private data in the repo: Apple team ids, device UDIDs, home-folder paths, emails,
+  secrets. `scripts/check-private-data.sh` blocks them in the pre-commit hook and in CI.
+  When it fires, use a placeholder (`<team id>`) or an env var; don't skip it.
 
 ## Measuring
 
@@ -88,8 +91,8 @@ checklist are in the `commit-convention`, `label-pr` and `verify-pr-testplan` sk
 
 ## Devices
 
-- Simulator: iPhone 17 Pro, `75C568DB-6957-4433-ADE2-B336FAC0C1FA` on the owner's Mac (yours
-  differs: `xcrun simctl list devices`).
+- Measurements so far are on an iPhone 17 Pro, simulator and phone. Pass your own with
+  `SIM_UDID` and `PHONE_UDID`.
 - The measurement runner is a sideloaded app too, so it takes one of a free account's slots.
 
 ## The React Native build (`apps/rn-sensor-dashboard`)
