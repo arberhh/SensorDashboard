@@ -4,6 +4,10 @@
 # app and the shared package's source with the RN app's oxfmt. The package's
 # types/ is generated and CI compares it to the generator's output, so it is
 # left alone; the Exact app has its own toolchain.
+# Private data (team ids, device UDIDs, home paths, emails, secrets) stops the
+# commit, whatever part of the repo it is in.
+scripts/check-private-data.sh --staged || exit 1
+
 RN=apps/rn-sensor-dashboard
 SRC=packages/sensor-core/src
 if git diff --cached --quiet --diff-filter=ACMR -- "$RN" "$SRC"; then

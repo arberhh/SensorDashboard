@@ -16,7 +16,7 @@ Install **release** builds on the simulator first, or you measure Metro and debu
 (cd apps/exact-sensor-dashboard && bun exact.mjs ios --release --run --sim <udid>)
 ```
 
-`SIM_UDID` picks the simulator (default: the iPhone 17 Pro in `AGENTS.md`). Each run appends a
+`SIM_UDID` is required and picks the simulator (`xcrun simctl list devices`). Each run appends a
 row to `measure-output/results-<time>.csv`. That folder is ignored: to keep a run, copy its CSV
 to `docs/measurements/` and draw it with `python3 scripts/measure/chart.py <results.csv> <out.svg>`.
 
