@@ -14,3 +14,12 @@ device.
 Each app has its own toolchain and README; run its commands from its folder. The apps share
 their seed data and pure logic through `sensor-core`; a behaviour change in one app's UI should
 land in the others.
+
+## Measurements
+
+[`scripts/measure`](scripts/measure/README.md) measures the builds the same way, from outside the
+app, on release builds. The results, with charts and the raw rows, are in
+[`docs/measurements`](docs/measurements/README.md).
+
+On an iPhone 17 Pro, RN dropped no frames while scrolling and Exact about 10 per run; both are
+in Apple's good band. On the simulator, Exact used about 12% less CPU to scroll.
