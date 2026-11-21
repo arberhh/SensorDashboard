@@ -109,9 +109,9 @@ Bare React Native CLI 0.87, new architecture, Hermes, TypeScript. Paths below ar
   rows, which forces `FlatList` to mount fresh cells). Don't add `getItemLayout`, `windowSize` or
   `initialNumToRender`. `renderSensorRow` is module-scope and `SensorRow` is not `React.memo`:
   FlashList already gates on `item` identity.
-- **Sort/filter**: `sortedIds` and `orderByIds` in `HomeScreen` and `SensorDetailScreen`. TYPE
-  changes go through `requestIdleCallback` (typed in `src/types/globals.d.ts`;
-  `InteractionManager` is gone).
+- **Sort/filter**: both screens sort through `useSensorSort` (`sortedIds` and `orderByIds`) and
+  draw the chips from `src/components/SortChips.tsx`. TYPE changes go through
+  `requestIdleCallback` (typed in `src/types/globals.d.ts`; `InteractionManager` is gone).
 - **Theme**: `src/theme/index.ts`, default export (`colors`, `fontSizes`, `spacing`, `radii`).
   No hex or raw pixels in `StyleSheet`.
 - **Code**: no `any` and no `as` to quiet an error. `async`/`await` with `try`/`catch`, never
