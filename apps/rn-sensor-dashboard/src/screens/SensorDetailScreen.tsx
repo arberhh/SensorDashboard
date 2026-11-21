@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useMemo } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { FlashList } from "@shopify/flash-list";
@@ -7,15 +7,8 @@ import type { NativeStackScreenProps } from "@react-navigation/native-stack";
 import theme from "@/theme";
 import { SortGroups } from "@/components/SortChips";
 import { useSensorFeedContext } from "@/context/SensorFeedContext";
-import {
-  filterSimilarSensors,
-  orderByIds,
-  sortSensors,
-  type ActiveSort,
-  type SortDirection,
-  type SortField,
-  type Sensor,
-} from "sensor-core";
+import { useSensorSort } from "@/hooks/useSensorSort";
+import { filterSimilarSensors, type Sensor } from "sensor-core";
 import { formatDeviation, getLocationIcon, getTypeStyle } from "@/utils/sensorDisplay";
 import type { RootStackParamList } from "@/navigation/RootStack";
 
@@ -51,27 +44,12 @@ const SensorDetailScreen: React.FC<SensorDetailScreenProps> = ({ route }) => {
   const { sensorId } = route.params;
   const { sensors } = useSensorFeedContext();
   const sensor = sensors.find((s) => s.id === sensorId);
-  const [activeSort, setActiveSort] = useState<ActiveSort>(null);
-  const [sortedIds, setSortedIds] = useState<number[] | null>(null);
-
-  const similarSensors = useMemo(() => {
-    if (!sensor) return [];
-    const others = filterSimilarSensors(sensors, sensor);
-    return sortedIds ? orderByIds(others, sortedIds) : others;
-  }, [sensors, sensor, sortedIds]);
-
-  // Same behavior as HomeScreen's applySort: the order is captured at press
-  // time so live deviation doesn't reshuffle the list, and pressing the
-  // already-active chip clears the sort rather than being a no-op.
-  function applySort(field: SortField, direction: SortDirection): void {
-    if (activeSort?.field === field && activeSort.direction === direction) {
-      setActiveSort(null);
-      setSortedIds(null);
-      return;
-    }
-    setActiveSort({ field, direction });
-    setSortedIds(sortSensors(similarSensors, field, direction).map((s) => s.id));
-  }
+  const others = useMemo(
+    () => (sensor ? filterSimilarSensors(sensors, sensor) : []),
+    [sensors, sensor],
+  );
+  // Same sort as the home screen, over the similar sensors only.
+  const { activeSort, ordered: similarSensors, pressSort } = useSensorSort(others);
 
   if (!sensor) {
     return (
@@ -144,7 +122,7 @@ const SensorDetailScreen: React.FC<SensorDetailScreenProps> = ({ route }) => {
       </View>
 
       <View style={styles.sortBar}>
-        <SortGroups activeSort={activeSort} onPress={applySort} />
+        <SortGroups activeSort={activeSort} onPress={pressSort} />
       </View>
     </>
   );
