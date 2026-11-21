@@ -1,10 +1,11 @@
 import React, { useMemo, useState } from "react";
-import { Pressable, StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { FlashList } from "@shopify/flash-list";
 import type { NativeStackScreenProps } from "@react-navigation/native-stack";
 
 import theme from "@/theme";
+import { SortGroups } from "@/components/SortChips";
 import { useSensorFeedContext } from "@/context/SensorFeedContext";
 import {
   filterSimilarSensors,
@@ -143,37 +144,7 @@ const SensorDetailScreen: React.FC<SensorDetailScreenProps> = ({ route }) => {
       </View>
 
       <View style={styles.sortBar}>
-        <View style={styles.sortGroup}>
-          <Text style={styles.sortGroupLabel}>TREND</Text>
-          <View style={styles.sortChipRow}>
-            <SortChip
-              label="Asc ↑"
-              active={activeSort?.field === "trend" && activeSort.direction === "asc"}
-              onPress={() => applySort("trend", "asc")}
-            />
-            <SortChip
-              label="Desc ↓"
-              active={activeSort?.field === "trend" && activeSort.direction === "desc"}
-              onPress={() => applySort("trend", "desc")}
-            />
-          </View>
-        </View>
-
-        <View style={styles.sortGroup}>
-          <Text style={styles.sortGroupLabel}>NAME</Text>
-          <View style={styles.sortChipRow}>
-            <SortChip
-              label="Asc ↑"
-              active={activeSort?.field === "name" && activeSort.direction === "asc"}
-              onPress={() => applySort("name", "asc")}
-            />
-            <SortChip
-              label="Desc ↓"
-              active={activeSort?.field === "name" && activeSort.direction === "desc"}
-              onPress={() => applySort("name", "desc")}
-            />
-          </View>
-        </View>
+        <SortGroups activeSort={activeSort} onPress={applySort} />
       </View>
     </>
   );
@@ -193,30 +164,6 @@ const SensorDetailScreen: React.FC<SensorDetailScreenProps> = ({ route }) => {
     </SafeAreaView>
   );
 };
-
-function SortChip({
-  label,
-  active,
-  onPress,
-}: {
-  label: string;
-  active: boolean;
-  onPress: () => void;
-}) {
-  return (
-    <Pressable
-      onPress={onPress}
-      hitSlop={6}
-      style={({ pressed }: { pressed: boolean }) => [
-        styles.sortChip,
-        active && styles.sortChipActive,
-        pressed && styles.sortChipPressed,
-      ]}
-    >
-      <Text style={styles.sortChipText}>{label}</Text>
-    </Pressable>
-  );
-}
 
 const styles = StyleSheet.create({
   container: {
@@ -391,36 +338,6 @@ const styles = StyleSheet.create({
     gap: theme.spacing.m,
     marginHorizontal: theme.spacing.sm,
     marginTop: theme.spacing.sm,
-  },
-  sortChip: {
-    backgroundColor: theme.colors.chipBackground,
-    borderRadius: theme.radii.pill,
-    paddingHorizontal: theme.spacing.sm + theme.spacing.xs,
-    paddingVertical: theme.spacing.xs + 2,
-  },
-  sortChipActive: {
-    backgroundColor: theme.colors.accent,
-  },
-  sortChipPressed: {
-    backgroundColor: theme.colors.chipPressed,
-  },
-  sortChipRow: {
-    flexDirection: "row",
-    gap: theme.spacing.sm,
-  },
-  sortChipText: {
-    color: theme.colors.text,
-    fontSize: theme.fontSizes.m,
-    fontWeight: "600",
-  },
-  sortGroup: {
-    gap: theme.spacing.sm - theme.spacing.xs,
-  },
-  sortGroupLabel: {
-    color: theme.colors.textMuted,
-    fontSize: theme.fontSizes.sm,
-    fontWeight: "700",
-    letterSpacing: 0.6,
   },
   typeBadge: {
     alignSelf: "flex-start",

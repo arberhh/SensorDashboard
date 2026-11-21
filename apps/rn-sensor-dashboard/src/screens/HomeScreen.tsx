@@ -1,6 +1,6 @@
 import React, { useMemo, useReducer } from "react";
 
-import { View, Text, StyleSheet, Pressable } from "react-native";
+import { View, StyleSheet } from "react-native";
 import { FlashList } from "@shopify/flash-list";
 
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -16,6 +16,7 @@ import {
   type Sensor,
 } from "sensor-core";
 import { renderSensorRow } from "@/components/SensorRow";
+import { Chip, ChipGroup, SortGroups } from "@/components/SortChips";
 import { useSensorFeedContext } from "@/context/SensorFeedContext";
 
 type HomeState = {
@@ -89,115 +90,27 @@ const HomeScreen: React.FC = () => {
   return (
     <SafeAreaView style={styles.container} edges={["bottom", "left", "right"]}>
       <View style={styles.sortBar}>
-        <View style={styles.sortGroup}>
-          <Text style={styles.sortGroupLabel}>TYPE</Text>
-          <View style={styles.sortChipRow}>
-            <Pressable
-              testID="type-filter-all"
-              onPress={() => setTypeFilterDeferred("all")}
-              hitSlop={6}
-              style={({ pressed }) => [
-                styles.sortChip,
-                typeFilter === "all" && styles.sortChipActive,
-                pressed && styles.sortChipPressed,
-              ]}
-            >
-              <Text style={styles.sortChipText}>All</Text>
-            </Pressable>
-            <Pressable
-              testID="type-filter-temperature"
-              onPress={() => setTypeFilterDeferred("temperature")}
-              hitSlop={6}
-              style={({ pressed }) => [
-                styles.sortChip,
-                typeFilter === "temperature" && styles.sortChipActive,
-                pressed && styles.sortChipPressed,
-              ]}
-            >
-              <Text style={styles.sortChipText}>Temperature</Text>
-            </Pressable>
-            <Pressable
-              testID="type-filter-humidity"
-              onPress={() => setTypeFilterDeferred("humidity")}
-              hitSlop={6}
-              style={({ pressed }) => [
-                styles.sortChip,
-                typeFilter === "humidity" && styles.sortChipActive,
-                pressed && styles.sortChipPressed,
-              ]}
-            >
-              <Text style={styles.sortChipText}>Humidity</Text>
-            </Pressable>
-          </View>
-        </View>
-
-        <View style={styles.sortGroup}>
-          <Text style={styles.sortGroupLabel}>TREND</Text>
-          <View style={styles.sortChipRow}>
-            <Pressable
-              testID="sort-trend-asc"
-              onPress={() => applySort("trend", "asc")}
-              hitSlop={6}
-              style={({ pressed }) => [
-                styles.sortChip,
-                activeSort?.field === "trend" &&
-                  activeSort.direction === "asc" &&
-                  styles.sortChipActive,
-                pressed && styles.sortChipPressed,
-              ]}
-            >
-              <Text style={styles.sortChipText}>Asc ↑</Text>
-            </Pressable>
-            <Pressable
-              testID="sort-trend-desc"
-              onPress={() => applySort("trend", "desc")}
-              hitSlop={6}
-              style={({ pressed }) => [
-                styles.sortChip,
-                activeSort?.field === "trend" &&
-                  activeSort.direction === "desc" &&
-                  styles.sortChipActive,
-                pressed && styles.sortChipPressed,
-              ]}
-            >
-              <Text style={styles.sortChipText}>Desc ↓</Text>
-            </Pressable>
-          </View>
-        </View>
-
-        <View style={styles.sortGroup}>
-          <Text style={styles.sortGroupLabel}>NAME</Text>
-          <View style={styles.sortChipRow}>
-            <Pressable
-              testID="sort-name-asc"
-              onPress={() => applySort("name", "asc")}
-              hitSlop={6}
-              style={({ pressed }) => [
-                styles.sortChip,
-                activeSort?.field === "name" &&
-                  activeSort.direction === "asc" &&
-                  styles.sortChipActive,
-                pressed && styles.sortChipPressed,
-              ]}
-            >
-              <Text style={styles.sortChipText}>Asc ↑</Text>
-            </Pressable>
-            <Pressable
-              testID="sort-name-desc"
-              onPress={() => applySort("name", "desc")}
-              hitSlop={6}
-              style={({ pressed }) => [
-                styles.sortChip,
-                activeSort?.field === "name" &&
-                  activeSort.direction === "desc" &&
-                  styles.sortChipActive,
-                pressed && styles.sortChipPressed,
-              ]}
-            >
-              <Text style={styles.sortChipText}>Desc ↓</Text>
-            </Pressable>
-          </View>
-        </View>
+        <ChipGroup label="TYPE">
+          <Chip
+            testID="type-filter-all"
+            label="All"
+            active={typeFilter === "all"}
+            onPress={() => setTypeFilterDeferred("all")}
+          />
+          <Chip
+            testID="type-filter-temperature"
+            label="Temperature"
+            active={typeFilter === "temperature"}
+            onPress={() => setTypeFilterDeferred("temperature")}
+          />
+          <Chip
+            testID="type-filter-humidity"
+            label="Humidity"
+            active={typeFilter === "humidity"}
+            onPress={() => setTypeFilterDeferred("humidity")}
+          />
+        </ChipGroup>
+        <SortGroups activeSort={activeSort} onPress={applySort} />
       </View>
       <FlashList
         testID="sensor-list"
@@ -226,36 +139,6 @@ const styles = StyleSheet.create({
     marginTop: theme.spacing.sm,
     paddingHorizontal: theme.spacing.m,
     paddingVertical: theme.spacing.sm + theme.spacing.xs,
-  },
-  sortChip: {
-    backgroundColor: theme.colors.chipBackground,
-    borderRadius: theme.radii.pill,
-    paddingHorizontal: theme.spacing.sm + theme.spacing.xs,
-    paddingVertical: theme.spacing.xs + 2,
-  },
-  sortChipActive: {
-    backgroundColor: theme.colors.accent,
-  },
-  sortChipPressed: {
-    backgroundColor: theme.colors.chipPressed,
-  },
-  sortChipRow: {
-    flexDirection: "row",
-    gap: theme.spacing.sm,
-  },
-  sortChipText: {
-    color: theme.colors.text,
-    fontSize: theme.fontSizes.m,
-    fontWeight: "600",
-  },
-  sortGroup: {
-    gap: theme.spacing.xs + 2,
-  },
-  sortGroupLabel: {
-    color: theme.colors.textMuted,
-    fontSize: theme.fontSizes.sm,
-    fontWeight: "700",
-    letterSpacing: 0.6,
   },
 });
 
