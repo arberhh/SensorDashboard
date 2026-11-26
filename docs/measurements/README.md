@@ -4,6 +4,30 @@ Results from `scripts/measure` (see its README for the method and what each colu
 All runs use release builds and LOCAL mode, alternating the apps. Values are the median, with
 the lowest and highest run in brackets.
 
+## 2026-11-26, iPhone 17 Pro
+
+The same phone and method as the run of 2026-11-19 below, 3 runs per app, after RN's two
+screens moved to a shared sort hook and shared chips.
+
+![RN and Exact compared on an iPhone 17 Pro](2026-11-26-phone.svg)
+
+| Metric | RN | Exact |
+| --- | --- | --- |
+| Late frames during 16 swipes | 0 (0–1) | 9 (7–16) |
+| Hitch time per second of movement | 0 ms/s (0–0.2) | 1.4 ms/s (1.2–2.8) |
+| Longest hitch | none (0–16.7 ms) | 16.7 ms (16.7–25.0) |
+| Peak frames per second | 113 (112–114) | 112 (110–113) |
+
+Raw rows: [2026-11-26-phone.csv](2026-11-26-phone.csv).
+
+- **The same picture as a week before.** RN delivered one frame late in three runs, Exact about
+  9 per run, and both stay in Apple's good band.
+- **The RN refactor cost no frames.**
+- **Noisier than the first run.** In three of the six runs the swipes took 84 to 107s to send,
+  against 72s, so `scroll_wall_s` does not match between runs. Hitch time per second of
+  movement still compares. Exact's third run was its worst (16 late frames, one of 25 ms) and
+  was redone after two failed attempts.
+
 ## 2026-11-19, iPhone 17 Pro
 
 A physical iPhone 17 Pro (iOS 26.6.2) over USB, 3 runs per app. Each run: relaunch, then
