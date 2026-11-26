@@ -62,6 +62,29 @@ TARGET=phone scripts/measure/run.sh 3  # about 5 minutes a run: saving a trace i
 | `fps_max` | the most frames shown in one second |
 | `fps_mean` | frames per second over `moving_s`. Low by design: the phone slows its refresh rate as a fling slows, so don't read it as dropped frames |
 
+`TARGET=phone-nav` records the same columns while a tap opens the first row's detail screen and
+a tap on the back button returns, 8 times, 3.5s apart. Its first column is `nav_wall_s`.
+
+## CPU and memory, on a phone
+
+`TARGET=phone-cpu` records Instruments' Activity Monitor instead: 20s idle, 16 swipes that move
+nothing, then the same 16 swipes as the frames run. It needs the same setup as `TARGET=phone`.
+
+```sh
+TARGET=phone-cpu scripts/measure/run.sh 3  # about 3 minutes a run
+```
+
+| Column | What it is |
+| --- | --- |
+| `idle_cpu_s` | CPU seconds the app used in 20s without input |
+| `phone_tool_cpu_s` | CPU seconds the app used during 16 sideways swipes that move nothing: agent-device's cost |
+| `phone_scroll_cpu_s` | CPU seconds the app used during the 16 swipes on the list, the tool's share included |
+| `phone_scroll_net_cpu_s` | `phone_scroll_cpu_s` less `phone_tool_cpu_s`. Noisy: the tool's share is the larger part |
+| `tool_wall_s`, `scroll_wall_s` | how long each set of swipes took; they should match |
+| `mem_launch_mb`, `mem_scroll_mb` | the app's memory footprint after launch and after the scroll |
+
+Frames and CPU are separate runs, so the CPU recording can't disturb the frame numbers.
+
 ## What this does not measure
 
-CPU and memory on the phone, and anything on Android.
+Startup on the phone, and anything on Android.
