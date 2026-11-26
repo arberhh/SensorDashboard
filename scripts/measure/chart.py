@@ -76,6 +76,8 @@ def panel(x, y, metric, rows):
 
 rows = list(csv.DictReader(open(sys.argv[1])))
 METRICS = {name: spec for name, spec in ALL_METRICS.items() if name in rows[0]}
+if "nav_wall_s" in rows[0]:  # the navigation session taps instead of swiping
+    METRICS["hitches"] = ("Late frames during 16 transitions", "", 0)
 TITLE = sys.argv[3] if len(sys.argv) > 3 else "RN and Exact on the iOS Simulator"
 runs = len(rows) // len(APPS)
 grid_rows = -(-len(METRICS) // COLUMNS)

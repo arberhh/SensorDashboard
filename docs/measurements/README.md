@@ -58,6 +58,8 @@ The same phone, 3 runs per app. Each run: relaunch, then Instruments' Animation 
 while a tap opens the first row's detail screen and a tap on the back button returns, 8 times
 (16 transitions), 3.5s apart.
 
+![RN and Exact navigating on an iPhone 17 Pro](2026-11-26-phone-nav.svg)
+
 | Metric | RN | Exact |
 | --- | --- | --- |
 | Late frames during 16 transitions | 1 (0–1) | 11 (9–13) |
