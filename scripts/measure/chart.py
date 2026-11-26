@@ -9,10 +9,13 @@ import sys
 # column -> (title, unit, decimals); a panel is drawn for each column the CSV has
 ALL_METRICS = {
     "scroll_net_cpu_s": ("CPU during 30 swipes, less the tool's share", "s", 2),
+    "phone_scroll_net_cpu_s": ("CPU during 16 swipes, less the tool's share", "s", 2),
     "idle_cpu_s": ("CPU over 20 s idle", "s", 2),
     "startup_ms": ("Startup", "ms", 0),
     "rss_launch_mb": ("Memory after launch", "MB", 0),
     "rss_scroll_mb": ("Memory after scroll", "MB", 0),
+    "mem_launch_mb": ("Memory after launch", "MB", 1),
+    "mem_scroll_mb": ("Memory after scroll", "MB", 1),
     "hitches": ("Late frames during 16 swipes", "", 0),
     "hitch_ms_per_s": ("Hitch time per second of movement", "ms/s", 1),
     "longest_hitch_ms": ("Longest hitch", "ms", 1),
