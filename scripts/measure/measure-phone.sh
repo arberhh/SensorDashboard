@@ -5,6 +5,7 @@
 # measure.sh scroll the list down and back up. Appends one CSV row.
 # Env: PHONE_UDID (required: the phone's UDID), plus agent-device's
 # runner signing (AGENT_DEVICE_IOS_TEAM_ID, AGENT_DEVICE_IOS_BUNDLE_ID).
+# SESSION=nav opens the detail screen and goes back instead of scrolling.
 set -euo pipefail
 APP=$1; RUN=$2; OUT=$3
 PHONE=${PHONE_UDID:?set PHONE_UDID to the UDID of the phone, from xcrun xctrace list devices}
@@ -45,10 +46,24 @@ done
 sleep 2 # the recording starts a moment after the prompt
 
 T0=$(now)
-ad swipe 200 650 200 250 --count "$SWIPES" --pause-ms "$PAUSE_MS" --no-post-gesture-stabilization >/dev/null
-sleep 3.5 # the last fling down comes to rest
-ad swipe 200 250 200 650 --count "$SWIPES" --pause-ms "$PAUSE_MS" --no-post-gesture-stabilization >/dev/null
-sleep 3.5
+case ${SESSION:-scroll} in
+  scroll)
+    ad swipe 200 650 200 250 --count "$SWIPES" --pause-ms "$PAUSE_MS" --no-post-gesture-stabilization >/dev/null
+    sleep 3.5 # the last fling down comes to rest
+    ad swipe 200 250 200 650 --count "$SWIPES" --pause-ms "$PAUSE_MS" --no-post-gesture-stabilization >/dev/null
+    sleep 3.5
+    ;;
+  nav)
+    # Open the first row's detail screen and go back, SWIPES times: the same
+    # number of transitions as the scroll has swipes. Plain taps by position,
+    # because agent-device's own back reads the screen again while it animates.
+    for _ in $(seq 1 "$SWIPES"); do
+      ad press 200 330 >/dev/null; sleep 3.5 # the first row
+      ad press 37 85 >/dev/null; sleep 3.5   # the back button, same place in both apps
+    done
+    ;;
+  *) echo "SESSION is scroll or nav" >&2; exit 1 ;;
+esac
 T1=$(now)
 
 kill -INT "$RECORDER" || { cat "$LOG" >&2; exit 1; } # it died early: show why
@@ -57,6 +72,6 @@ RECORDER=
 ad close >/dev/null
 
 WALL=$(python3 -c "print(round($T1 - $T0, 2))")
-[ -f "$OUT" ] || echo "app,run,scroll_wall_s,moving_s,hitches,hitch_ms,longest_hitch_ms,hitch_ms_per_s,fps_mean,fps_max" > "$OUT"
+[ -f "$OUT" ] || echo "app,run,${SESSION:-scroll}_wall_s,moving_s,hitches,hitch_ms,longest_hitch_ms,hitch_ms_per_s,fps_mean,fps_max" > "$OUT"
 echo "$APP,$RUN,$WALL,$(python3 "$HERE/hitches.py" "$TRACE" "$PROCESS")" | tee -a "$OUT"
 rm -rf "$(dirname "$TRACE")"
