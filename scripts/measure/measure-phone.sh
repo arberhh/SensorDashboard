@@ -35,6 +35,9 @@ sleep 3 # first render and layout settle
 xcrun xctrace record --template "Animation Hitches" --device "$PHONE" --all-processes \
   --output "$TRACE" --no-prompt >"$LOG" 2>&1 &
 RECORDER=$!
+# A run that fails must not leave its recorder behind: it keeps the phone's
+# profiling lock, and every later recording fails with "could not lock kperf".
+trap '[ -z "$RECORDER" ] || kill -TERM "$RECORDER" 2>/dev/null || true' EXIT
 until grep -q "Ctrl-C to stop" "$LOG"; do
   kill -0 "$RECORDER" 2>/dev/null || { cat "$LOG" >&2; exit 1; }
   sleep 0.5
@@ -48,8 +51,9 @@ ad swipe 200 250 200 650 --count "$SWIPES" --pause-ms "$PAUSE_MS" --no-post-gest
 sleep 3.5
 T1=$(now)
 
-kill -INT "$RECORDER"
+kill -INT "$RECORDER" || { cat "$LOG" >&2; exit 1; } # it died early: show why
 wait "$RECORDER" || true # saving the trace takes a few minutes
+RECORDER=
 ad close >/dev/null
 
 WALL=$(python3 -c "print(round($T1 - $T0, 2))")

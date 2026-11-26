@@ -21,5 +21,5 @@ land in the others.
 app, on release builds. The results, with charts and the raw rows, are in
 [`docs/measurements`](docs/measurements/README.md).
 
-On an iPhone 17 Pro, RN dropped no frames while scrolling and Exact about 10 per run; both are
-in Apple's good band. On the simulator, Exact used about 12% less CPU to scroll.
+On an iPhone 17 Pro, RN dropped almost no frames while scrolling and Exact about 10 per run;
+both are in Apple's good band. On the simulator, Exact used about 12% less CPU to scroll.
